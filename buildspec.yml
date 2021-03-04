@@ -40,6 +40,6 @@ artifacts:
   files:
     - /template-export.yml
     - /template-configuration.json
-    - "**/*"
-  discard-paths: no
-  base-directory: $BUILD_FOLDER/dist/NG-Grid
+  #  - "**/*"
+  #discard-paths: no
+  #base-directory: $BUILD_FOLDER/dist/NG-Grid
