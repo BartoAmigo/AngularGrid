@@ -9,7 +9,7 @@ phases:
       nodejs: 12
     commands:
       # Install dependencies needed for running tests
-      #- cd $BUILD_FOLDER
+      - cd $BUILD_FOLDER
       - npm install
       - npm install -g @angular/cli 
       - npm install -g --save-dev @angular-devkit/build-angular
@@ -25,7 +25,7 @@ phases:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
       - ng build --prod
-      #- cd ../..
+      - cd ../..
       - aws s3 cp --recursive dist/NG-Grid s3://$WEBSITE_S3_BUCKET/public/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
       #- sed -i -e "s|assets/|$WEBSITE_S3_PREFIX/public/assets/|g" public/src/app/index.html
       - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template template-export.yml
