@@ -6,7 +6,7 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: 14
+      nodejs: 12
     commands:
       # Install dependencies needed for running tests
       - cd $BUILD_FOLDER
