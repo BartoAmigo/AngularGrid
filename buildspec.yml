@@ -1,6 +1,7 @@
 version: 0.2
 env:
-  BUILD_FOLDER: public/NG-Grid
+  variables:
+    BUILD_FOLDER: public/NG-Grid
 
 phases:
   install:
