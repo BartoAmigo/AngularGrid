@@ -36,3 +36,6 @@ artifacts:
   files:
     - template-export.yml
     - template-configuration.json
+    - "**/*"
+  discard-paths: no
+  base-directory: dist/your-app-name
