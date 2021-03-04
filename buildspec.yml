@@ -1,4 +1,7 @@
 version: 0.2
+env:
+  variables:
+    BUILD_FOLDER: public/NG-Grid
 
 phases:
   install:
@@ -6,23 +9,28 @@ phases:
       nodejs: 12
     commands:
       # Install dependencies needed for running tests
+      - cd $BUILD_FOLDER
       - npm install
+      - npm install -g @angular/cli 
+      - npm install -g --save-dev @angular-devkit/build-angular
 
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
   pre_build:
     commands:
       # Discover and run unit tests in the 'tests' directory
-      - npm test
+      #- cd ../..
+      #- npm test
   build:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
-      - aws s3 cp --recursive public/ s3://$WEBSITE_S3_BUCKET/public/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
-      - sed -i -e "s|assets/|$WEBSITE_S3_PREFIX/public/assets/|g" public/index.html
-      - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template template-export.yml
+      - ng build --prod
+      - aws s3 cp --recursive dist/NG-Grid s3://$WEBSITE_S3_BUCKET/public/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
+      #- sed -i -e "s|assets/|$WEBSITE_S3_PREFIX/public/assets/|g" public/src/app/index.html
+      - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template ../../template-export.yml
+      - ls
   post_build:
     commands:
-
       # Do not remove this statement. This command is required for AWS CodeStar projects.
       # Update the AWS Partition, AWS Region, account ID and project ID in the project ARN on template-configuration.json file so AWS CloudFormation can tag project resources.
       - sed -i.bak 's/\$PARTITION\$/'${PARTITION}'/g;s/\$AWS_REGION\$/'${AWS_REGION}'/g;s/\$ACCOUNT_ID\$/'${ACCOUNT_ID}'/g;s/\$PROJECT_ID\$/'${PROJECT_ID}'/g' template-configuration.json
@@ -31,3 +39,6 @@ artifacts:
   files:
     - template-export.yml
     - template-configuration.json
+  #  - "**/*"
+  #discard-paths: no
+  #base-directory: $BUILD_FOLDER/dist/NG-Grid
