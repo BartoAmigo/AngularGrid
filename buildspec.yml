@@ -27,7 +27,7 @@ phases:
       - ng build --prod
       - aws s3 cp --recursive dist/NG-Grid s3://$WEBSITE_S3_BUCKET/public/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
       #- sed -i -e "s|assets/|$WEBSITE_S3_PREFIX/public/assets/|g" public/src/app/index.html
-      - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template ./template-export.yml
+      - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template ../../template-export.yml
       - ls
   post_build:
     commands:
@@ -37,8 +37,8 @@ phases:
 
 artifacts:
   files:
-    - $BUILD_FOLDER/template-export.yml
-    - $BUILD_FOLDER/template-configuration.json
+    - template-export.yml
+    - template-configuration.json
   #  - "**/*"
   #discard-paths: no
   #base-directory: $BUILD_FOLDER/dist/NG-Grid
