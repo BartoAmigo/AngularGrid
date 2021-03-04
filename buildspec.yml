@@ -19,6 +19,7 @@ phases:
   build:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
+      - ll
       - cd public/NG-Grid
       - ng build --prod
       - cd ../..
