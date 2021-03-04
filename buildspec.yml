@@ -37,8 +37,8 @@ phases:
 
 artifacts:
   files:
-    - template-export.yml
-    - template-configuration.json
+    - $BUILD_FOLDER/template-export.yml
+    - $BUILD_FOLDER/template-configuration.json
   #  - "**/*"
   #discard-paths: no
   #base-directory: $BUILD_FOLDER/dist/NG-Grid
