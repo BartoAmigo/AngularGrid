@@ -42,4 +42,4 @@ artifacts:
     - template-configuration.json
     - "**/*"
   discard-paths: no
-  base-directory: dist/NG-Grid
+  base-directory: $BUILD_FOLDER/dist/NG-Grid
