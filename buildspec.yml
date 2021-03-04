@@ -9,8 +9,8 @@ phases:
       nodejs: 12
     commands:
       # Install dependencies needed for running tests
-      - npm install
       - cd $BUILD_FOLDER
+      - npm install
       - npm install -g @angular/cli 
       - npm install -g --save-dev @angular-devkit/build-angular
 
