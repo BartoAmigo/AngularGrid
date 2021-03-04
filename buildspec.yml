@@ -36,7 +36,7 @@ phases:
 
 artifacts:
   files:
-    - ../..template-export.yml
+    - ../../template-export.yml
     - template-configuration.json
   #  - "**/*"
   #discard-paths: no
