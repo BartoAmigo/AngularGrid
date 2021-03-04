@@ -24,7 +24,6 @@ phases:
   build:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
-      - cd $BUILD_FOLDER
       - ng build --prod
       - cd ../..
 
