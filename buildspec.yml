@@ -1,4 +1,6 @@
 version: 0.2
+env:
+  BUILD_FOLDER: public/NG-Grid
 
 phases:
   install:
@@ -6,8 +8,10 @@ phases:
       nodejs: 12
     commands:
       # Install dependencies needed for running tests
+      - cd $BUILD_FOLDER
       - npm install
       - npm install -g @angular/cli 
+      - npm install -g --save-dev @angular-devkit/build-angular
 
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
@@ -18,8 +22,6 @@ phases:
   build:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
-      - cd public/NG-Grid
-      - npm install -g --save-dev @angular-devkit/build-angular  
       - ls
       - ng build --prod
       - cd ../..
