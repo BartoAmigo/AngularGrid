@@ -3,12 +3,11 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 12
+      nodejs: 14.16
     commands:
       # Install dependencies needed for running tests
       - npm install
-      - npm install -g @angular/cli
-      - npm install -g --save-dev @angular-devkit/build-angular   
+      - npm install -g @angular/cli 
 
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
@@ -19,10 +18,8 @@ phases:
   build:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
-      - ls
-      - dir
-      - pwd
       - cd public/NG-Grid
+      - npm install -g --save-dev @angular-devkit/build-angular  
       - ng build --prod
       - cd ../..
       - aws s3 cp --recursive public/ s3://$WEBSITE_S3_BUCKET/public/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
