@@ -21,7 +21,7 @@ phases:
   build:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
-      - ng build
+      - ng build --prod
       - rm -dfr node_modules
       - aws s3 cp --recursive $BUILD_FOLDER s3://$WEBSITE_S3_BUCKET/public/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
       #- sed -i -e "s|assets/|$WEBSITE_S3_PREFIX/public/assets/|g" public/src/app/index.html
