@@ -44,7 +44,15 @@ export class AdmingridComponent implements OnInit {
     receiveData($event){
       this.excelData = $event;
       console.log(this.excelData);
-      
+      this.updateCols();
     }
-
+    updateCols()
+    {
+    
+      for(var i = 0;i <this.excelData[0].length;i++)
+      {
+        this.myColumnDefs.push({field:this.excelData[0][i]});
+      }
+      this.gridApi.setColumnDefs(this.myColumnDefs);
+    }
   }
