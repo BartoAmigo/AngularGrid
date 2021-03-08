@@ -7,20 +7,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsergridComponent implements OnInit {
 
-  private gridApi; 
-  private columnApi; 
-  myRowData = []; 
-  myColumnDefs=[]; 
+  private gridApi; //placeholder for grid api 
+  private columnApi; //place holder to get grid's column api
+  myRowData = [];  //array of row definitions 
+  myColumnDefs=[];  //array of columndefinitions 
   
-  gridOptions = {
-    rowData:this.myRowData,
-    columnDefs:this.myColumnDefs,
-    pagination:true
-  }
+  /* Grid option function 
+  Sets properties for grid 
+  */ 
 
+  gridOptions = {
+    //properties 
+    rowData:this.myRowData, //grabs our row definition 
+    columnDefs:this.myColumnDefs, //grabs our column definition 
+    pagination:true
+    //events
+    //event handlers
+    /*Insert Event handlers here  */
+
+    //callbacks 
+    /*Insert callbacks here */ 
+    /**/
+
+  }
+/* Grid Ready function */
   onGridReady = (params) => {
-    this.gridApi = params.api; 
-    this.columnApi = params.columnapi; 
+    this.gridApi = params.api; //gets gridApi here
+    this.columnApi = params.columnapi; //gets columnApi here 
   }
 
   constructor() { }

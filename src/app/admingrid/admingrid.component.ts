@@ -6,18 +6,31 @@ import { Component, OnInit,EventEmitter } from '@angular/core';
   styleUrls: ['./admingrid.component.css']
 })
 export class AdmingridComponent implements OnInit {
-  private gridApi; 
-  private columnApi; 
-  myRowData = []; 
-  myColumnDefs = []; 
-  public excelData: [][]
-  
+  private gridApi;  //defines a placeholder for out gridApi
+  private columnApi;  //defines placeholder for our columnApi 
+  myRowData = []; // Defines row definitions
+  myColumnDefs = [];  //defines column definitions 
+  public excelData: [][]; //excel matrix use to store data informations. 
+
+  /* Grid Options 
+  used to set definitions for grid. can add Properties/events/callbacks
+  */ 
   gridOptions = {
-      rowData:this.myRowData,
-      columnDefs:this.myColumnDefs,
+      //Properties 
+      rowData:this.myRowData, //row data gets information from our array
+      columnDefs:this.myColumnDefs, //grid gets column definitons here
       pagination:true
+      //Events 
+      //add event handlers
+      /* */ 
+
+      //callbacks
+      /**/  
   };
   
+  /* onGridReady 
+  this function grabs our grid api.
+  */
   onGridReady = (params) => {
     this.gridApi = params.api; 
     this.columnApi = params.columnapi; 
