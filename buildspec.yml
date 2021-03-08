@@ -24,7 +24,7 @@ phases:
       - ng build --prod
       - rm -dfr node_modules
       - aws s3 cp --recursive $BUILD_FOLDER s3://$WEBSITE_S3_BUCKET/public/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
-      #- sed -i -e "s|assets/|$WEBSITE_S3_PREFIX/public/assets/|g" public/src/app/index.html
+      - sed -i -e "s|base href='/|base href='$WEBSITE_S3_PREFIX/public|g" dist/index.html
       - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template template-export.yml
   post_build:
     commands:
