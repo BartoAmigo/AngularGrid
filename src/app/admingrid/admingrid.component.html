@@ -1,6 +1,7 @@
 <h2>Admin-Grid Page</h2>
 <p>This is our Admin-Grid, It will be able to create a grid for user to use.</p>
 <p>The admin grid shows all the data. It allows you to choose what data the user should see.</p>
+<app-excelsheet (dataEvent)="receiveData($event)"></app-excelsheet>
 <ag-grid-angular
 #admingrid
 style="width:500px;height:500px;"

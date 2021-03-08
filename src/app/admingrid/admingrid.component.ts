@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-admingrid',
@@ -10,6 +10,7 @@ export class AdmingridComponent implements OnInit {
   private columnApi; 
   myRowData = []; 
   myColumnDefs = []; 
+  public excelData: [][]
   
   gridOptions = {
       rowData:this.myRowData,
@@ -26,4 +27,11 @@ export class AdmingridComponent implements OnInit {
     ngOnInit(): void {
     }
   
+    //create html button to trigger function 
+    receiveData($event){
+      this.excelData = $event;
+      console.log(this.excelData);
+      
+    }
+
   }

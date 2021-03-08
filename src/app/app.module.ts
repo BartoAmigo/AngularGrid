@@ -7,6 +7,7 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { AdmingridComponent } from './admingrid/admingrid.component';
 import { UsergridComponent } from './usergrid/usergrid.component';
+import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { UsergridComponent } from './usergrid/usergrid.component';
     AboutComponent,
     HomeComponent,
     AdmingridComponent,
-    UsergridComponent
+    UsergridComponent,
+    ExcelsheetComponent
   ],
   imports: [
     BrowserModule,
