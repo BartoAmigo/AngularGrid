@@ -11,7 +11,7 @@ export class AdmingridComponent implements OnInit {
   myRowData = []; // Defines row definitions
   myColumnDefs = [];  //defines column definitions 
   public excelData: [][]; //excel matrix use to store data informations. 
-
+  public arrayData :any;
   /* Grid Options 
   used to set definitions for grid. can add Properties/events/callbacks
   */ 
@@ -45,7 +45,13 @@ export class AdmingridComponent implements OnInit {
       this.excelData = $event;
       this.updateCols();
       
-      this.updateRows();
+      //this.updateRows();
+    }
+    receiveRowData($event){
+     console.log("receive row data function");
+      this.arrayData = $event;
+      console.log(this.arrayData);
+      this.gridApi.setRowData(this.arrayData);
     }
     updateCols()
     {
@@ -60,22 +66,24 @@ export class AdmingridComponent implements OnInit {
     //this.exceldata.length = amount of rows/number of arrays
    // this.exceldata[i].length = number of columns/length of array
     updateRows(){
+      
+      
       //first for loop deals with number of rows
       //second for loop deals with number of columns
-       for(var i = 1;i < this.excelData.length; i++){
+       /*for(var i = 1;i < this.excelData.length; i++){
           this.myRowData.push({field:this.excelData[i]});
-         
+         */
         
 
          //this.myRowData = this.excelData[i];
          //console.log(this.excelData[i]);
-         this.gridApi.setRowData(this.myRowData);
+        // this.gridApi.setRowData(tempArray);
 
        }
        
     }
 
-  }
+  
  /**  for(var x = 0; x  <this.excelData[i].length;x++){
     this.myRowData.push({field:this.excelData[i][x]});
    }

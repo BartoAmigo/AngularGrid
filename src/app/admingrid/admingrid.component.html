@@ -2,7 +2,11 @@
 <p>This is our Admin-Grid, It will be able to create a grid for user to use.</p>
 <p>The admin grid shows all the data. It allows you to choose what data the user should see.</p>
 <!--ExcelSheet Component-->
-<app-excelsheet (dataEvent)="receiveData($event)"></app-excelsheet>
+<app-excelsheet (dataEvent)="receiveData($event)"
+[columns]="myColumnDefs"
+(rowDataEvent) = "receiveRowData($event)"
+></app-excelsheet>
+
 <!--********************-->
 
 <!--Grid Component-->
@@ -12,5 +16,6 @@ style="width:500px;height:500px;"
 class="ag-theme-alpine"
 [gridOptions]="gridOptions"
 (gridReady) = "onGridReady($event)"
+
 ></ag-grid-angular>
 <!--****************-->
