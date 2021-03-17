@@ -1,3 +1,4 @@
+import { ExcelsheetComponent } from './../excelsheet/excelsheet.component';
 import { Component, OnInit,EventEmitter } from '@angular/core';
 
 import * as XLSX from 'xlsx';
@@ -13,7 +14,7 @@ export class AdmingridComponent implements OnInit {
   private columnApi;  //defines placeholder for our columnApi 
   myRowData = []; // Defines row definitions
   myColumnDefs = [];  //defines column definitions 
-  public excelSheet: XLSX.WorkSheet;
+   excelSheet: XLSX.WorkBook;
   public excelData: [][]; //excel matrix use to store data informations. 
   public arrayData :any;
   /* Grid Options 
@@ -85,7 +86,7 @@ export class AdmingridComponent implements OnInit {
           num = char.charCodeAt(0); //Store char as number
           num++;
           char = String.fromCharCode(num); //Going from ascii to char
-          console.log(char);
+         
         }
         else
         {
@@ -93,7 +94,6 @@ export class AdmingridComponent implements OnInit {
           col1 = (i/26)+64;
           col2 = (i%26)+65;
           char = String.fromCharCode(col1)+String.fromCharCode(col2);
-          console.log(char);
         }
       }
 
@@ -102,24 +102,27 @@ export class AdmingridComponent implements OnInit {
 
     populateRows()
     {
+      var firstSheetName = this.excelSheet.SheetNames[0];
+    var worksheet = this.excelSheet.Sheets[firstSheetName];
+    
       console.log("inside populate rows function")
       var columns = {};
       columns = this.setcolumns(columns);
-      var rowData = [];
       var rowIndex = 2;
-      while (this.excelSheet['A' + rowIndex]) {
+      while (worksheet['A' + rowIndex]) {
         var row = {};
         Object.keys(columns).forEach(function(column) {
-            row[columns[column]] = this.excelSheet[column + rowIndex].w;
+            row[columns[column]] = worksheet[column + rowIndex].w;
+            
         });
 
-        rowData.push(row);
+        this.myRowData.push(row);
 
         rowIndex++;
     }
 
     // finally, set the imported rowData into the grid
-    this.gridApi.setRowData(rowData);
+    this.gridApi.setRowData(this.myRowData);
 }
            
          }

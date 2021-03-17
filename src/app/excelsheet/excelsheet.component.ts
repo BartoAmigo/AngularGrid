@@ -14,6 +14,7 @@ export class ExcelsheetComponent implements OnInit {
   @Output() dataEvent = new EventEmitter<any>();
   @Output() dataEvent2 = new EventEmitter<any>();
   ws: XLSX.WorkSheet;
+ 
 
   constructor() { }
   @Input() columns:[];
@@ -30,11 +31,11 @@ export class ExcelsheetComponent implements OnInit {
 
     reader.onload = (e: any) => {
       const bstr: string = e.target.result;
-      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+     this.wb = XLSX.read(bstr, { type: 'binary' });
 
-      const wsname : string = wb.SheetNames[0];
+      const wsname : string = this.wb.SheetNames[0];
 
-      this.ws = wb.Sheets[wsname];
+      this.ws = this.wb.Sheets[wsname];
       this.data = (XLSX.utils.sheet_to_json(this.ws, { header: 1 }));
 
     }; 
@@ -42,7 +43,7 @@ export class ExcelsheetComponent implements OnInit {
 
   }
   sendData(){
-    this.dataEvent.emit(this.ws);
+    this.dataEvent.emit(this.wb);
     this.dataEvent2.emit(this.data);
   }
 
