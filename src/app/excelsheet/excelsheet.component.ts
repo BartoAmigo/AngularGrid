@@ -32,7 +32,8 @@ export class ExcelsheetComponent implements OnInit {
       const wsname : string = wb.SheetNames[0];
 
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-
+      
+console.log(ws)
       this.data = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
       this.populateGrid(wb);
     };
