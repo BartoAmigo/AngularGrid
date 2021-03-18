@@ -104,7 +104,7 @@ export class AdmingridComponent implements OnInit {
     {
       var firstSheetName = this.excelSheet.SheetNames[0];
     var worksheet = this.excelSheet.Sheets[firstSheetName];
-    
+    console.log (worksheet)
       console.log("inside populate rows function")
       var columns = {};
       columns = this.setcolumns(columns);
@@ -112,8 +112,9 @@ export class AdmingridComponent implements OnInit {
       while (worksheet['A' + rowIndex]) {
         var row = {};
         Object.keys(columns).forEach(function(column) {
+          if(worksheet[column+rowIndex]){
             row[columns[column]] = worksheet[column + rowIndex].w;
-            
+          }
         });
 
         this.myRowData.push(row);
