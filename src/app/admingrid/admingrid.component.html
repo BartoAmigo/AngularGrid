@@ -1,12 +1,4 @@
-<h2>Admin-Grid Page</h2>
-<p>This is our Admin-Grid, It will be able to create a grid for user to use.</p>
-<p>The admin grid shows all the data. It allows you to choose what data the user should see.</p>
-<!--ExcelSheet Component-->
 
-<app-excelsheet (dataEvent)="receiveData($event)" (dataEvent2) = "receiveMatrixData($event)"></app-excelsheet>
-<!--********************-->
-<!--[columns]="myColumnDefs-->
-<!--Grid Component-->
 <ag-grid-angular
 #admingrid
 style="width:1500px;height:500px;"
@@ -16,9 +8,4 @@ class="ag-theme-alpine"
 
 ></ag-grid-angular>
 <!--****************-->
-<div>
-    This is column List 
-    <ul>
-        <li *ngFor="let column of myColumnDefs">{{column.field}}</li>
-    </ul>
-</div>
+

@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { AdmingridComponent } from './admingrid/admingrid.component';
 import { UsergridComponent } from './usergrid/usergrid.component';
 import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
+import { AdminpageComponent } from './adminpage/adminpage.component';
+import { UserpageComponent } from './userpage/userpage.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
     HomeComponent,
     AdmingridComponent,
     UsergridComponent,
-    ExcelsheetComponent
+    ExcelsheetComponent,
+    AdminpageComponent,
+    UserpageComponent
   ],
   imports: [
     BrowserModule,

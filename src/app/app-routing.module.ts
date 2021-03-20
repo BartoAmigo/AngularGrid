@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
-import { AdmingridComponent } from './admingrid/admingrid.component';
+import { AdminpageComponent } from './adminpage/adminpage.component';
 import { HomeComponent } from './home/home.component';
-import { UsergridComponent } from './usergrid/usergrid.component';
+import { UserpageComponent } from './userpage/userpage.component';
 
 const routes: Routes = [
-  {path:'admingrid', component:AdmingridComponent},
-  {path:'usergrid',component:UsergridComponent},
+  {path:'adminpage', component:AdminpageComponent},
+  {path:'userpage',component:UserpageComponent},
   {path:'Home',component:HomeComponent},
   {path:'About',component:AboutComponent},
   {path:'',redirectTo: '/Home',pathMatch:'full'},

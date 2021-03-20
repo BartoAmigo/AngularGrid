@@ -1,5 +1,5 @@
-import { ExcelsheetComponent } from './../excelsheet/excelsheet.component';
-import { Component, OnInit,EventEmitter } from '@angular/core';
+
+import { Component, OnInit,Input} from '@angular/core';
 
 import * as XLSX from 'xlsx';
 
@@ -14,8 +14,8 @@ export class AdmingridComponent implements OnInit {
   private columnApi;  //defines placeholder for our columnApi 
   myRowData = []; // Defines row definitions
   myColumnDefs = [];  //defines column definitions 
-   excelSheet: XLSX.WorkBook;
-  public excelData: [][]; //excel matrix use to store data informations. 
+  @Input() excelSheet: XLSX.WorkBook;
+  @Input() excelData: [][]; //excel matrix use to store data informations. 
   public arrayData :any;
   /* Grid Options 
   used to set definitions for grid. can add Properties/events/callbacks
@@ -39,26 +39,14 @@ export class AdmingridComponent implements OnInit {
   onGridReady = (params) => {
     this.gridApi = params.api; 
     this.columnApi = params.columnapi; 
+    this.updateCols(); 
+    this.populateRows(); 
   }
     constructor() { }
   
     ngOnInit(): void {
     }
   
-    //create html button to trigger function 
-    receiveData($event){
-      this.excelSheet = $event;
-      console.log(this.excelSheet)
-      console.log("inside receiveData function")
-    }
-    receiveMatrixData($event){
-      this.excelData= $event;
-      console.log("inside receiveMatrixdata function");;
-      this.updateCols();
-      console.log("finished update columns function, going into populate data function")
-      this.populateRows();
-
-    }
    
     //update COLS just adds columns to grid. 
     updateCols()
