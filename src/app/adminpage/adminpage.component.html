@@ -3,7 +3,7 @@
 <p>The admin grid shows all the data. It allows you to choose what data the user should see.</p>
 <!--ExcelSheet Component-->
 
-<app-excelsheet (dataEvent)="receiveData($event)" (dataEvent2) = "receiveMatrixData($event)"></app-excelsheet>
+<app-excelsheet (dataEvent)="receiveData($event)" (dataEvent2) = "receiveMatrixData($event)" [role]="role"></app-excelsheet>
 <app-admingrid
 *ngIf="ifExcelFile==true"
 [excelData] = "excelData" 

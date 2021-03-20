@@ -9,6 +9,7 @@ import * as XLSX from 'xlsx';
 })
 export class ExcelsheetComponent implements OnInit {
 
+  @Input() role:boolean = false; 
   data: [][];
    wb: XLSX.WorkBook;
   @Output() dataEvent = new EventEmitter<any>();
