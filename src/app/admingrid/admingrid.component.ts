@@ -1,5 +1,7 @@
 
 import { Component, OnInit,Input} from '@angular/core';
+import { FileDetector } from 'selenium-webdriver';
+import {CreateUserGridService} from '../create-user-grid.service'
 
 import * as XLSX from 'xlsx';
 
@@ -41,8 +43,9 @@ export class AdmingridComponent implements OnInit {
     this.columnApi = params.columnapi; 
     this.updateCols(); 
     this.populateRows(); 
+    this.gridService.setData(this.excelSheet,this.excelData,this.myRowData,this.myColumnDefs);
   }
-    constructor() { }
+    constructor(private gridService:CreateUserGridService) { }
   
     ngOnInit(): void {
     }
@@ -84,7 +87,6 @@ export class AdmingridComponent implements OnInit {
           char = String.fromCharCode(col1)+String.fromCharCode(col2);
         }
       }
-
       return columns;
     }
 
@@ -110,10 +112,11 @@ export class AdmingridComponent implements OnInit {
         rowIndex++;
     }
 
-    // finally, set the imported rowData into the grid
+    // finally, set the imported rowData into the grid'
+    console.log(columns);
+    console.log(this.myRowData[0].Make);
     this.gridApi.setRowData(this.myRowData);
 }
-           
-         }
+}
 
-  
+

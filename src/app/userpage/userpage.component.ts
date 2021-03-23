@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserpageComponent implements OnInit {
 
+  gotDataFromAdmin:boolean = false; 
+  
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  fillUserGrid(){
+    this.gotDataFromAdmin=true;
+  }
 }

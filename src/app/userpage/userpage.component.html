@@ -1,3 +1,8 @@
-<app-usergrid>
+<h2>User-Grid Page</h2>
+<p>This is our User-Grid</p>
+<p>This will show a grid designed by the Admin</p>
+<label for="importbutton"></label>
+<button (click)="fillUserGrid()" name="importbutton"> Import </button>
+<app-usergrid *ngIf = "gotDataFromAdmin==true">
     
 </app-usergrid>

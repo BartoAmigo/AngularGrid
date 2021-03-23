@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CreateUserGridService} from '../create-user-grid.service'
 
 @Component({
   selector: 'app-usergrid',
@@ -34,10 +35,15 @@ export class UsergridComponent implements OnInit {
   onGridReady = (params) => {
     this.gridApi = params.api; //gets gridApi here
     this.columnApi = params.columnapi; //gets columnApi here 
+    this.myRowData = this.gridService.getRowDefs();
+    this.myColumnDefs = this.gridService.getColDefs();
+    console.log(this.myRowData);
+    console.log(this.myColumnDefs)
+    this.gridApi.setRowData(this.myRowData); 
+    this.gridApi.setColumnDefs(this.myColumnDefs);
   }
 
-  constructor() { }
-
+  constructor(private gridService:CreateUserGridService) { }
   ngOnInit(): void {
   }
 }
