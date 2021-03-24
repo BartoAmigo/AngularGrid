@@ -9,7 +9,7 @@ const routes: Routes = [
   {path:'adminpage', component:AdminpageComponent},
   {path:'userpage',component:UserpageComponent},
   {path:'Home',component:HomeComponent},
-  {path:'About',component:AboutComponent},
+  {path:'about',component:AboutComponent},
   {path:'',redirectTo: '/Home',pathMatch:'full'},
   {path:'**',redirectTo:'/Home',pathMatch:'full'}
 
