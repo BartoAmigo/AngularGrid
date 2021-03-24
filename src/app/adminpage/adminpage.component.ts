@@ -11,6 +11,8 @@ import { CreateUserGridService } from '../create-user-grid.service';
 export class AdminpageComponent implements OnInit {
   @ViewChild(AdmingridComponent) child:AdmingridComponent
   role:boolean = false;
+  columnDefs: [];
+  columnsLoaded:boolean = false;
   public excelData: [][]; 
   excelSheet: XLSX.WorkBook;
   ifExcelFile:boolean = false;
@@ -28,5 +30,7 @@ export class AdminpageComponent implements OnInit {
   resetGrid(){
     this.child.resetState();
   }
+  
 
-}
+  }
+

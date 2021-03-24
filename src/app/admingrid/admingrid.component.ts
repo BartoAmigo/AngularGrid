@@ -1,7 +1,7 @@
 
 import { Component, OnInit,Input} from '@angular/core';
-import { FileDetector } from 'selenium-webdriver';
 import {CreateUserGridService} from '../create-user-grid.service'
+import 'ag-grid-enterprise'
 
 import * as XLSX from 'xlsx';
 
@@ -14,6 +14,7 @@ import * as XLSX from 'xlsx';
 export class AdmingridComponent implements OnInit {
   private gridApi;  //defines a placeholder for out gridApi
   private columnApi;  //defines placeholder for our columnApi 
+  private sideBar = "columns";
   myRowData = []; // Defines row definitions
   myColumnDefs = [];  //defines column definitions 
   @Input() excelSheet: XLSX.WorkBook;
@@ -21,13 +22,13 @@ export class AdmingridComponent implements OnInit {
   public arrayData :any;
  
   private defColDefs = {
-    sortable:true,
-    enableRowGroup:true,
-    resizable:true,
-    width:100,
-    checkboxSelection:false
-
-
+    flex: 1,
+    minWidth: 100,
+    enableValue: true,
+    enableRowGroup: true,
+    enablePivot: true,
+    sortable: true,
+    filter: true,
   }
   /* Grid Options 
   used to set definitions for grid. can add Properties/events/callbacks
@@ -38,14 +39,14 @@ export class AdmingridComponent implements OnInit {
       defaultColDef:this.defColDefs,
       columnDefs:this.myColumnDefs, //grid gets column definitons here
       pagination:true,
+      sideBar:this.sideBar
       //Events 
       //add event handlers
       /* */ 
 
       //callbacks
       /**/  
-  };
-  
+  }
   /* onGridReady 
   this function grabs our grid api.
   */
@@ -132,6 +133,11 @@ export class AdmingridComponent implements OnInit {
   resetState(){
     this.columnApi.resetColumnState();
   }
+
+  getColumnDefs():any{
+    return this.myColumnDefs;
+  }
+
 }
 
 
