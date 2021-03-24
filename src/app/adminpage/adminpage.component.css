@@ -1,0 +1,4 @@
+div.gridDisplayBox{
+    display:flex;
+    flex-direction:row;
+}

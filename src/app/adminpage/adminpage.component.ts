@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import * as XLSX from "xlsx";
+import { AdmingridComponent } from '../admingrid/admingrid.component';
 import { CreateUserGridService } from '../create-user-grid.service';
+
 @Component({
   selector: 'app-adminpage',
   templateUrl: './adminpage.component.html',
-  styleUrls: ['./adminpage.component.css']
+  styleUrls: ['./adminpage.component.css'],
 })
 export class AdminpageComponent implements OnInit {
-  role:boolean = false; 
+  @ViewChild(AdmingridComponent) child:AdmingridComponent
+  role:boolean = false;
   public excelData: [][]; 
   excelSheet: XLSX.WorkBook;
   ifExcelFile:boolean = false;
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   receiveData($event){
     this.excelSheet = $event; 
@@ -22,6 +23,10 @@ export class AdminpageComponent implements OnInit {
   }
   receiveMatrixData($event){
     this.excelData = $event; 
+  }
+
+  resetGrid(){
+    this.child.resetState();
   }
 
 }

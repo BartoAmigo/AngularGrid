@@ -4,8 +4,22 @@
 <!--ExcelSheet Component-->
 
 <app-excelsheet (dataEvent)="receiveData($event)" (dataEvent2) = "receiveMatrixData($event)" [role]="role"></app-excelsheet>
-<app-admingrid
-*ngIf="ifExcelFile==true"
-[excelData] = "excelData" 
-[excelSheet] = "excelSheet"
-></app-admingrid>
+<div *ngIf="ifExcelFile==true">
+<div class = "gridControlBox">
+    <p>Grid Control Box</p>
+    <div class="controlButtons"> 
+        <label for="resetButton">Resets Grid</label>
+        <button (click)="resetGrid()" name="resetButton">Reset</button>
+    </div>
+</div>
+
+<div class="gridDisplayBox">
+    <app-admingrid
+    [excelData] = "excelData" 
+    [excelSheet] = "excelSheet">   
+    </app-admingrid>
+    <div class="gridColumnCommands">
+       <ul> 
+       </ul>
+    </div>
+</div>

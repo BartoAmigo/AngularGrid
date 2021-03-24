@@ -19,14 +19,25 @@ export class AdmingridComponent implements OnInit {
   @Input() excelSheet: XLSX.WorkBook;
   @Input() excelData: [][]; //excel matrix use to store data informations. 
   public arrayData :any;
+ 
+  private defColDefs = {
+    sortable:true,
+    enableRowGroup:true,
+    resizable:true,
+    width:100,
+    checkboxSelection:false
+
+
+  }
   /* Grid Options 
   used to set definitions for grid. can add Properties/events/callbacks
   */ 
   gridOptions = {
       //Properties 
       rowData:this.myRowData, //row data gets information from our array
+      defaultColDef:this.defColDefs,
       columnDefs:this.myColumnDefs, //grid gets column definitons here
-      pagination:true
+      pagination:true,
       //Events 
       //add event handlers
       /* */ 
@@ -38,9 +49,10 @@ export class AdmingridComponent implements OnInit {
   /* onGridReady 
   this function grabs our grid api.
   */
+
   onGridReady = (params) => {
     this.gridApi = params.api; 
-    this.columnApi = params.columnapi; 
+    this.columnApi = params.columnApi; 
     this.updateCols(); 
     this.populateRows(); 
     this.gridService.setData(this.excelSheet,this.excelData,this.myRowData,this.myColumnDefs);
@@ -117,6 +129,9 @@ export class AdmingridComponent implements OnInit {
     console.log(this.myRowData[0].Make);
     this.gridApi.setRowData(this.myRowData);
 }
+  resetState(){
+    this.columnApi.resetColumnState();
+  }
 }
 
 
