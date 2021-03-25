@@ -8,10 +8,14 @@ import { CreateUserGridService } from 'app/create-user-grid.service';
   styleUrls: ['./userpage.component.css']
 })
 export class UserpageComponent implements  OnInit {
-
+  somebool:boolean; 
   gotDataFromAdmin:boolean = false; 
 
-  constructor(private gridService:CreateUserGridService) { }
+  constructor(private gridService:CreateUserGridService) {
+    this.gridService.dataGotted.subscribe((res: boolean) =>{
+    console.log(this.somebool = res);
+    })
+   }
 
   ngOnInit(): void {
 

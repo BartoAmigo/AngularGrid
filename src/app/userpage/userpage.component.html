@@ -2,10 +2,13 @@
 <p>This is our User-Grid</p>
 <p>This will show a grid designed by the Admin</p>
 
-<div>
+<p style="font-size:50px; "*ngIf="somebool==false">Please Export Data to User Grid From Admin</p>
+
+
+<div *ngIf ="somebool==true">
 <label for="importbutton"></label>
-<button (click)="fillUserGrid()" name="importbutton"> Import </button>
-</div>
+<button (click)="fillUserGrid()" name="importbutton" *ngIf="gotDataFromAdmin==false"> Import </button>
 <app-usergrid *ngIf = "gotDataFromAdmin==true">
     
 </app-usergrid>
+</div>

@@ -148,6 +148,7 @@ export class AdmingridComponent implements OnInit {
       
     }
     this.gridService.setData(this.myRowData,someColDefs);
+    this.gridService.dataGotted.next(true);
 
   }
 

@@ -45,7 +45,9 @@ export class UsergridComponent implements OnInit {
     
   }
 
-  constructor(private gridService:CreateUserGridService) { }
+  constructor(private gridService:CreateUserGridService) { 
+    
+  }
   ngOnInit(): void {
   }
 }

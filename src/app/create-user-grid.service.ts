@@ -1,11 +1,12 @@
 import { Injectable} from '@angular/core';
-import {Subject} from 'rxjs'
+import {BehaviorSubject} from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateUserGridService {
-  dataGot:boolean = false;
+  dataGotted = new BehaviorSubject<boolean>(false);
+  dataGot:boolean=false;
   rowDefs = [];
   colDefs = [];
   constructor() { }

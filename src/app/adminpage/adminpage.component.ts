@@ -11,7 +11,6 @@ import { CreateUserGridService } from '../create-user-grid.service';
 })
 export class AdminpageComponent implements OnInit {
   @ViewChild(AdmingridComponent) child:AdmingridComponent; 
-  @ViewChild(UserpageComponent) child2:UserpageComponent;
   role:boolean = false;
   columnDefs: [];
   columnsLoaded:boolean = false;
@@ -30,13 +29,11 @@ export class AdminpageComponent implements OnInit {
   }
 
   resetGrid(){
-    //this.child.resetState();
+    this.child.resetState();
   }
   
   exportState(){
     this.child.sendCurrentColumnState();
-    console.log(this.child);
-    console.log(this.child2);
   }
 
   }
