@@ -4,6 +4,7 @@ import {CreateUserGridService} from '../create-user-grid.service'
 import 'ag-grid-enterprise'
 
 import * as XLSX from 'xlsx';
+import { stringify } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class AdmingridComponent implements OnInit {
       defaultColDef:this.defColDefs,
       columnDefs:this.myColumnDefs, //grid gets column definitons here
       pagination:true,
-      sideBar:this.sideBar
+      sideBar:this.sideBar,
+      rowMultiSelectWithClick:"true"
       //Events 
       //add event handlers
       /* */ 
@@ -56,7 +58,6 @@ export class AdmingridComponent implements OnInit {
     this.columnApi = params.columnApi; 
     this.updateCols(); 
     this.populateRows(); 
-    this.gridService.setData(this.excelSheet,this.excelData,this.myRowData,this.myColumnDefs);
   }
     constructor(private gridService:CreateUserGridService) { }
   
@@ -138,6 +139,20 @@ export class AdmingridComponent implements OnInit {
     return this.myColumnDefs;
   }
 
+  sendCurrentColumnState(){
+    var someColDefs = [];
+    let columns = this.columnApi.getAllDisplayedColumns();
+    for(let i =0;i<columns.length;i++){
+      var tempvar = columns[i].colId;
+      someColDefs.push({field:tempvar.toString()})
+      
+    }
+    this.gridService.setData(this.myRowData,someColDefs);
+
+  }
+
+
 }
+
 
 

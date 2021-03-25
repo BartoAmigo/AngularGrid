@@ -1,26 +1,19 @@
-import { Injectable } from '@angular/core';
-import * as XLSX from 'xlsx'
+import { Injectable} from '@angular/core';
+import {Subject} from 'rxjs'
+
 @Injectable({
   providedIn: 'root'
 })
 export class CreateUserGridService {
-  workbook: XLSX.WorkBook;
-  excelData: [][];
+  dataGot:boolean = false;
   rowDefs = [];
   colDefs = [];
   constructor() { }
 
-  setData(someWorkbook: XLSX.WorkBook, someData:[][],someRowDefs= [],someColDefs = []){
-    this.workbook = someWorkbook; 
-    this.excelData = someData; 
+  setData(someRowDefs= [],someColDefs = []){
+    this.dataGot = true; 
     this.rowDefs = someRowDefs;
     this.colDefs = someColDefs; 
-  }
-  getWorkbook(){
-    return this.workbook; 
-  }
-  getExcelData(){
-    return this.excelData; 
   }
   getRowDefs(){
     return this.rowDefs; 
@@ -28,4 +21,5 @@ export class CreateUserGridService {
   getColDefs(){
     return this.colDefs;
   }
+  
 }

@@ -34,13 +34,15 @@ export class UsergridComponent implements OnInit {
 /* Grid Ready function */
   onGridReady = (params) => {
     this.gridApi = params.api; //gets gridApi here
-    this.columnApi = params.columnapi; //gets columnApi here 
+    this.columnApi = params.columnApi; //gets columnApi here 
+    
+    
     this.myRowData = this.gridService.getRowDefs();
     this.myColumnDefs = this.gridService.getColDefs();
-    console.log(this.myRowData);
-    console.log(this.myColumnDefs)
+    
     this.gridApi.setRowData(this.myRowData); 
     this.gridApi.setColumnDefs(this.myColumnDefs);
+    
   }
 
   constructor(private gridService:CreateUserGridService) { }
