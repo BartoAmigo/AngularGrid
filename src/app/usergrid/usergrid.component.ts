@@ -10,23 +10,37 @@ export class UsergridComponent implements OnInit {
 
   private gridApi; //placeholder for grid api 
   private columnApi; //place holder to get grid's column api
+  private sideBar = "columns";
   myRowData = [];  //array of row definitions 
   myColumnDefs=[];  //array of columndefinitions 
   
   /* Grid option function 
   Sets properties for grid 
   */ 
+ private defColDefs = {
+  flex: 1,
+  minWidth: 100,
+  enableValue: true,
+  enableRowGroup: true,
+  enablePivot: true,
+  sortable: true,
+  filter: true,
+}
+
 
   gridOptions = {
     //properties 
     rowData:this.myRowData, //grabs our row definition 
     columnDefs:this.myColumnDefs, //grabs our column definition 
-    pagination:true
+    pagination:true,
+    defaultColDef:this.defColDefs,
+    sideBar:this.sideBar,
+    rowMultiSelectWithClick:"true"
     //events
     //event handlers
     /*Insert Event handlers here  */
 
-    //callbacks 
+    //callbacks  
     /*Insert callbacks here */ 
     /**/
 
