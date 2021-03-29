@@ -25,7 +25,6 @@ phases:
       - ng build --prod
       - rm -dfr node_modules
       - aws s3 cp --recursive $BUILD_FOLDER s3://$WEBSITE_S3_BUCKET/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
-      - sed -i -e "2 s|src=\"|&$WEBSITE_S3_PREFIX/|g" src\app\home\home.component.html"
       - sed -i -e "8 s|href=\"|&$WEBSITE_S3_PREFIX/|g" $BUILD_FOLDER/index.html
       - sed -i -e "11 s|href=\"|&$WEBSITE_S3_PREFIX/|g" $BUILD_FOLDER/index.html 
       - sed -i -e "18 s|src=\"|&$WEBSITE_S3_PREFIX/|g" $BUILD_FOLDER/index.html 
