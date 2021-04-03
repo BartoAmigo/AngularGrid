@@ -1,6 +1,7 @@
 
 import { Component, OnInit,Input} from '@angular/core';
-import {CreateUserGridService} from '../create-user-grid.service'
+import {CreateUserGridService} from 'services/create-user-grid.service'
+import {ColsFromExcelService} from 'services/cols-from-excel.service'
 import 'ag-grid-enterprise'
 
 import * as XLSX from 'xlsx';
@@ -15,6 +16,7 @@ export class AdmingridComponent implements OnInit {
   private gridApi;  //defines a placeholder for out gridApi
   private columnApi;  //defines placeholder for our columnApi 
   private sideBar = "columns"; //columns for side
+  columnInfo;
   myRowData = []; // Defines row definitions
   myColumnDefs = [];  //defines column definitions 
   @Input() excelSheet: XLSX.WorkBook; //excelSheet 
@@ -70,7 +72,7 @@ export class AdmingridComponent implements OnInit {
   }
 
   //in the constructor we are injecting a grid service in our constructor. 
-    constructor(private gridService:CreateUserGridService)  { }
+    constructor(private gridService:CreateUserGridService, private getColFromExcelService:ColsFromExcelService)  { }
   
     ngOnInit(): void {
     }
@@ -79,13 +81,9 @@ export class AdmingridComponent implements OnInit {
     //update COLS just adds columns to grid. 
     updateCols()
     {
-    
-      for(var i = 0;i <this.excelData[0].length;i++)
-      {
-        this.myColumnDefs.push({field:this.excelData[0][i]});
-      }
+      this.columnInfo = this.getColFromExcelService.getColumnsFromExcelFile(this.excelData);
+      this.myColumnDefs = this.columnInfo.columns;
       this.gridApi.setColumnDefs(this.myColumnDefs);
-
     }
 
     /*SetColumns Function 
@@ -154,6 +152,10 @@ export class AdmingridComponent implements OnInit {
     this.columnApi.resetColumnState(); //resets columns to origin state 
   }
 
+  /* 
+  getColumnDefs() 
+  just grabs columnDefs
+  */
   getColumnDefs():any{
     return this.myColumnDefs;
   }

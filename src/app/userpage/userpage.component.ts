@@ -1,6 +1,6 @@
-import { DOCUMENT } from '@angular/common';
+
 import { Component, OnInit} from '@angular/core';
-import { CreateUserGridService } from 'app/create-user-grid.service';
+import { CreateUserGridService } from 'services/create-user-grid.service';
 
 @Component({
   selector: 'app-userpage',
