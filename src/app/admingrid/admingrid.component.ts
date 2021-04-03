@@ -14,13 +14,15 @@ import * as XLSX from 'xlsx';
 export class AdmingridComponent implements OnInit {
   private gridApi;  //defines a placeholder for out gridApi
   private columnApi;  //defines placeholder for our columnApi 
-  private sideBar = "columns";
+  private sideBar = "columns"; //columns for side
   myRowData = []; // Defines row definitions
   myColumnDefs = [];  //defines column definitions 
-  @Input() excelSheet: XLSX.WorkBook;
+  @Input() excelSheet: XLSX.WorkBook; //excelSheet 
   @Input() excelData: [][]; //excel matrix use to store data informations. 
-  public arrayData :any;
  
+
+
+  //This is for the column information, sets rules to every column. 
   private defColDefs = {
     flex: 1,
     minWidth: 100,
@@ -30,6 +32,9 @@ export class AdmingridComponent implements OnInit {
     sortable: true,
     filter: true,
   }
+
+
+
   /* Grid Options 
   used to set definitions for grid. can add Properties/events/callbacks
   */ 
@@ -38,9 +43,10 @@ export class AdmingridComponent implements OnInit {
       rowData:this.myRowData, //row data gets information from our array
       defaultColDef:this.defColDefs,
       columnDefs:this.myColumnDefs, //grid gets column definitons here
-      pagination:true,
-      sideBar:this.sideBar,
-      rowMultiSelectWithClick:"true"
+      pagination:true, //pagination
+      sideBar:this.sideBar, //sidebar
+      rowMultiSelectWithClick:"true" //rowMultiSelectWithClick
+
       //Events 
       //add event handlers
       /* */ 
@@ -52,13 +58,19 @@ export class AdmingridComponent implements OnInit {
   this function grabs our grid api.
   */
 
+
+  /*OnGridReady function just loads the grid up
+  in this function you are able to get the gridapi and column api. */ 
+
   onGridReady = (params) => {
     this.gridApi = params.api; 
     this.columnApi = params.columnApi; 
     this.updateCols(); 
     this.populateRows(); 
   }
-    constructor(private gridService:CreateUserGridService) { }
+
+  //in the constructor we are injecting a grid service in our constructor. 
+    constructor(private gridService:CreateUserGridService)  { }
   
     ngOnInit(): void {
     }
@@ -75,6 +87,9 @@ export class AdmingridComponent implements OnInit {
       this.gridApi.setColumnDefs(this.myColumnDefs);
 
     }
+
+    /*SetColumns Function 
+    creates columns for the populate rows */
     setcolumns(columns)
     {
       var char = 'A';
@@ -103,9 +118,14 @@ export class AdmingridComponent implements OnInit {
       return columns;
     }
 
+
+    /*
+    This function populateRows() 
+    creates rowdata using an excelfile. 
+    */
     populateRows()
     {
-      var firstSheetName = this.excelSheet.SheetNames[0];
+      var firstSheetName = this.excelSheet.SheetNames[0]; 
     var worksheet = this.excelSheet.Sheets[firstSheetName];
     console.log (worksheet)
       console.log("inside populate rows function")
@@ -126,25 +146,28 @@ export class AdmingridComponent implements OnInit {
     }
 
     // finally, set the imported rowData into the grid'
-    console.log(columns);
-    console.log(this.myRowData[0].Make);
     this.gridApi.setRowData(this.myRowData);
 }
+
+  //resetState function resets columns to the original content
   resetState(){
-    this.columnApi.resetColumnState();
+    this.columnApi.resetColumnState(); //resets columns to origin state 
   }
 
   getColumnDefs():any{
     return this.myColumnDefs;
   }
 
+
+  /*sendCurrentColumnState function 
+  sends data to the userGrid. 
+  */ 
   sendCurrentColumnState(){
-    var someColDefs = [];
-    let columns = this.columnApi.getAllDisplayedColumns();
+    let someColDefs = [];  
+    let columns = this.columnApi.getAllDisplayedColumns(); 
     for(let i =0;i<columns.length;i++){
       var tempvar = columns[i].colId;
       someColDefs.push({field:tempvar.toString()})
-      
     }
     this.gridService.setData(this.myRowData,someColDefs);
     this.gridService.dataGotted.next(true);
