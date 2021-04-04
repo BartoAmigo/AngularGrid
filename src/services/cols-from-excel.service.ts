@@ -31,9 +31,5 @@ getColumnsFromExcelFile(excelData:[][]):any{
   }
 
   return {columns,columnsForRows}
-}
-
-resetColumns(){
-
-}
+  }
 }

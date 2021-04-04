@@ -2,6 +2,7 @@
 import { Component, OnInit,Input} from '@angular/core';
 import {CreateUserGridService} from 'services/create-user-grid.service'
 import {ColsFromExcelService} from 'services/cols-from-excel.service'
+import {RowsFromExcelService} from 'services/rows-from-excel.service'
 import 'ag-grid-enterprise'
 
 import * as XLSX from 'xlsx';
@@ -16,7 +17,7 @@ export class AdmingridComponent implements OnInit {
   private gridApi;  //defines a placeholder for out gridApi
   private columnApi;  //defines placeholder for our columnApi 
   private sideBar = "columns"; //columns for side
-  columnInfo;
+  columnInfo; // columnInfo is going to collect column   
   myRowData = []; // Defines row definitions
   myColumnDefs = [];  //defines column definitions 
   @Input() excelSheet: XLSX.WorkBook; //excelSheet 
@@ -72,7 +73,7 @@ export class AdmingridComponent implements OnInit {
   }
 
   //in the constructor we are injecting a grid service in our constructor. 
-    constructor(private gridService:CreateUserGridService, private getColFromExcelService:ColsFromExcelService)  { }
+    constructor(private gridService:CreateUserGridService, private getColFromExcelService:ColsFromExcelService, private RowService:RowsFromExcelService)  { }
   
     ngOnInit(): void {
     }
@@ -123,11 +124,10 @@ export class AdmingridComponent implements OnInit {
     */
     populateRows()
     {
-      var firstSheetName = this.excelSheet.SheetNames[0]; 
-    var worksheet = this.excelSheet.Sheets[firstSheetName];
-    console.log (worksheet)
-      console.log("inside populate rows function")
-      var columns = {};
+    let firstSheetName = this.excelSheet.SheetNames[0]; 
+    let worksheet = this.excelSheet.Sheets[firstSheetName];
+    /*
+      let columns = {};
       columns = this.setcolumns(columns);
       var rowIndex = 2;
       while (worksheet['A' + rowIndex]) {
@@ -142,8 +142,11 @@ export class AdmingridComponent implements OnInit {
 
         rowIndex++;
     }
+    */
 
-    // finally, set the imported rowData into the grid'
+    // finally, set the imported rowData into the grid
+    this.myRowData = this.RowService.populateRows(worksheet,this.columnInfo.columnsForRows);
+    // SetRowData
     this.gridApi.setRowData(this.myRowData);
 }
 
