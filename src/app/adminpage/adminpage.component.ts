@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { UserpageComponent } from 'app/userpage/userpage.component';
 import * as XLSX from "xlsx";
 import { AdmingridComponent } from '../admingrid/admingrid.component';
-import { CreateUserGridService } from '../create-user-grid.service';
+import { CreateUserGridService } from 'services/create-user-grid.service';
 
 @Component({
   selector: 'app-adminpage',
