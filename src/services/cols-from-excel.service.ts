@@ -24,14 +24,12 @@ getColumnsFromExcelFile(excelWorkSheet):any{
         num = char.charCodeAt(0);
         num++;
         char = String.fromCharCode(num); 
-        console.log("In If Statement");
       }
       else
       {
         col1 = (i/26)+64;
         col2 = (i%26)+65;
         char = String.fromCharCode(col1)+String.fromCharCode(col2);
-        console.log("In Else");
       }
       console.log(i);
     }
