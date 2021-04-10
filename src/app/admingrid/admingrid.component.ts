@@ -89,35 +89,6 @@ export class AdmingridComponent implements OnInit {
       this.gridApi.setColumnDefs(this.myColumnDefs);
     }
 
-    /* SetColumns Function 
-    creates columns for the populate rows */
-    setcolumns(columns)
-    {
-      var char = 'A';
-      var num = 0;
-      var col1 = 0;
-      var col2 = 0;
-      for(var i = 1;i <=this.myColumnDefs.length;i++)
-      {
-        //save first header
-        columns[char] = this.myColumnDefs[i-1].field;
-        //check if 'i' is longer than the alphabet
-        if(i<26){
-          num = char.charCodeAt(0); //Store char as number
-          num++;
-          char = String.fromCharCode(num); //Going from ascii to char
-         
-        }
-        else
-        {
-          
-          col1 = (i/26)+64;
-          col2 = (i%26)+65;
-          char = String.fromCharCode(col1)+String.fromCharCode(col2);
-        }
-      }
-      return columns;
-    }
 
 
     /*
@@ -130,23 +101,7 @@ export class AdmingridComponent implements OnInit {
     let firstSheetName = this.excelSheet.SheetNames[0]; 
     let worksheet = this.excelSheet.Sheets[firstSheetName];
     
-      let columns = {};
-      columns = this.setcolumns(columns);
-      var rowIndex = 2;
-      while (worksheet['A' + rowIndex]) {
-        var row = {};
-        Object.keys(columns).forEach(function(column) {
-          if(worksheet[column+rowIndex]){
-            row[columns[column]] = worksheet[column + rowIndex].w;
-          }
-        });
-
-        this.myRowData.push(row);
-
-        rowIndex++;
-    }
-    
-
+  
     // finally, set the imported rowData into the grid
     this.myRowData = this.RowService.populateRows(worksheet,this.columnInfo.columnsForRows);
     // SetRowData
