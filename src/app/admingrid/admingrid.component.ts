@@ -69,7 +69,7 @@ export class AdmingridComponent implements OnInit {
     this.gridApi = params.api; 
     this.columnApi = params.columnApi; 
     this.updateCols(); 
-    this.populateRows(); 
+    //this.populateRows(); 
   }
 
   //in the constructor we are injecting a grid service in our constructor. 
@@ -82,12 +82,14 @@ export class AdmingridComponent implements OnInit {
     //update COLS just adds columns to grid. 
     updateCols()
     {
-      this.columnInfo = this.getColFromExcelService.getColumnsFromExcelFile(this.excelData);
+      let firstSheetName = this.excelSheet.SheetNames[0]; 
+      let worksheet = this.excelSheet.Sheets[firstSheetName];
+      this.columnInfo = this.getColFromExcelService.getColumnsFromExcelFile(worksheet);
       this.myColumnDefs = this.columnInfo.columns;
       this.gridApi.setColumnDefs(this.myColumnDefs);
     }
 
-    /*SetColumns Function 
+    /* SetColumns Function 
     creates columns for the populate rows */
     setcolumns(columns)
     {
