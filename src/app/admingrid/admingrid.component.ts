@@ -105,10 +105,9 @@ export class AdmingridComponent implements OnInit {
 
     populateRows()
     {
+  
       var firstSheetName = this.excelSheet.SheetNames[0];
     var worksheet = this.excelSheet.Sheets[firstSheetName];
-    console.log (worksheet)
-      console.log("inside populate rows function")
       var columns = {};
       columns = this.setcolumns(columns);
       var rowIndex = 2;

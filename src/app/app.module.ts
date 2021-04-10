@@ -10,6 +10,8 @@ import { UsergridComponent } from './usergrid/usergrid.component';
 import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
 import { AdminpageComponent } from './adminpage/adminpage.component';
 import { UserpageComponent } from './userpage/userpage.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -21,12 +23,14 @@ import { UserpageComponent } from './userpage/userpage.component';
     UsergridComponent,
     ExcelsheetComponent,
     AdminpageComponent,
-    UserpageComponent
+    UserpageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    BrowserAnimationsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,11 +1,23 @@
-
+<mat-tab-group>
+  
+    <mat-tab label="sheet 1"> 
+  
+    
 <ag-grid-angular
 #admingrid
 style="width:1000px;height:750px;"
 class="ag-theme-alpine"
 [gridOptions]="gridOptions"
 (gridReady) = "onGridReady($event)"
-
 ></ag-grid-angular>
 <!--****************-->
-
+</mat-tab>
+<mat-tab label="sheet 2">
+    <ag-grid-angular
+#admingrid2
+style="width:1000px;height:750px;"
+class="ag-theme-alpine"
+[gridOptions]="gridOptions"
+(gridReady) = "onGridReady($event)"
+></ag-grid-angular>
+ </mat-tab>
