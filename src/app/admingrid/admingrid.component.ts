@@ -69,7 +69,7 @@ export class AdmingridComponent implements OnInit {
     this.gridApi = params.api; 
     this.columnApi = params.columnApi; 
     this.updateCols(); 
-    //this.populateRows(); 
+    this.populateRows(); 
   }
 
   //in the constructor we are injecting a grid service in our constructor. 

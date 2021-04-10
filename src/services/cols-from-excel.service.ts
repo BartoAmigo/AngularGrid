@@ -18,18 +18,22 @@ getColumnsFromExcelFile(excelWorkSheet):any{
 
       columns.push({field:excelWorkSheet[char+1].w});
       columnsForRows[char] = columns[i].field;
+      i++;
 
       if(i<26){
         num = char.charCodeAt(0);
         num++;
         char = String.fromCharCode(num); 
+        console.log("In If Statement");
       }
-      else{
+      else
+      {
         col1 = (i/26)+64;
         col2 = (i%26)+65;
         char = String.fromCharCode(col1)+String.fromCharCode(col2);
+        console.log("In Else");
       }
-      i++;
+      console.log(i);
     }
     console.log(columns);
     console.log(columnsForRows);
