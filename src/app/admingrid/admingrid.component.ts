@@ -126,9 +126,10 @@ export class AdmingridComponent implements OnInit {
     */
     populateRows()
     {
+
     let firstSheetName = this.excelSheet.SheetNames[0]; 
     let worksheet = this.excelSheet.Sheets[firstSheetName];
-    /*
+    
       let columns = {};
       columns = this.setcolumns(columns);
       var rowIndex = 2;
@@ -144,7 +145,7 @@ export class AdmingridComponent implements OnInit {
 
         rowIndex++;
     }
-    */
+    
 
     // finally, set the imported rowData into the grid
     this.myRowData = this.RowService.populateRows(worksheet,this.columnInfo.columnsForRows);
