@@ -17,8 +17,20 @@
 </div>
 
 <div>
-<app-admingrid
-[excelData] = "excelData" 
-[excelSheet] = "excelSheet">   
-</app-admingrid>
+    <mat-tab-group>
+        <mat-tab label="sheet1">
+            <app-admingrid
+            [excelData] = "excelData" 
+            [excelSheet] = "excelSheet">   
+            </app-admingrid>
+        </mat-tab>
+        <mat-tab label="sheet2">
+            <app-admingrid
+            [excelData]="excelData"
+            [excelSheet]="excelSheet">
+                
+            </app-admingrid>
+        </mat-tab>
+    </mat-tab-group>
+
 </div>
