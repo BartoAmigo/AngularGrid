@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { UserpageComponent } from 'app/userpage/userpage.component';
 import * as XLSX from "xlsx";
 import { AdmingridComponent } from '../admingrid/admingrid.component';
@@ -16,13 +16,17 @@ export class AdminpageComponent implements OnInit {
   columnsLoaded:boolean = false;
   public excelData: [][]; 
   excelSheet: XLSX.WorkBook;
+  indexArr: Number[] = [];
   ifExcelFile:boolean = false;
-
+  public index = 0;
+  
   ngOnInit(): void { }
 
   receiveData($event){
     this.excelSheet = $event; 
     this.ifExcelFile=true;
+    this.createArray()
+  
   }
   receiveMatrixData($event){
     this.excelData = $event; 
@@ -36,5 +40,10 @@ export class AdminpageComponent implements OnInit {
     this.child.sendCurrentColumnState();
   }
 
-  }
-
+ createArray(){
+   this.index = this.excelSheet.SheetNames.length
+   for(let i = 0;i<this.index;i++){
+     this.indexArr.push(i)
+   }
+ }
+}

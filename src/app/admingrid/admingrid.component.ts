@@ -21,7 +21,8 @@ export class AdmingridComponent implements OnInit {
   myRowData = []; // Defines row definitions
   myColumnDefs = [];  //defines column definitions 
   @Input() excelSheet: XLSX.WorkBook; //excelSheet 
-  @Input() excelData: [][]; //excel matrix use to store data informations. 
+  @Input() excelData: [][];
+  @Input() index: Number //index of worksheet
  
 
 
@@ -65,12 +66,17 @@ export class AdmingridComponent implements OnInit {
   /*OnGridReady function just loads the grid up
   in this function you are able to get the gridapi and column api. */ 
 
+
+
+
   onGridReady = (params) => {
     this.gridApi = params.api; 
-    this.columnApi = params.columnApi; 
-    this.updateCols(); 
-    this.populateRows(); 
-  }
+    this.columnApi = params.columnApi;
+    this.updateCols(this.index)
+    this.populateRows(this.index)
+    
+    }
+  
 
   //in the constructor we are injecting a grid service in our constructor. 
     constructor(private gridService:CreateUserGridService, private getColFromExcelService:ColsFromExcelService, private RowService:RowsFromExcelService)  { }
@@ -80,9 +86,9 @@ export class AdmingridComponent implements OnInit {
   
    
     //update COLS just adds columns to grid. 
-    updateCols()
+    updateCols(newindex)
     {
-      let firstSheetName = this.excelSheet.SheetNames[0]; 
+      let firstSheetName = this.excelSheet.SheetNames[newindex]; 
       let worksheet = this.excelSheet.Sheets[firstSheetName];
       this.columnInfo = this.getColFromExcelService.getColumnsFromExcelFile(worksheet);
       this.myColumnDefs = this.columnInfo.columns;
@@ -95,10 +101,10 @@ export class AdmingridComponent implements OnInit {
     This function populateRows() 
     creates rowdata using an excelfile. 
     */
-    populateRows()
+    populateRows(newindex)
     {
 
-    let firstSheetName = this.excelSheet.SheetNames[0]; 
+    let firstSheetName = this.excelSheet.SheetNames[newindex]; 
     let worksheet = this.excelSheet.Sheets[firstSheetName];
     
   
@@ -138,6 +144,12 @@ export class AdmingridComponent implements OnInit {
   }
 
 
+
+   
+
+    
+
+  
 }
 
 
