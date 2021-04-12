@@ -17,9 +17,10 @@
 </div>
 
 <div >
-    <mat-tab-group >
+    <mat-tab-group (selectedIndexChange)="tabChanged($event)">
         <mat-tab *ngFor= "let ind of indexArr" label="worksheet{{ind+1}}">
-            <app-admingrid [index] = "ind"
+            <app-admingrid 
+            [index] = "ind"
             [excelData] = "excelData" 
             [excelSheet] = "excelSheet">   
             </app-admingrid>

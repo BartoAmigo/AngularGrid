@@ -1,8 +1,6 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import { UserpageComponent } from 'app/userpage/userpage.component';
+import { Component,OnInit,ViewChildren,QueryList, Input} from '@angular/core';
 import * as XLSX from "xlsx";
 import { AdmingridComponent } from '../admingrid/admingrid.component';
-import { CreateUserGridService } from 'services/create-user-grid.service';
 
 @Component({
   selector: 'app-adminpage',
@@ -10,7 +8,8 @@ import { CreateUserGridService } from 'services/create-user-grid.service';
   styleUrls: ['./adminpage.component.css'],
 })
 export class AdminpageComponent implements OnInit {
-  @ViewChild(AdmingridComponent) child:AdmingridComponent; 
+  @ViewChildren(AdmingridComponent) child:QueryList<AdmingridComponent>;
+  @Input() currentGrid:number 
   role:boolean = false;
   columnDefs: [];
   columnsLoaded:boolean = false;
@@ -18,9 +17,9 @@ export class AdminpageComponent implements OnInit {
   excelSheet: XLSX.WorkBook;
   indexArr: Number[] = [];
   ifExcelFile:boolean = false;
-  public index = 0;
   
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+  }
 
   receiveData($event){
     this.excelSheet = $event; 
@@ -31,18 +30,21 @@ export class AdminpageComponent implements OnInit {
   receiveMatrixData($event){
     this.excelData = $event; 
   }
+  
+  tabChanged($event){
+    this.currentGrid = $event;
+  }
 
   resetGrid(){
-    this.child.resetState();
+    this.child.get(this.currentGrid).resetState();
   }
-  
   exportState(){
-    this.child.sendCurrentColumnState();
+    this.child.get(this.currentGrid).sendCurrentColumnState();
   }
 
  createArray(){
-   this.index = this.excelSheet.SheetNames.length
-   for(let i = 0;i<this.index;i++){
+   let index = this.excelSheet.SheetNames.length
+   for(let i = 0;i<index;i++){
      this.indexArr.push(i)
    }
  }
