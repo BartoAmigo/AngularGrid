@@ -30,12 +30,13 @@ export class AdmingridComponent implements OnInit {
   //This is for the column information, sets rules to every column. 
   private defColDefs = {
     flex: 1,
-    minWidth: 100,
+    minWidth: 200,
     enableValue: true,
     enableRowGroup: true,
     enablePivot: true,
     sortable: true,
     filter: true,
+    editable:true
   }
 
 
