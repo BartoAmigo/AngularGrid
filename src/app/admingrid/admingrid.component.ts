@@ -6,6 +6,7 @@ import {RowsFromExcelService} from 'services/rows-from-excel.service'
 import 'ag-grid-enterprise'
 
 import * as XLSX from 'xlsx';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -140,6 +141,17 @@ export class AdmingridComponent implements OnInit {
     }
     this.gridService.setData(this.myRowData,someColDefs);
     this.gridService.dataGotted.next(true);
+
+  }
+
+  addNewRowItem(){
+    let columns = this.columnInfo.columnsForRows;
+    let row = {};
+    Object.keys(columns).forEach(function(column){
+      row[columns[column]] = "FILL"; 
+    });
+    this.gridApi.applyTransaction({add:[row]})
+
 
   }
 

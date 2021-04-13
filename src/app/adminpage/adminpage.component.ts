@@ -9,7 +9,7 @@ import { AdmingridComponent } from '../admingrid/admingrid.component';
 })
 export class AdminpageComponent implements OnInit {
   @ViewChildren(AdmingridComponent) child:QueryList<AdmingridComponent>;
-  @Input() currentGrid:number 
+  @Input() currentGrid:number = 0;
   role:boolean = false;
   columnDefs: [];
   columnsLoaded:boolean = false;
@@ -47,5 +47,9 @@ export class AdminpageComponent implements OnInit {
    for(let i = 0;i<index;i++){
      this.indexArr.push(i)
    }
+ }
+
+ addARow(){
+   this.child.get(this.currentGrid).addNewRowItem();
  }
 }
