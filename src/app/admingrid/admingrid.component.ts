@@ -148,7 +148,7 @@ export class AdmingridComponent implements OnInit {
     let columns = this.columnInfo.columnsForRows;
     let row = {};
     Object.keys(columns).forEach(function(column){
-      row[columns[column]] = "FILL"; 
+      row[columns[column]] = ""; 
     });
     this.gridApi.applyTransaction({add:[row]})
 
