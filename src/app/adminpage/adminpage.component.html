@@ -13,16 +13,21 @@
         <button (click)="resetGrid()" name="resetButton">Reset</button>
         <label for ="exportButton">Export Grid To User</label>
         <button (click)="exportState()"name="exportButton">Export</button>
+        <label for = "addRowButton">Add Row</label>
+        <button (click)="addARow()">Add</button>
     </div>
 </div>
 
 <div >
-    <mat-tab-group >
-        <mat-tab *ngFor= "let ind of indexArr" label="worksheet{{ind+1}}">
-            <app-admingrid [index] = "ind"
-            [excelData] = "excelData" 
-            [excelSheet] = "excelSheet">   
-            </app-admingrid>
+    <mat-tab-group (selectedIndexChange)="tabChanged($event)">
+        <mat-tab *ngFor= "let ind of indexArr" label="{{excelSheet.SheetNames[ind]}}">
+            <div style="height:750px">
+                <app-admingrid 
+                [index] = "ind"
+                [excelData] = "excelData" 
+                [excelSheet] = "excelSheet">   
+                </app-admingrid>
+            </div>
         </mat-tab>
     </mat-tab-group>
 
