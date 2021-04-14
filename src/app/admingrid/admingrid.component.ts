@@ -24,7 +24,6 @@ export class AdmingridComponent implements OnInit {
   @Input() excelSheet: XLSX.WorkBook; //excelSheet 
   @Input() excelData: [][];
   @Input() index: Number //index of worksheet
- 
 
 
   //This is for the column information, sets rules to every column. 
@@ -155,8 +154,6 @@ export class AdmingridComponent implements OnInit {
 
 
   }
-
-
 
    
 

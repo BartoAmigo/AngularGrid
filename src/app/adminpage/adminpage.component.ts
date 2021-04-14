@@ -17,6 +17,7 @@ export class AdminpageComponent implements OnInit {
   excelSheet: XLSX.WorkBook;
   indexArr: Number[] = [];
   ifExcelFile:boolean = false;
+  style={width:screen.width-750+'px',height:screen.height-200+'px'}
   
   ngOnInit(): void { 
   }
