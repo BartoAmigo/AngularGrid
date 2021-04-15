@@ -1,4 +1,6 @@
+import { CustomTooltipComponent } from './../app/custom-tooltip/custom-tooltip.component';
 import { Injectable } from '@angular/core';
+import { TooltipFeature } from 'ag-grid-community';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,11 @@ getColumnsFromExcelFile(excelWorkSheet):any{
   let char = "A";
   while(excelWorkSheet[char+1]){
 
-      columns.push({field:excelWorkSheet[char+1].w});
+      columns.push({field:excelWorkSheet[char+1].w,
+        tooltipField:excelWorkSheet[char+1].w,
+        tooltipComponentParams: { color: '#ececec' },
+
+      });
       columnsForRows[char] = columns[i].field;
       i++;
 

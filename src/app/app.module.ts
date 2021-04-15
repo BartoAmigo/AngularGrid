@@ -12,7 +12,11 @@ import { AdminpageComponent } from './adminpage/adminpage.component';
 import { UserpageComponent } from './userpage/userpage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
-import { GridcontrolboxComponent } from './gridcontrolbox/gridcontrolbox.component';
+import { CustomTooltipComponent } from './custom-tooltip/custom-tooltip.component';
+import { ITooltipAngularComp } from 'ag-grid-angular';
+import{ICellRendererParams} from 'ag-grid-community'
+
+//import { GridcontrolboxComponent } from './gridcontrolbox/gridcontrolbox.component';
 
 
 @NgModule({
@@ -25,12 +29,13 @@ import { GridcontrolboxComponent } from './gridcontrolbox/gridcontrolbox.compone
     ExcelsheetComponent,
     AdminpageComponent,
     UserpageComponent,
-    GridcontrolboxComponent,
+    CustomTooltipComponent,
+    //GridcontrolboxComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([CustomTooltipComponent]),
     BrowserAnimationsModule,
     MatTabsModule
   ],

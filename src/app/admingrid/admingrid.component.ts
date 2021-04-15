@@ -1,10 +1,11 @@
+import { CustomTooltipComponent } from './../custom-tooltip/custom-tooltip.component';
 
 import { Component, OnInit,Input} from '@angular/core';
 import {CreateUserGridService} from 'services/create-user-grid.service'
 import {ColsFromExcelService} from 'services/cols-from-excel.service'
 import {RowsFromExcelService} from 'services/rows-from-excel.service'
 import 'ag-grid-enterprise'
-
+import{ICellRendererParams} from 'ag-grid-community'
 import * as XLSX from 'xlsx';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
@@ -24,7 +25,8 @@ export class AdmingridComponent implements OnInit {
   @Input() excelSheet: XLSX.WorkBook; //excelSheet 
   @Input() excelData: [][];
   @Input() index: Number //index of worksheet
-
+  public tooltipShowDelay;
+  public frameworkComponents;
 
   //This is for the column information, sets rules to every column. 
   private defColDefs = {
@@ -35,7 +37,10 @@ export class AdmingridComponent implements OnInit {
     enablePivot: true,
     sortable: true,
     filter: true,
-    editable:true
+    editable:true,
+    tooltipComponent: 'customTooltip',
+
+
   }
 
 
@@ -50,8 +55,9 @@ export class AdmingridComponent implements OnInit {
       columnDefs:this.myColumnDefs, //grid gets column definitons here
       pagination:true, //pagination
       sideBar:this.sideBar, //sidebar
-      rowMultiSelectWithClick:"true" //rowMultiSelectWithClick
-
+      rowMultiSelectWithClick:"true", //rowMultiSelectWithClick
+      detailCellRendererFramework: CustomTooltipComponent,
+      detailCellRendererParams: (params: ICellRendererParams) => this.formatToolTip(params.data)
       //Events 
       //add event handlers
       /* */ 
@@ -80,7 +86,10 @@ export class AdmingridComponent implements OnInit {
   
 
   //in the constructor we are injecting a grid service in our constructor. 
-    constructor(private gridService:CreateUserGridService, private getColFromExcelService:ColsFromExcelService, private RowService:RowsFromExcelService)  { }
+    constructor(private gridService:CreateUserGridService, private getColFromExcelService:ColsFromExcelService, private RowService:RowsFromExcelService)  {
+      this.tooltipShowDelay = 0;
+      this.frameworkComponents = { customTooltip: CustomTooltipComponent };
+     }
   
     ngOnInit(): void {
     }
@@ -155,7 +164,19 @@ export class AdmingridComponent implements OnInit {
 
   }
 
-   
+  formatToolTip(params: any) {
+    // USE THIS FOR TOOLTIP LINE BREAKs
+
+    const toolTipArray = this.gridApi.setColumnDefs(this.myColumnDefs);
+console.log(toolTipArray)
+    return {toolTipArray}
+
+    // USE THIS FOR SINGLE LINE TOOLTIP
+
+    // const lineBreak = false;
+    // const toolTipString = 'Hello World'
+    // return { toolTipString, lineBreak }
+  }
 
     
 
