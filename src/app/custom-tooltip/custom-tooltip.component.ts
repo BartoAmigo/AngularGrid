@@ -16,14 +16,16 @@ export class CustomTooltipComponent implements ITooltipAngularComp,OnInit {
   public data: any;
   public toolTip: string;
   public dataArray  = [];
-
-
+public keyArray = [];
   constructor() { }
   agInit(params: ITooltipParams): void {
     this.params = params;
     this.data = params.api.getDisplayedRowAtIndex(params.rowIndex).data;
     Object.values(this.data).forEach(element => {
       this.dataArray.push(element)
+    });
+    Object.keys(this.data).forEach(element => {
+      this.keyArray.push(element)
     });
 
   }
@@ -38,7 +40,5 @@ export class CustomTooltipComponent implements ITooltipAngularComp,OnInit {
   }
 
 }
-function forEach(arg0: (element: any) => void) {
-  throw new Error('Function not implemented.');
-}
+
 

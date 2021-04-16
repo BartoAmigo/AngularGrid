@@ -1,6 +1,6 @@
 :host {
     position: absolute;
-    width: 150px;
+    width:fit-content;
     height: 70px;
     pointer-events: none;
     transition: opacity 1s;
@@ -17,4 +17,15 @@
 
   .custom-tooltip p:first-of-type {
     font-weight: bold;
+  }
+  .custom-tooltip {
+    position: absolute;
+    width:fit-content;
+    height: fit-content;
+    border: 3px solid rgb(255, 255, 255);
+    background-color:#f25d5a ;
+    overflow:visible;
+    pointer-events: none;
+    
+    transition: opacity 1s;
   }

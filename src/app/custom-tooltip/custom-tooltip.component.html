@@ -1,6 +1,10 @@
-<div class="custom-tooltip" [style.background-color]="data.color">
-  <div *ngFor ="let rowdata of dataArray">
-   
-      {{rowdata}}
-    
-  </div>
+<div class="custom-tooltip">
+  <ng-container *ngFor ="let rowdata of dataArray";let i= index>  
+    {{rowdata}}
+  </ng-container>
+</div>
+<div class="custom-tooltip">
+  <ng-container *ngFor ="let rowdata of keyArray";let i= index>  
+    {{rowdata}}
+  </ng-container>
+</div>

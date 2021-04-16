@@ -57,7 +57,62 @@ export class AdmingridComponent implements OnInit {
       sideBar:this.sideBar, //sidebar
       rowMultiSelectWithClick:"true", //rowMultiSelectWithClick
       detailCellRendererFramework: CustomTooltipComponent,
-      detailCellRendererParams: (params: ICellRendererParams) => this.formatToolTip(params.data)
+      detailCellRendererParams: (params: ICellRendererParams) => this.formatToolTip(params.data),
+      getRowStyle: params => {
+
+        if( params.node.rowIndex % 14 === 0){
+          return {background: '#f25d5a'};
+        }
+        else if(params.node.rowIndex % 14 === 1){
+          return {background: '#363537'};
+        }
+        else if(params.node.rowIndex % 14 === 2){
+            return {background: '#84be18'};
+        }
+        else if(params.node.rowIndex % 14 === 3){
+          return {background: 'a68e5a'};
+
+        }
+        else if(params.node.rowIndex % 14 === 4){
+          return {background: '#dddcce'};
+        }
+        else if(params.node.rowIndex % 14 === 5){
+          return {background: '#84a834'};
+        }
+        else if(params.node.rowIndex % 14 === 6){
+          return {background: '#1698d4'};
+        }
+        else if(params.node.rowIndex % 14 === 7){
+          return {background: '#4e6585'};
+        }
+        else if(params.node.rowIndex % 14 === 8){
+          return {background: '#3d3c3e'};
+        }
+        else if(params.node.rowIndex % 14 === 9){
+          return {background: '#e74701'};
+        }
+        else if(params.node.rowIndex % 14 === 10){
+          return {background: '#bfef75'};
+        }
+        else if(params.node.rowIndex % 14 === 11){
+          return {background: '#0fc8f8'};
+        }
+        else if(params.node.rowIndex % 14 === 12){
+          return {background: '#807e80'};
+        }
+        else if(params.node.rowIndex % 14 === 13){
+          return {background: '#f25b48'};
+        }
+        else if(params.node.rowIndex % 14 === 14){
+          return {background: '#ee1c25'};
+
+
+
+        }
+
+
+
+      },
       //Events 
       //add event handlers
       /* */ 
@@ -87,7 +142,7 @@ export class AdmingridComponent implements OnInit {
 
   //in the constructor we are injecting a grid service in our constructor. 
     constructor(private gridService:CreateUserGridService, private getColFromExcelService:ColsFromExcelService, private RowService:RowsFromExcelService)  {
-      this.tooltipShowDelay = 0;
+     
       this.frameworkComponents = { customTooltip: CustomTooltipComponent };
      }
   
@@ -168,8 +223,9 @@ export class AdmingridComponent implements OnInit {
     // USE THIS FOR TOOLTIP LINE BREAKs
 
     const toolTipArray = this.gridApi.setColumnDefs(this.myColumnDefs);
-console.log(toolTipArray)
-    return {toolTipArray}
+    const toolTipArray1 = this.gridApi.setColumnDefs(this.myColumnDefs);
+
+    return {toolTipArray,toolTipArray1}
 
     // USE THIS FOR SINGLE LINE TOOLTIP
 
