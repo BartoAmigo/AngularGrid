@@ -20,7 +20,8 @@
   }
   .custom-tooltip {
     position: absolute;
-    width:fit-content;
+    max-width:300px;
+    min-width:150px;
     height: fit-content;
     border: 3px solid rgb(255, 255, 255);
     background-color:#f25d5a ;
