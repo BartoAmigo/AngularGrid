@@ -16,19 +16,21 @@ export class CustomTooltipComponent implements ITooltipAngularComp,OnInit {
   public data: any;
   public toolTip: string;
   public dataArray  = [];
-//public keyArray = [];
+public keyArray = [];
   constructor() { }
   agInit(params: ITooltipParams): void {
     this.params = params;
     this.data = params.api.getDisplayedRowAtIndex(params.rowIndex).data;
     var value,key;
     Object.keys(this.data).forEach(element => {
-      if(this.data[element] === null){
+      if(this.data[element] === "undefined"){
         value = "data missing";
         key = element;
+        console.log(value)
       }
       else{
         value = this.data[element];
+        console.log(value)
         key = element;
       }
       this.dataArray.push(key + " : " + value);
