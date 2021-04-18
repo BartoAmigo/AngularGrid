@@ -39,7 +39,8 @@ export class AdmingridComponent implements OnInit {
     filter: true,
     editable:true,
     tooltipComponent: 'customTooltip',
-
+    rowDragManaged: true,
+    animateRows: true,
 
   }
 
@@ -56,6 +57,7 @@ export class AdmingridComponent implements OnInit {
       pagination:true, //pagination
       sideBar:this.sideBar, //sidebar
       rowMultiSelectWithClick:"true", //rowMultiSelectWithClick
+    
       detailCellRendererFramework: CustomTooltipComponent,
       detailCellRendererParams: (params: ICellRendererParams) => this.formatToolTip(params.data),
       getRowStyle: params => {
@@ -64,7 +66,7 @@ export class AdmingridComponent implements OnInit {
           return {background: '#f25d5a'};
         }
         else if(params.node.rowIndex % 14 === 1){
-          return {background: '#363537'};
+          return {background: '#363537',color:'white'};
         }
         else if(params.node.rowIndex % 14 === 2){
             return {background: '#84be18'};

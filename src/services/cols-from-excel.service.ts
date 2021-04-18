@@ -21,6 +21,7 @@ getColumnsFromExcelFile(excelWorkSheet):any{
       columns.push({field:excelWorkSheet[char+1].w,
         tooltipField:excelWorkSheet[char+1].w,
         tooltipComponentParams: { color: '#ececec' },
+        rowDrag: true,
 
       });
       columnsForRows[char] = columns[i].field;
