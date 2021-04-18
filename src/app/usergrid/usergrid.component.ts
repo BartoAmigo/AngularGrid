@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CreateUserGridService} from '../create-user-grid.service'
+import {CreateUserGridService} from 'services/create-user-grid.service'
 
 @Component({
   selector: 'app-usergrid',
@@ -10,7 +10,7 @@ export class UsergridComponent implements OnInit {
 
   private gridApi; //placeholder for grid api 
   private columnApi; //place holder to get grid's column api
-  private sideBar = "columns";
+  private sideBar = "columns"; //this is for the side bar
   myRowData = [];  //array of row definitions 
   myColumnDefs=[];  //array of columndefinitions 
   
@@ -51,11 +51,11 @@ export class UsergridComponent implements OnInit {
     this.columnApi = params.columnApi; //gets columnApi here 
     
     
-    this.myRowData = this.gridService.getRowDefs();
-    this.myColumnDefs = this.gridService.getColDefs();
+    this.myRowData = this.gridService.getRowDefs(); //this gets the data from a service.
+    this.myColumnDefs = this.gridService.getColDefs(); //this gets the data from a service.
     
-    this.gridApi.setRowData(this.myRowData); 
-    this.gridApi.setColumnDefs(this.myColumnDefs);
+    this.gridApi.setRowData(this.myRowData); //this sets row data.
+    this.gridApi.setColumnDefs(this.myColumnDefs); //this sets column Data.
     
   }
 
