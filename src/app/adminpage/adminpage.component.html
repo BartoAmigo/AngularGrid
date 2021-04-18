@@ -6,7 +6,7 @@
 <app-excelsheet (dataEvent)="receiveData($event)" (dataEvent2) = "receiveMatrixData($event)" [role]="role"></app-excelsheet>
 
 <div *ngIf="ifExcelFile==true">
-<div class = "gridControlBox">
+<div class = "gridControlBox" style="background-color:green;border:solid black 2px; border-radius:100px;">
     <p style="text-align:center">Grid Control Box</p>
     <div class="controlButtons"> 
         <label style="text-align:center">
@@ -38,7 +38,7 @@
 <div>
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
         <mat-tab *ngFor= "let ind of indexArr" label="{{excelSheet.SheetNames[ind]}}">
-            <div id="gridcontainer" style="height:750px;">
+            <div id="gridcontainer" [style]="getGridStyle()">
                 <app-admingrid 
                 [index] = "ind"
                 [excelData] = "excelData" 
