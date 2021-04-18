@@ -27,7 +27,7 @@ export class AdmingridComponent implements OnInit {
   @Input() index: Number //index of worksheet
   public tooltipShowDelay;
   public frameworkComponents;
-
+private deleteIndex;
   //This is for the column information, sets rules to every column. 
   private defColDefs = {
     flex: 1,
@@ -39,8 +39,6 @@ export class AdmingridComponent implements OnInit {
     filter: true,
     editable:true,
     tooltipComponent: 'customTooltip',
-    rowDragManaged: true,
-    animateRows: true,
 
   }
 
@@ -57,7 +55,7 @@ export class AdmingridComponent implements OnInit {
       pagination:true, //pagination
       sideBar:this.sideBar, //sidebar
       rowMultiSelectWithClick:"true", //rowMultiSelectWithClick
-    
+      rowSelection:"single",
       detailCellRendererFramework: CustomTooltipComponent,
       detailCellRendererParams: (params: ICellRendererParams) => this.formatToolTip(params.data),
       getRowStyle: params => {
@@ -218,6 +216,13 @@ export class AdmingridComponent implements OnInit {
     });
     this.gridApi.applyTransaction({add:[row]})
 
+  }
+  onRowClick(event: any): void {
+    this.deleteIndex = event.getRow;
+  }
+  deleteRowItem(){
+    var selectedData = this.gridApi.getSelectedRows();
+    var res = this.gridApi.applyTransaction({ remove: selectedData });
 
   }
 

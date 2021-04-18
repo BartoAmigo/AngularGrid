@@ -59,6 +59,9 @@ export class AdminpageComponent implements OnInit {
  addARow(){
    this.child.get(this.currentGrid).addNewRowItem();
  }
+ deleteRow(){
+   this.child.get(this.currentGrid).deleteRowItem();
+ }
  gridSizeUp(){
    this.height += .10 *screen.height;
    this.width  += .10 *screen.width;
@@ -71,7 +74,6 @@ export class AdminpageComponent implements OnInit {
  }
  getGridStyle():string{
    let HTMLSTRING = ("width:"+this.width+"px;"+"height:"+this.height+"px;")
-   console.log(HTMLSTRING);
    return HTMLSTRING;
  }
 }
