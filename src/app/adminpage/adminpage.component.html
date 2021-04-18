@@ -6,22 +6,39 @@
 <app-excelsheet (dataEvent)="receiveData($event)" (dataEvent2) = "receiveMatrixData($event)" [role]="role"></app-excelsheet>
 
 <div *ngIf="ifExcelFile==true">
-<div class = "gridControlBox">
-    <p>Grid Control Box</p>
+<div class = "gridControlBox" style="background-color:green;border:solid black 2px; border-radius:100px;">
+    <p style="text-align:center">Grid Control Box</p>
     <div class="controlButtons"> 
+        <label style="text-align:center">
+        <p>Grid Controls</p>
+        <div>
         <label for="resetButton">Resets Grid</label>
         <button (click)="resetGrid()" name="resetButton">Reset</button>
         <label for ="exportButton">Export Grid To User</label>
         <button (click)="exportState()"name="exportButton">Export</button>
         <label for = "addRowButton">Add Row</label>
         <button (click)="addARow()">Add</button>
+        </div>
+        </label>
+        <label style="margin-left:5px;font-size:20px">
+        <p style="text-align:center">Grid size tools</p>
+        <div>
+        <label for ="sizeUpButton">Increase size of Grid</label>
+        <button name="sizeUpButton" (click)="gridSizeUp()">+</button>
+        <label for="sizeDownButton">Decrease size of Grid</label>
+        <button name="sizeDownButton" (click)="gridSizeDown()">-</button>
+        </div>
+        </label>
+    
+    </div>
+            
     </div>
 </div>
 
-<div >
+<div>
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
         <mat-tab *ngFor= "let ind of indexArr" label="{{excelSheet.SheetNames[ind]}}">
-            <div style="height:750px">
+            <div id="gridcontainer" [style]="getGridStyle()">
                 <app-admingrid 
                 [index] = "ind"
                 [excelData] = "excelData" 

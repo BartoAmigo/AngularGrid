@@ -1,3 +1,4 @@
+
 import { Component,OnInit,ViewChildren,QueryList, Input} from '@angular/core';
 import * as XLSX from "xlsx";
 import { AdmingridComponent } from '../admingrid/admingrid.component';
@@ -9,7 +10,7 @@ import { AdmingridComponent } from '../admingrid/admingrid.component';
 })
 export class AdminpageComponent implements OnInit {
   @ViewChildren(AdmingridComponent) child:QueryList<AdmingridComponent>;
-  @Input() currentGrid:number = 0;
+  @Input() currentGrid:number;
   role:boolean = false;
   columnDefs: [];
   columnsLoaded:boolean = false;
@@ -17,10 +18,14 @@ export class AdminpageComponent implements OnInit {
   excelSheet: XLSX.WorkBook;
   indexArr: Number[] = [];
   ifExcelFile:boolean = false;
-  //style={width:screen.width-750+'px',height:screen.height-200+'px'}
+  height = screen.height - (.20*screen.height);
+  width = screen.width - (.20*screen.height);
+
   
   ngOnInit(): void { 
   }
+  
+  constructor() {}
 
   receiveData($event){
     this.excelSheet = $event; 
@@ -34,6 +39,7 @@ export class AdminpageComponent implements OnInit {
   
   tabChanged($event){
     this.currentGrid = $event;
+    document.getElementById("gridcontainer").setAttribute("style",this.getGridStyle());
   }
 
   resetGrid(){
@@ -52,5 +58,20 @@ export class AdminpageComponent implements OnInit {
 
  addARow(){
    this.child.get(this.currentGrid).addNewRowItem();
+ }
+ gridSizeUp(){
+   this.height += .10 *screen.height;
+   this.width  += .10 *screen.width;
+   document.getElementById("gridcontainer").setAttribute("style",this.getGridStyle());
+ }
+ gridSizeDown(){
+  this.height -= .10 *screen.height;
+  this.width  -= .10 *screen.width;
+  document.getElementById("gridcontainer").setAttribute("style",this.getGridStyle());
+ }
+ getGridStyle():string{
+   let HTMLSTRING = ("width:"+this.width+"px;"+"height:"+this.height+"px;")
+   console.log(HTMLSTRING);
+   return HTMLSTRING;
  }
 }

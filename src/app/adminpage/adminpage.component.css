@@ -1,0 +1,13 @@
+div.gridControlBox{
+
+    width:fit-content;
+}
+div.controlButtons{
+    font-size:20px;
+    border:solid #000000 5px;
+    border-radius:100px;
+    width:fit-content;
+}
+p{
+    font-size:20px;
+}
