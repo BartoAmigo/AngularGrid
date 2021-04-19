@@ -28,6 +28,7 @@ export class AdmingridComponent implements OnInit {
   public tooltipShowDelay;
   public frameworkComponents;
 private deleteIndex;
+private rowIndex;
   //This is for the column information, sets rules to every column. 
   private defColDefs = {
     flex: 1,
@@ -211,14 +212,20 @@ private deleteIndex;
   addNewRowItem(){
     let columns = this.columnInfo.columnsForRows;
     let row = {};
+  
     Object.keys(columns).forEach(function(column){
       row[columns[column]] = ""; 
     });
-    this.gridApi.applyTransaction({add:[row]})
+
+    this.gridApi.applyTransaction({ add: [{row}], addIndex: this.rowIndex+1 })
+
+    //this.gridApi.applyTransaction({add:[row]})
 
   }
   onRowClick(event: any): void {
     this.deleteIndex = event.getRow;
+    this.rowIndex = event.rowIndex
+
   }
   deleteRowItem(){
     var selectedData = this.gridApi.getSelectedRows();
