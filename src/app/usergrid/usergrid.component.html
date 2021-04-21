@@ -4,6 +4,8 @@
 <!--Grid Component -->
 <ag-grid-angular
 #usergrid
+[rowData]="myRowData"
+[columnDefs]="myColData"
 style="width:1000px;height:750px;"
 class="ag-theme-alpine"
 [gridOptions]="gridOptions"

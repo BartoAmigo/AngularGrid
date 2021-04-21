@@ -2,13 +2,23 @@
 <p>This is our User-Grid</p>
 <p>This will show a grid designed by the Admin</p>
 
-<p style="font-size:50px; "*ngIf="somebool==false">Please Export Data to User Grid From Admin</p>
+<p style="font-size:50px; "*ngIf="isDataSet==false">Create DB in Admin</p>
 
+<label for="addRowButton"></label>
+<button (click) = "addARow()" name="addRowButton">Add a row</button>
 
-<div *ngIf ="somebool==true">
-<label for="importbutton"></label>
-<button (click)="fillUserGrid()" name="importbutton" *ngIf="gotDataFromAdmin==false"> Import </button>
-<app-usergrid *ngIf = "gotDataFromAdmin==true">
-    
-</app-usergrid>
+<div>
+    <mat-tab-group (selectedIndexChange)="tabChanged($event)">
+        <mat-tab *ngFor = "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>
+            <div id="gridcontainer">
+                <app-usergrid
+                    [myColData]="db.database[i].columns.columns"
+                    [myRowData]="db.database[i].rows"
+                    [sheetName]="db.database[i].workSheetName"
+                >
+                </app-usergrid>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
 </div>

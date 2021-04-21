@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {CreateUserGridService} from 'services/create-user-grid.service'
+import { Component, Input, OnInit } from '@angular/core';
+import {DatabaseService} from 'services/database.service'
 
 @Component({
   selector: 'app-usergrid',
@@ -11,12 +11,16 @@ export class UsergridComponent implements OnInit {
   private gridApi; //placeholder for grid api 
   private columnApi; //place holder to get grid's column api
   private sideBar = "columns"; //this is for the side bar
-  myRowData = [];  //array of row definitions 
-  myColumnDefs=[];  //array of columndefinitions 
+  @Input() sheetName;
+  @Input() myRowData; //array of row definitions 
+  @Input() myColData; //array of columndefinitions 
   
   /* Grid option function 
   Sets properties for grid 
   */ 
+  constructor(public db:DatabaseService){ 
+    
+  }
  private defColDefs = {
   flex: 1,
   minWidth: 100,
@@ -30,8 +34,6 @@ export class UsergridComponent implements OnInit {
 
   gridOptions = {
     //properties 
-    rowData:this.myRowData, //grabs our row definition 
-    columnDefs:this.myColumnDefs, //grabs our column definition 
     pagination:true,
     defaultColDef:this.defColDefs,
     sideBar:this.sideBar,
@@ -49,19 +51,25 @@ export class UsergridComponent implements OnInit {
   onGridReady = (params) => {
     this.gridApi = params.api; //gets gridApi here
     this.columnApi = params.columnApi; //gets columnApi here 
-    
-    
-    this.myRowData = this.gridService.getRowDefs(); //this gets the data from a service.
-    this.myColumnDefs = this.gridService.getColDefs(); //this gets the data from a service.
-    
-    this.gridApi.setRowData(this.myRowData); //this sets row data.
-    this.gridApi.setColumnDefs(this.myColumnDefs); //this sets column Data.
-    
   }
 
-  constructor(private gridService:CreateUserGridService) { 
-    
+  addNewRowItem(){
+    let columns = this.myColData;
+    let row = {};
+    Object.keys(columns).forEach(function(column){
+      row[columns[column].field]="";
+    });
+    this.gridApi.applyTransaction({add:[row]});
   }
+
+  updateRowItems(){
+    let exrowdata = [];
+    this.gridApi.forEachNode(function(node){
+      exrowdata.push(node.data);
+    })
+    this.db.updateElementRows(this.sheetName,exrowdata);
+  }
+
   ngOnInit(): void {
   }
 }

@@ -3,9 +3,9 @@
 <p>The admin grid shows all the data. It allows you to choose what data the user should see.</p>
 <!--ExcelSheet Component-->
 
-<app-excelsheet (dataEvent)="receiveData($event)" (dataEvent2) = "receiveMatrixData($event)" [role]="role"></app-excelsheet>
+<app-excelsheet (dataEvent)="receiveData($event)"></app-excelsheet>
 
-<div *ngIf="ifExcelFile==true">
+<div>
 <div class = "gridControlBox">
     <p style="text-align:center">Grid Control Box</p>
     <div class="controlButtons"> 
@@ -35,14 +35,17 @@
     </div>
 </div>
 
+<div *ngIf="somebool" style="font-size:40px;text-align:center;display:flex;">User has edited the Data</div>
+
 <div>
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
-        <mat-tab *ngFor= "let ind of indexArr" label="{{excelSheet.SheetNames[ind]}}">
-            <div id="gridcontainer" style="height:750px;">
-                <app-admingrid 
-                [index] = "ind"
-                [excelData] = "excelData" 
-                [excelSheet] = "excelSheet">   
+        <mat-tab *ngFor= "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>
+            <div id="gridcontainer" [style]="getGridStyle()">
+                <app-admingrid
+                    [columnInfo]="db.database[i].columns.columns"
+                    [myRowData]="db.database[i].rows"
+                    [sheetName]="db.database[i].workSheetName"
+                >
                 </app-admingrid>
             </div>
         </mat-tab>

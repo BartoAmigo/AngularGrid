@@ -1,6 +1,8 @@
 
-import { Component, OnInit} from '@angular/core';
-import { CreateUserGridService } from 'services/create-user-grid.service';
+import { Component, OnInit,ViewChildren,QueryList} from '@angular/core';
+import {UsergridComponent} from '../usergrid/usergrid.component'
+import {DatabaseService} from 'services/database.service';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-userpage',
@@ -8,24 +10,31 @@ import { CreateUserGridService } from 'services/create-user-grid.service';
   styleUrls: ['./userpage.component.css']
 })
 export class UserpageComponent implements  OnInit {
-  somebool:boolean; 
+  @ViewChildren(UsergridComponent) child:QueryList<UsergridComponent>;
+  currGrid:number = 0;
+  isDataSet:boolean = false;
   gotDataFromAdmin:boolean = false; 
 
-  constructor(private gridService:CreateUserGridService) {
-    this.gridService.dataGotted.subscribe((res: boolean) =>{
-    console.log(this.somebool = res);
+  constructor(public db:DatabaseService) {
+    db.databaseSet.subscribe(value =>{
+      this.isDataSet=value;
     })
-   }
+    db.databaseChanges.subscribe(value =>{
+    })
+  }
 
   ngOnInit(): void {
 
   }
-  fillUserGrid(){
-    if(this.gridService.dataGot==true)
-    this.gotDataFromAdmin=true;
-    else
-    {
-      alert("No Data is Available");
-    }
+
+  addARow(){
+    this.child.get(this.currGrid).addNewRowItem();
+    this.db.databaseChanges.next(true);
   }
+
+  tabChanged($event){
+    this.currGrid = $event;
+  }
+  
+
 }

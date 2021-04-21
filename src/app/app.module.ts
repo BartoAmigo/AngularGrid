@@ -13,8 +13,6 @@ import { UserpageComponent } from './userpage/userpage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import { CustomTooltipComponent } from './custom-tooltip/custom-tooltip.component';
-import { ITooltipAngularComp } from 'ag-grid-angular';
-import{ICellRendererParams} from 'ag-grid-community'
 
 //import { GridcontrolboxComponent } from './gridcontrolbox/gridcontrolbox.component';
 
@@ -29,8 +27,7 @@ import{ICellRendererParams} from 'ag-grid-community'
     ExcelsheetComponent,
     AdminpageComponent,
     UserpageComponent,
-    CustomTooltipComponent,
-    //GridcontrolboxComponent,
+    CustomTooltipComponent
   ],
   imports: [
     BrowserModule,

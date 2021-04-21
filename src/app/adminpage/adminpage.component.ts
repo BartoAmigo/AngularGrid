@@ -1,7 +1,9 @@
 
-import { Component,OnInit,ViewChildren,QueryList, Input} from '@angular/core';
+import { Component,OnInit,ViewChildren,QueryList} from '@angular/core';
 import * as XLSX from "xlsx";
 import { AdmingridComponent } from '../admingrid/admingrid.component';
+import {GetDataFromWorkbookService} from 'services/get-data-from-workbook.service'
+import {DatabaseService} from 'services/database.service'
 
 @Component({
   selector: 'app-adminpage',
@@ -10,14 +12,9 @@ import { AdmingridComponent } from '../admingrid/admingrid.component';
 })
 export class AdminpageComponent implements OnInit {
   @ViewChildren(AdmingridComponent) child:QueryList<AdmingridComponent>;
-  @Input() currentGrid:number;
-  role:boolean = false;
-  columnDefs: [];
-  columnsLoaded:boolean = false;
-  public excelData: [][]; 
-  excelSheet: XLSX.WorkBook;
+  currentGrid:number;
+  somebool:boolean;
   indexArr: Number[] = [];
-  ifExcelFile:boolean = false;
   height = screen.height - (.20*screen.height);
   width = screen.width - (.20*screen.height);
 
@@ -25,16 +22,16 @@ export class AdminpageComponent implements OnInit {
   ngOnInit(): void { 
   }
   
-  constructor() {}
+  constructor(private workbookservice:GetDataFromWorkbookService,public db:DatabaseService) {
+    db.databaseChanges.subscribe(value=>{
+      this.somebool=value;
+    })
+  }
 
   receiveData($event){
-    this.excelSheet = $event; 
-    this.ifExcelFile=true;
-    this.createArray()
+    let excelsheet:XLSX.WorkBook = $event;
+    this.workbookservice.setData(excelsheet);
   
-  }
-  receiveMatrixData($event){
-    this.excelData = $event; 
   }
   
   tabChanged($event){
@@ -46,15 +43,8 @@ export class AdminpageComponent implements OnInit {
     this.child.get(this.currentGrid).resetState();
   }
   exportState(){
-    this.child.get(this.currentGrid).sendCurrentColumnState();
+    this.child.get(this.currentGrid)
   }
-
- createArray(){
-   let index = this.excelSheet.SheetNames.length
-   for(let i = 0;i<index;i++){
-     this.indexArr.push(i)
-   }
- }
 
  addARow(){
    this.child.get(this.currentGrid).addNewRowItem();
@@ -71,7 +61,6 @@ export class AdminpageComponent implements OnInit {
  }
  getGridStyle():string{
    let HTMLSTRING = ("width:"+this.width+"px;"+"height:"+this.height+"px;")
-   console.log(HTMLSTRING);
    return HTMLSTRING;
  }
 }

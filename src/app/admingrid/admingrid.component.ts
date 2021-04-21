@@ -1,13 +1,12 @@
 import { CustomTooltipComponent } from './../custom-tooltip/custom-tooltip.component';
-
+import {DatabaseService} from 'services/database.service'
 import { Component, OnInit,Input} from '@angular/core';
 import {CreateUserGridService} from 'services/create-user-grid.service'
 import {ColsFromExcelService} from 'services/cols-from-excel.service'
 import {RowsFromExcelService} from 'services/rows-from-excel.service'
 import 'ag-grid-enterprise'
-import{ICellRendererParams} from 'ag-grid-community'
-import * as XLSX from 'xlsx';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import {ICellRendererParams} from 'ag-grid-community'
+import { RowDragFeature } from 'ag-grid-community/dist/lib/gridPanel/rowDragFeature';
 
 
 @Component({
@@ -19,14 +18,19 @@ export class AdmingridComponent implements OnInit {
   private gridApi;  //defines a placeholder for out gridApi
   private columnApi;  //defines placeholder for our columnApi 
   private sideBar = "columns"; //columns for side
-  columnInfo; // columnInfo is going to collect column   
-  myRowData = []; // Defines row definitions
-  myColumnDefs = [];  //defines column definitions 
-  @Input() excelSheet: XLSX.WorkBook; //excelSheet 
-  @Input() excelData: [][];
-  @Input() index: Number //index of worksheet
+  @Input() columnInfo; // columnInfo is going to collect column   
+  @Input() myRowData; // Defines row definitions
+  @Input() sheetName:string;
   public tooltipShowDelay;
   public frameworkComponents;
+
+  ngOnInit(){
+
+  }
+  constructor(private gridService:CreateUserGridService, private getColFromExcelService:ColsFromExcelService, private RowService:RowsFromExcelService, private dbService:DatabaseService)  {
+     
+    this.frameworkComponents = { customTooltip: CustomTooltipComponent };
+   }
 
   //This is for the column information, sets rules to every column. 
   private defColDefs = {
@@ -39,8 +43,6 @@ export class AdmingridComponent implements OnInit {
     filter: true,
     editable:true,
     tooltipComponent: 'customTooltip',
-
-
   }
 
 
@@ -50,9 +52,9 @@ export class AdmingridComponent implements OnInit {
   */ 
   gridOptions = {
       //Properties 
-      rowData:this.myRowData, //row data gets information from our array
+      //row data gets information from our array
       defaultColDef:this.defColDefs,
-      columnDefs:this.myColumnDefs, //grid gets column definitons here
+       //grid gets column definitons here
       pagination:true, //pagination
       sideBar:this.sideBar, //sidebar
       rowMultiSelectWithClick:"true", //rowMultiSelectWithClick
@@ -134,50 +136,7 @@ export class AdmingridComponent implements OnInit {
   onGridReady = (params) => {
     this.gridApi = params.api; 
     this.columnApi = params.columnApi;
-    this.updateCols(this.index)
-    this.populateRows(this.index)
-    
     }
-  
-
-  //in the constructor we are injecting a grid service in our constructor. 
-    constructor(private gridService:CreateUserGridService, private getColFromExcelService:ColsFromExcelService, private RowService:RowsFromExcelService)  {
-     
-      this.frameworkComponents = { customTooltip: CustomTooltipComponent };
-     }
-  
-    ngOnInit(): void {
-    }
-  
-   
-    //update COLS just adds columns to grid. 
-    updateCols(newindex)
-    {
-      let firstSheetName = this.excelSheet.SheetNames[newindex]; 
-      let worksheet = this.excelSheet.Sheets[firstSheetName];
-      this.columnInfo = this.getColFromExcelService.getColumnsFromExcelFile(worksheet);
-      this.myColumnDefs = this.columnInfo.columns;
-      this.gridApi.setColumnDefs(this.myColumnDefs);
-    }
-
-
-
-    /*
-    This function populateRows() 
-    creates rowdata using an excelfile. 
-    */
-    populateRows(newindex)
-    {
-
-    let firstSheetName = this.excelSheet.SheetNames[newindex]; 
-    let worksheet = this.excelSheet.Sheets[firstSheetName];
-    
-  
-    // finally, set the imported rowData into the grid
-    this.myRowData = this.RowService.populateRows(worksheet,this.columnInfo.columnsForRows);
-    // SetRowData
-    this.gridApi.setRowData(this.myRowData);
-}
 
   //resetState function resets columns to the original content
   resetState(){
@@ -188,42 +147,35 @@ export class AdmingridComponent implements OnInit {
   getColumnDefs() 
   just grabs columnDefs
   */
-  getColumnDefs():any{
-    return this.myColumnDefs;
-  }
 
 
   /*sendCurrentColumnState function 
   sends data to the userGrid. 
   */ 
-  sendCurrentColumnState(){
-    let someColDefs = [];  
-    let columns = this.columnApi.getAllDisplayedColumns(); 
-    for(let i =0;i<columns.length;i++){
-      var tempvar = columns[i].colId;
-      someColDefs.push({field:tempvar.toString()})
-    }
-    this.gridService.setData(this.myRowData,someColDefs);
-    this.gridService.dataGotted.next(true);
-
-  }
 
   addNewRowItem(){
-    let columns = this.columnInfo.columnsForRows;
+    let columns = this.columnInfo;
     let row = {};
     Object.keys(columns).forEach(function(column){
-      row[columns[column]] = ""; 
+      row[columns[column].field]="";
     });
-    this.gridApi.applyTransaction({add:[row]})
+    this.gridApi.applyTransaction({add:[row]});
+  }
 
-
+  updateRowItems(){
+    let exrowdata = [];
+    this.gridApi.forEachNode(function(node){
+      exrowdata.push(node.data);
+    })
+    
+    
   }
 
   formatToolTip(params: any) {
     // USE THIS FOR TOOLTIP LINE BREAKs
 
-    const toolTipArray = this.gridApi.setColumnDefs(this.myColumnDefs);
-    const toolTipArray1 = this.gridApi.setColumnDefs(this.myColumnDefs);
+    const toolTipArray = this.gridApi.setColumnDefs(this.columnInfo);
+    const toolTipArray1 = this.gridApi.setColumnDefs(this.columnInfo);
 
     return {toolTipArray,toolTipArray1}
 
