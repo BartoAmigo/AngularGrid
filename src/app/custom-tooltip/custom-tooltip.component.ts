@@ -26,16 +26,13 @@ public keyArray = [];
       if(this.data[element] === "undefined"){
         value = "data missing";
         key = element;
-        console.log(value)
       }
       else{
         value = this.data[element];
-        console.log(value)
         key = element;
       }
       this.dataArray.push(key + " : " + value);
     });
-    console.log(this.dataArray);
   }
 
   refresh(params: ITooltipParams): boolean {

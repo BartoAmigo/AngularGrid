@@ -7,6 +7,7 @@
 
 <div>
 <div class = "gridControlBox">
+
     <p style="text-align:center">Grid Control Box</p>
     <div class="controlButtons"> 
         <label style="text-align:center">
@@ -18,6 +19,8 @@
         <button (click)="exportState()"name="exportButton">Export</button>
         <label for = "addRowButton">Add Row</label>
         <button (click)="addARow()">Add</button>
+        <label for = "deleteRowButton">Delete Row</label>
+        <button (click)="deleteRow()">delete</button>
         </div>
         </label>
         <label style="margin-left:5px;font-size:20px">
@@ -39,6 +42,7 @@
 
 <div>
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
+bartbranch
         <mat-tab *ngFor= "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>
             <div id="gridcontainer" [style]="getGridStyle()">
                 <app-admingrid

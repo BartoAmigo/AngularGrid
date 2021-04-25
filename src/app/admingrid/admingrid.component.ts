@@ -24,6 +24,7 @@ export class AdmingridComponent implements OnInit {
   public tooltipShowDelay;
   public frameworkComponents;
 
+
   ngOnInit(){
 
   }
@@ -32,6 +33,9 @@ export class AdmingridComponent implements OnInit {
     this.frameworkComponents = { customTooltip: CustomTooltipComponent };
    }
 
+private deleteIndex;
+private rowIndex;
+ newbranch
   //This is for the column information, sets rules to every column. 
   private defColDefs = {
     flex: 1,
@@ -43,6 +47,7 @@ export class AdmingridComponent implements OnInit {
     filter: true,
     editable:true,
     tooltipComponent: 'customTooltip',
+
   }
 
 
@@ -58,6 +63,7 @@ export class AdmingridComponent implements OnInit {
       pagination:true, //pagination
       sideBar:this.sideBar, //sidebar
       rowMultiSelectWithClick:"true", //rowMultiSelectWithClick
+      rowSelection:"single",
       detailCellRendererFramework: CustomTooltipComponent,
       detailCellRendererParams: (params: ICellRendererParams) => this.formatToolTip(params.data),
       getRowStyle: params => {
@@ -66,7 +72,7 @@ export class AdmingridComponent implements OnInit {
           return {background: '#f25d5a'};
         }
         else if(params.node.rowIndex % 14 === 1){
-          return {background: '#363537'};
+          return {background: '#363537',color:'white'};
         }
         else if(params.node.rowIndex % 14 === 2){
             return {background: '#84be18'};
@@ -156,11 +162,27 @@ export class AdmingridComponent implements OnInit {
   addNewRowItem(){
     let columns = this.columnInfo;
     let row = {};
+  
     Object.keys(columns).forEach(function(column){
       row[columns[column].field]="";
     });
-    this.gridApi.applyTransaction({add:[row]});
+  
+
+
+    this.gridApi.applyTransaction({ add: [{row}], addIndex: this.rowIndex+1 })
+
+    //this.gridApi.applyTransaction({add:[row]})
+
   }
+  onRowClick(event: any): void {
+    this.deleteIndex = event.getRow;
+    this.rowIndex = event.rowIndex
+
+  }
+  deleteRowItem(){
+    var selectedData = this.gridApi.getSelectedRows();
+    var res = this.gridApi.applyTransaction({ remove: selectedData });
+
 
   updateRowItems(){
     let exrowdata = [];
