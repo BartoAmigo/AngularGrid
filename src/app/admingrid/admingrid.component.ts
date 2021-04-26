@@ -6,7 +6,6 @@ import {ColsFromExcelService} from 'services/cols-from-excel.service'
 import {RowsFromExcelService} from 'services/rows-from-excel.service'
 import 'ag-grid-enterprise'
 import {ICellRendererParams} from 'ag-grid-community'
-import { RowDragFeature } from 'ag-grid-community/dist/lib/gridPanel/rowDragFeature';
 
 
 @Component({
@@ -28,7 +27,7 @@ export class AdmingridComponent implements OnInit {
   ngOnInit(){
 
   }
-  constructor(private gridService:CreateUserGridService, private getColFromExcelService:ColsFromExcelService, private RowService:RowsFromExcelService, private dbService:DatabaseService)  {
+  constructor(private gridService:CreateUserGridService, private getColFromExcelService:ColsFromExcelService, private RowService:RowsFromExcelService, private db:DatabaseService)  {
      
     this.frameworkComponents = { customTooltip: CustomTooltipComponent };
    }
@@ -128,9 +127,6 @@ private rowIndex;
       //callbacks
       /**/  
   }
-  /* onGridReady 
-  this function grabs our grid api.
-  */
 
 
   /*OnGridReady function just loads the grid up
@@ -149,15 +145,6 @@ private rowIndex;
     this.columnApi.resetColumnState(); //resets columns to origin state 
   }
 
-  /* 
-  getColumnDefs() 
-  just grabs columnDefs
-  */
-
-
-  /*sendCurrentColumnState function 
-  sends data to the userGrid. 
-  */ 
 
   addNewRowItem(){
     let columns = this.columnInfo;
@@ -172,7 +159,6 @@ private rowIndex;
     this.gridApi.applyTransaction({ add: [row], addIndex: this.rowIndex+1 })
     this.updateRowItems();
 
-    //this.gridApi.applyTransaction({add:[row]})
 
   }
   onRowClick(event: any): void {
@@ -183,6 +169,7 @@ private rowIndex;
   deleteRowItem(){
     var selectedData = this.gridApi.getSelectedRows();
     var res = this.gridApi.applyTransaction({ remove: selectedData });
+    this.updateRowItems();
   }
 
 
@@ -190,10 +177,9 @@ private rowIndex;
     let exrowdata = [];
     this.gridApi.forEachNode(function(node){
       exrowdata.push(node.data);
-    })
-    console.log(exrowdata)
-    
-    
+    });
+    this.myRowData = exrowdata;
+    this.db.updateElementRows(this.sheetName,exrowdata); 
   }
 
   formatToolTip(params: any) {

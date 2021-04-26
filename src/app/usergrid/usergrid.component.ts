@@ -29,6 +29,7 @@ export class UsergridComponent implements OnInit {
   enablePivot: true,
   sortable: true,
   filter: true,
+  editable:true
 }
 
 
@@ -60,14 +61,16 @@ export class UsergridComponent implements OnInit {
       row[columns[column].field]="";
     });
     this.gridApi.applyTransaction({add:[row]});
+    this.updateRowItems();
   }
 
   updateRowItems(){
     let exrowdata = [];
     this.gridApi.forEachNode(function(node){
       exrowdata.push(node.data);
-    })
-    this.db.updateElementRows(this.sheetName,exrowdata);
+    });
+    this.myRowData = exrowdata;
+    this.db.updateElementRows(this.sheetName,exrowdata); 
   }
 
   ngOnInit(): void {

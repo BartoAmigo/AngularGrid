@@ -13,10 +13,10 @@ export class gridData implements IgridData{
         return this.workSheetName;
     }
     getRows():any[]{
-        return this.columns;
+        return this.rows;
     }
     getColumns():any[]{
-        return this.rows;
+        return this.columns;
     }
     getEditFlag():boolean{
         return this.userEdited;
