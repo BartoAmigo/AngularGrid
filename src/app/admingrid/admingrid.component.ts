@@ -169,7 +169,8 @@ private rowIndex;
   
 
 
-    this.gridApi.applyTransaction({ add: [{row}], addIndex: this.rowIndex+1 })
+    this.gridApi.applyTransaction({ add: [row], addIndex: this.rowIndex+1 })
+    this.updateRowItems();
 
     //this.gridApi.applyTransaction({add:[row]})
 
@@ -182,6 +183,7 @@ private rowIndex;
   deleteRowItem(){
     var selectedData = this.gridApi.getSelectedRows();
     var res = this.gridApi.applyTransaction({ remove: selectedData });
+  }
 
 
   updateRowItems(){
@@ -189,6 +191,7 @@ private rowIndex;
     this.gridApi.forEachNode(function(node){
       exrowdata.push(node.data);
     })
+    console.log(exrowdata)
     
     
   }
