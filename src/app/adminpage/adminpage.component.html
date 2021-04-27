@@ -5,67 +5,56 @@
 -->
 
 <div>
-        <div class="Rich_Tiles"  >
-            <div class="group"> 
-                <ul class="spend">
-                    <li id="CntrolBox0">
-                        <div class="gridControlBox">
-                            <h1 class="title2"  (click)="boxClick($event)">Grid Control Box</h1>
-                        </div>
-                    </li>
-                    <li id="CntrlBox1" class="money" *ngIf="ifExcelFile && ifGridControlBox" >
-                        <div class="li_content">
-                            <h1 #title class="title"
-                                (mouseenter)="title.style = 'background-color:black;'"
-                                (mouseleave)="title.style = 'background-color:transparent;'"
-                                (click)="controlClick($event)"
-                            >Grid Controls</h1>
-                            <form id="controls" (submit)="controlChange();">
-                                <label for="choice">Choose Control</label>
-                                <select name="choice">
-                                    <option value="reset">Reset Grid</option>
-                                    <option value="export">Export Grid to User</option>
-                                    <option value="addrow">Add a Row</option>
-                                    <option value="deleterow">Delete a Row</option>
-                                </select>
-                                <button type="submit">Execute</button>
-                            </form>
-                            <button (click)="resetGrid()" name="resetButton">Reset</button>
-                        
-                            <label for ="exportButton">Export Grid To User</label>
-                            <button (click)="exportState()"name="exportButton">Export</button>
-
-                            <label for = "addRowButton">Add Row</label>
-                            <button (click)="addARow()">Add</button>
-
-                            <label for = "deleteRowButton">Delete Row</label>
-                            <button (click)="deleteRow()">delete</button>
-                        </div>
-                    </li>
-                    <li id="CntrlBox2" class="money" *ngIf="ifGridControlBox">    
-                        <div class="li_content">
-                            <h1 #title2 class="title" 
-                                (mouseenter)="title2.style = 'background-color:black;'"
-                                (mouseleave)="title2.style = 'background-color:transparent;'"
-                                (click)="controlClick($event)"
-                            >Input Data</h1>
-                            <!--ExcelSheet Component-->
-                            <app-excelsheet (dataEvent)="receiveData($event)" [role]="role"></app-excelsheet>
-                        </div>
-                    </li>
-                    <li id="CntrlBox3" class="money" *ngIf="ifExcelFile && ifGridControlBox">    
-                        <div class="li_content">
-                            <h1 #title3 class="title" 
-                                (mouseenter)="title3.style = 'background-color:black;'"
-                                (mouseleave)="title3.style = 'background-color:transparent;'"
-                                (click)="controlClick($event)"
-                            >Grid size tools</h1>
-                            <button name="sizeUpButton" (click)="gridSizeUp()">+</button>
-                            <label for="sizeDownButton">Resize Grid</label>
-                            <button name="sizeDownButton" (click)="gridSizeDown()">-</button>
-                        </div>
-                    </li>
-                
+    <div class="Rich_Tiles"  >
+        <div class="group"> 
+            <ul class="spend">
+                <li id="CntrolBox0">
+                    <div class="gridControlBox">
+                        <h1 class="title2"  (click)="boxClick($event)">Grid Control Box</h1>
+                    </div>
+                </li>
+                <li id="CntrlBox1" class="money" *ngIf="ifExcelFile && ifGridControlBox" >
+                    <div class="li_content">
+                        <h1 #title class="title"
+                            (mouseenter)="title.style = 'background-color:black;'"
+                            (mouseleave)="title.style = 'background-color:transparent;'"
+                            (click)="controlClick($event)"
+                        >Grid Controls</h1>
+                        <form id="controls" (submit)="controlChange();">
+                            <label for="choice">Choose Control</label>
+                            <select name="choice">
+                                <option value="reset">Reset Grid</option>
+                                <option value="export">Export Grid to User</option>
+                                <option value="addrow">Add a Row</option>
+                                <option value="deleterow">Delete a Row</option>
+                            </select>
+                            <button type="submit">Execute</button>
+                        </form>
+                    </div>
+                </li>
+                <li id="CntrlBox2" class="money" *ngIf="ifGridControlBox">    
+                    <div class="li_content">
+                        <h1 #title2 class="title" 
+                            (mouseenter)="title2.style = 'background-color:black;'"
+                            (mouseleave)="title2.style = 'background-color:transparent;'"
+                            (click)="controlClick($event)"
+                        >Input Data</h1>
+                        <!--ExcelSheet Component-->
+                        <app-excelsheet (dataEvent)="receiveData($event)"></app-excelsheet>
+                    </div>
+                </li>
+                <li id="CntrlBox3" class="money" *ngIf="ifExcelFile && ifGridControlBox">    
+                    <div class="li_content">
+                        <h1 #title3 class="title" 
+                            (mouseenter)="title3.style = 'background-color:black;'"
+                            (mouseleave)="title3.style = 'background-color:transparent;'"
+                            (click)="controlClick($event)"
+                        >Grid size tools</h1>
+                        <button name="sizeUpButton" (click)="gridSizeUp()">+</button>
+                        <label for="sizeDownButton">Resize Grid</label>
+                        <button name="sizeDownButton" (click)="gridSizeDown()">-</button>
+                    </div>
+                </li>
             </ul>
         </div> 
     </div>

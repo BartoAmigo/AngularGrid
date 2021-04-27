@@ -32,6 +32,7 @@ export class AdminpageComponent implements OnInit {
   }
 
   receiveData($event){
+    this.ifExcelFile = true;
     let excelsheet:XLSX.WorkBook = $event;
     this.workbookservice.setData(excelsheet);
   
@@ -43,10 +44,11 @@ export class AdminpageComponent implements OnInit {
   }
 
   resetGrid(){
+    console.log(this.child);
     this.child.get(this.currentGrid).resetState();
   }
   exportState(){
-    this.child.get(this.currentGrid)
+    this.child.get(this.currentGrid);
   }
 
  addARow(){
