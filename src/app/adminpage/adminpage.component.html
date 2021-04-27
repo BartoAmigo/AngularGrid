@@ -70,14 +70,16 @@
         </div> 
     </div>
 </div>
+<div *ngIf="somebool" style="font-size:40px;text-align:center;display:flex;">User has edited the Data</div>
 <div *ngIf="ifExcelFile">
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
-        <mat-tab *ngFor= "let ind of indexArr" label="{{excelSheet.SheetNames[ind]}}">
+        <mat-tab *ngFor= "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>
             <div id="gridcontainer" [style]="getGridStyle()">
-                <app-admingrid 
-                [index] = "ind"
-                [excelData] = "excelData" 
-                [excelSheet] = "excelSheet">   
+                <app-admingrid
+                    [columnInfo]="db.database[i].columns.columns"
+                    [myRowData]="db.database[i].rows"
+                    [sheetName]="db.database[i].workSheetName"
+                >
                 </app-admingrid>
             </div>
         </mat-tab>
