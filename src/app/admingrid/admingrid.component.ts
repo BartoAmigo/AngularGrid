@@ -1,4 +1,4 @@
-import { CustomTooltipComponent } from './../custom-tooltip/custom-tooltip.component';
+import { CustomTooltipComponent } from '../custom-tooltip/custom-tooltip.component';
 import {DatabaseService} from 'services/database.service'
 import { Component, OnInit,Input} from '@angular/core';
 import {CreateUserGridService} from 'services/create-user-grid.service'
@@ -67,7 +67,7 @@ private rowIndex;
       detailCellRendererParams: (params: ICellRendererParams) => this.formatToolTip(params.data),
       getRowStyle: params => {
 
-/*        if( params.node.rowIndex % 14 === 0){
+        if( params.node.rowIndex % 14 === 0){
           return {background: '#f25d5a'};
         }
         else if(params.node.rowIndex % 14 === 1){
@@ -75,15 +75,15 @@ private rowIndex;
         }
         else if(params.node.rowIndex % 14 === 2){
             return {background: '#84be18'};
-        }*/
-        if(params.node.rowIndex % 2 === 0){
+        }
+        else if(params.node.rowIndex % 14 === 3){
           return {background: 'a68e5a'};
 
         }
-        else if(params.node.rowIndex % 2 === 1){
+        else if(params.node.rowIndex % 14 === 4){
           return {background: '#dddcce'};
         }
-/*        else if(params.node.rowIndex % 14 === 5){
+        else if(params.node.rowIndex % 14 === 5){
           return {background: '#84a834'};
         }
         else if(params.node.rowIndex % 14 === 6){
@@ -116,7 +116,7 @@ private rowIndex;
 
 
         }
-*/
+
 
 
       },
