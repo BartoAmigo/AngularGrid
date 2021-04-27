@@ -2,7 +2,6 @@
 import { Component, OnInit,ViewChildren,QueryList} from '@angular/core';
 import {UsergridComponent} from '../usergrid/usergrid.component'
 import {DatabaseService} from 'services/database.service';
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-userpage',
@@ -24,7 +23,6 @@ export class UserpageComponent implements  OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   addARow(){

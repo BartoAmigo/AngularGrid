@@ -7,6 +7,7 @@ import {BehaviorSubject} from 'rxjs'
 })
 export class DatabaseService{
   database:gridData[]= [];
+
   databaseSet = new BehaviorSubject<boolean>(false);
   databaseChanges = new BehaviorSubject<boolean>(false);
   

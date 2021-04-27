@@ -2,11 +2,12 @@
 <p>This is our User-Grid</p>
 <p>This will show a grid designed by the Admin</p>
 
-<p style="font-size:50px; "*ngIf="isDataSet==false">Create DB in Admin</p>
-
+<p style="font-size:50px;text-align:center;"*ngIf="isDataSet==false">Create DB in Admin</p>
+<div style="text-align:center;background-color:green; width:fit-content" *ngIf="isDataSet">
+<p style="color:white;">Grid Controls For User</p>
 <label for="addRowButton"></label>
-<button (click) = "addARow()" name="addRowButton">Add a row</button>
-
+<button (click) = "addARow()" name="addRowButton" style="height:40px;width:100px;">Add a row</button>
+</div>
 <div>
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
         <mat-tab *ngFor = "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>

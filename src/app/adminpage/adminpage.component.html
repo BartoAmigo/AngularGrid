@@ -25,7 +25,7 @@
                     </div>
                 </li>
                 <li id="CntrlBox1" class="money" *ngIf="ifExcelFile && ifGridControlBox" >
-                    <div class="li_content">
+                    <div class="li_content" style='text-align:center'>
                         <h1 #title class="title"
                             (mouseenter)="title.style = 'background-color:black;'"
                             (mouseleave)="title.style = 'background-color:transparent;'"
@@ -50,10 +50,12 @@
                             (mouseleave)="title3.style = 'background-color:transparent;'"
                             (click)="controlClick($event)"
                         >Grid size tools</h1>
+                        <div style='text-align:center'>
                         <label for ="sizeUpButton"></label>
-                        <button name="sizeUpButton" (click)="gridSizeUp()">+</button>
+                        <button style='margin-left:5px;margin-right:5px;'name="sizeUpButton" (click)="gridSizeUp()">+</button>
                         <label for="sizeDownButton"></label>
-                        <button name="sizeDownButton" (click)="gridSizeDown()">-</button>
+                        <button style='margin-left:5px;margin-right:5px;'name="sizeDownButton" (click)="gridSizeDown()">-</button>
+                        </div>
                     </div>
                 </li>
             </ul>
