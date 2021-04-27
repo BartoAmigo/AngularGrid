@@ -3,15 +3,21 @@
 <p>This will show a grid designed by the Admin</p>
 
 <p style="font-size:50px;text-align:center;"*ngIf="isDataSet==false">Create DB in Admin</p>
-<div style="text-align:center;background-color:green; width:fit-content" *ngIf="isDataSet">
+<div style="text-align:center;background-color:green; width:fit-content;margin-left:auto;margin-right:auto;" *ngIf="isDataSet">
 <p style="color:white;">Grid Controls For User</p>
+<label>
 <label for="addRowButton"></label>
 <button (click) = "addARow()" name="addRowButton" style="height:40px;width:100px;">Add a row</button>
+<label for="sizeUpButton"></label>
+<button name="sizeUpButton">+</button>
+<label for="sizeDownButton"></label>
+<button name="sizeDownButton">-</button>
+</label>
 </div>
 <div>
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
         <mat-tab *ngFor = "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>
-            <div id="gridcontainer">
+            <div id="gridcontainer" style="height:750px;width:1000px;margin-left:auto;margin-right:auto;">
                 <app-usergrid
                     [myColData]="db.database[i].columns.columns"
                     [myRowData]="db.database[i].rows"
