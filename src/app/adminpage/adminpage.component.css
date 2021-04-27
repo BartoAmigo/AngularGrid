@@ -2,7 +2,7 @@
 
     width:fit-content;
     margin:15px auto;
-    transition: all 2s;
+    transition: all 1s;
 }
 
 .controlButtons{
@@ -33,50 +33,20 @@ Ul.spend {
 	height: 100%;
 	padding: 0.1%;
 }
-li.money-Carlsbad {
-	display:inline-block;
-	width:30%;
-	height: 75px;
-	background: #00AFE9;
-	background: linear-gradient(#ccf2ff, #BED733, #BED733, #ccf2ff);
-/*	background: linear-gradient(#58595B,#00AFE9,#58595B); */
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	overflow: hidden;
-	transition: height 2s, width 2s;
-	margin: 25px auto;
-	border: 2px solid #F7901E;
-	border-radius: 30px;
-	color:black;
-}
-li.money-highlight {
-	width:65%;
-	height: 75px;
-
-	background: #00AFE9;
-	background: linear-gradient(#ccf2ff, #BED733, #BED733, #ccf2ff);
-/*	background: linear-gradient(#58595B,#00AFE9,#58595B); */
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	overflow: hidden;
-	transition: height 2s, width 2s;
-	margin: 25px auto;
-	border: 2px solid #F7901E;
-	border-radius: 30px;
-	color:black;
-}
 li.money {
 	width: 15%;
     min-width: 175px;
 	height: 30px;
     display: inline-block;
 	background: #84be18;
-	background: linear-gradient(#807e80,#84be18,#84be18,#84be18,#84be18,#807e80);
+/*	background: linear-gradient(#807e80,#84be18,#84be18,#84be18,#84be18,#807e80); */
 /*	background: linear-gradient(#58595B,#00AFE9,#58595B); */
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	overflow: hidden;
-	transition: all 2s;
-	margin: 9px auto;
+	transition: all .1s;
+	margin: auto;
 	border: 2px solid #F7901E;
-	border-radius: 30px;
+	border-radius: 0px;
 	color:rgb(255, 255, 255);
 }
 li.money a:visited
