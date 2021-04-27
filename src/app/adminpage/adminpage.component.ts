@@ -1,6 +1,5 @@
 
-import { state } from '@angular/animations';
-import { Component,OnInit,ViewChildren,QueryList, Input} from '@angular/core';
+import { Component,OnInit,ViewChildren,QueryList} from '@angular/core';
 import * as XLSX from "xlsx";
 import { AdmingridComponent } from '../admingrid/admingrid.component';
 import {GetDataFromWorkbookService} from 'services/get-data-from-workbook.service'
@@ -13,7 +12,7 @@ import {DatabaseService} from 'services/database.service'
 })
 export class AdminpageComponent implements OnInit {
   @ViewChildren(AdmingridComponent) child:QueryList<AdmingridComponent>;
-  currentGrid:number;
+  currentGrid:number = 0;
   somebool:boolean;
   indexArr: Number[] = [];
   ifExcelFile:boolean = false;
@@ -28,6 +27,12 @@ export class AdminpageComponent implements OnInit {
   constructor(private workbookservice:GetDataFromWorkbookService,public db:DatabaseService) {
     db.databaseChanges.subscribe(value=>{
       this.somebool=value;
+    })
+    db.databaseSet.subscribe(value=>{
+      if(value==true){
+        this.ifExcelFile=true; 
+        this.ifGridControlBox=true; 
+      }
     })
   }
 

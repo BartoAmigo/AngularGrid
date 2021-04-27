@@ -13,6 +13,17 @@
                         <h1 class="title2"  (click)="boxClick($event)">Grid Control Box</h1>
                     </div>
                 </li>
+                <li id="CntrlBox2" class="money" *ngIf="ifGridControlBox && ifExcelFile==false">    
+                    <div class="li_content">
+                        <h1 #title2 class="title" 
+                            (mouseenter)="title2.style = 'background-color:black;'"
+                            (mouseleave)="title2.style = 'background-color:transparent;'"
+                            (click)="controlClick($event)"
+                        >Input Data</h1>
+                        <!--ExcelSheet Component-->
+                        <app-excelsheet (dataEvent)="receiveData($event)"></app-excelsheet>
+                    </div>
+                </li>
                 <li id="CntrlBox1" class="money" *ngIf="ifExcelFile && ifGridControlBox" >
                     <div class="li_content">
                         <h1 #title class="title"
@@ -32,17 +43,6 @@
                         </form>
                     </div>
                 </li>
-                <li id="CntrlBox2" class="money" *ngIf="ifGridControlBox">    
-                    <div class="li_content">
-                        <h1 #title2 class="title" 
-                            (mouseenter)="title2.style = 'background-color:black;'"
-                            (mouseleave)="title2.style = 'background-color:transparent;'"
-                            (click)="controlClick($event)"
-                        >Input Data</h1>
-                        <!--ExcelSheet Component-->
-                        <app-excelsheet (dataEvent)="receiveData($event)"></app-excelsheet>
-                    </div>
-                </li>
                 <li id="CntrlBox3" class="money" *ngIf="ifExcelFile && ifGridControlBox">    
                     <div class="li_content">
                         <h1 #title3 class="title" 
@@ -50,8 +50,9 @@
                             (mouseleave)="title3.style = 'background-color:transparent;'"
                             (click)="controlClick($event)"
                         >Grid size tools</h1>
+                        <label for ="sizeUpButton"></label>
                         <button name="sizeUpButton" (click)="gridSizeUp()">+</button>
-                        <label for="sizeDownButton">Resize Grid</label>
+                        <label for="sizeDownButton"></label>
                         <button name="sizeDownButton" (click)="gridSizeDown()">-</button>
                     </div>
                 </li>
