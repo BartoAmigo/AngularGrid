@@ -1,4 +1,4 @@
-import { CustomTooltipComponent } from './../custom-tooltip/custom-tooltip.component';
+import { CustomTooltipComponent } from '../custom-tooltip/custom-tooltip.component';
 import {DatabaseService} from 'services/database.service'
 import { Component, OnInit,Input} from '@angular/core';
 import {CreateUserGridService} from 'services/create-user-grid.service'
