@@ -50,7 +50,7 @@
                                 (click)="controlClick($event)"
                             >Input Data</h1>
                             <!--ExcelSheet Component-->
-                            <app-excelsheet (dataEvent)="receiveData($event)" (dataEvent2) = "receiveMatrixData($event)" [role]="role"></app-excelsheet>
+                            <app-excelsheet (dataEvent)="receiveData($event)" [role]="role"></app-excelsheet>
                         </div>
                     </li>
                     <li id="CntrlBox3" class="money" *ngIf="ifExcelFile && ifGridControlBox">    
