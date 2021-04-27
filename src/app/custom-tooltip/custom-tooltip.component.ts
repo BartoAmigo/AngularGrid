@@ -23,7 +23,7 @@ public keyArray = [];
     this.data = params.api.getDisplayedRowAtIndex(params.rowIndex).data;
     var value,key;
     Object.keys(this.data).forEach(element => {
-      if(this.data[element] === "undefined"){
+      if(this.data[element] === undefined){
         value = "data missing";
         key = element;
       }

@@ -1,46 +1,66 @@
+<!--
 <h2>Admin-Grid Page</h2>
 <p>This is our Admin-Grid, It will be able to create a grid for user to use.</p>
 <p>The admin grid shows all the data. It allows you to choose what data the user should see.</p>
-<!--ExcelSheet Component-->
-
-<app-excelsheet (dataEvent)="receiveData($event)"></app-excelsheet>
+-->
 
 <div>
-<div class = "gridControlBox">
+    <div class="gridControlBox">
+        <h1 class="title2"  (click)="boxClick($event)">Grid Control Box</h1>
+        <div class="Rich_Tiles" *ngIf="ifGridControlBox" >
+            <div class="group"> 
+                <ul class="spend">
+                    <li id="CntrlBox0" class="money">
+                        <div class="li_content">
+                            <h1 #title class="title"
+                                (mouseenter)="title.style = 'background-color:black;'"
+                                (mouseleave)="title.style = 'background-color:transparent;'"
+                                (click)="controlClick($event)"
+                            >Grid Controls</h1>
+                            <label for="resetButton">Resets Grid</label>
+                            <button (click)="resetGrid()" name="resetButton">Reset</button>
+                        
+                            <label for ="exportButton">Export Grid To User</label>
+                            <button (click)="exportState()"name="exportButton">Export</button>
 
-    <p style="text-align:center">Grid Control Box</p>
-    <div class="controlButtons"> 
-        <label style="text-align:center">
-        <p>Grid Controls</p>
-        <div>
-        <label for="resetButton">Resets Grid</label>
-        <button (click)="resetGrid()" name="resetButton">Reset</button>
-        <label for ="exportButton">Export Grid To User</label>
-        <button (click)="exportState()"name="exportButton">Export</button>
-        <label for = "addRowButton">Add Row</label>
-        <button (click)="addARow()">Add</button>
-        <label for = "deleteRowButton">Delete Row</label>
-        <button (click)="deleteRow()">delete</button>
+                            <label for = "addRowButton">Add Row</label>
+                            <button (click)="addARow()">Add</button>
+
+                            <label for = "deleteRowButton">Delete Row</label>
+                            <button (click)="deleteRow()">delete</button>
+                        </div>
+                    </li>
+                    <li id="CntrlBox1" class="money">    
+                        <div class="li_content">
+                            <h1 #title2 class="title" 
+                                (mouseenter)="title2.style = 'background-color:black;'"
+                                (mouseleave)="title2.style = 'background-color:transparent;'"
+                                (click)="controlClick($event)"
+                            >Input Data</h1>
+                            <!--ExcelSheet Component-->
+                            <app-excelsheet (dataEvent)="receiveData($event)" (dataEvent2) = "receiveMatrixData($event)" [role]="role"></app-excelsheet>
+                        </div>
+                    </li>
+                    <li id="CntrlBox" class="money">    
+                        <div class="li_content">
+                            <h1 #title3 class="title" 
+                                (mouseenter)="title3.style = 'background-color:black;'"
+                                (mouseleave)="title3.style = 'background-color:transparent;'"
+                                (click)="controlClick($event)"
+                            >Grid size tools</h1>
+                            <label for ="sizeUpButton">Increase size of Grid</label>
+                            <button name="sizeUpButton" (click)="gridSizeUp()">+</button>
+                            <label for="sizeDownButton">Decrease size of Grid</label>
+                            <button name="sizeDownButton" (click)="gridSizeDown()">-</button>
+                        </div>
+                    </li>
+                </ul>
+            </div> 
         </div>
-        </label>
-        <label style="margin-left:5px;font-size:20px">
-        <p style="text-align:center">Grid size tools</p>
-        <div>
-        <label for ="sizeUpButton">Increase size of Grid</label>
-        <button name="sizeUpButton" (click)="gridSizeUp()">+</button>
-        <label for="sizeDownButton">Decrease size of Grid</label>
-        <button name="sizeDownButton" (click)="gridSizeDown()">-</button>
-        </div>
-        </label>
-    
-    </div>
-            
+
     </div>
 </div>
-
-<div *ngIf="somebool" style="font-size:40px;text-align:center;display:flex;">User has edited the Data</div>
-
-<div>
+<div *ngIf="ifExcelFile==true">
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
 bartbranch
         <mat-tab *ngFor= "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>

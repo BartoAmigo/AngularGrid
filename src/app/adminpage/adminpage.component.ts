@@ -15,6 +15,8 @@ export class AdminpageComponent implements OnInit {
   currentGrid:number;
   somebool:boolean;
   indexArr: Number[] = [];
+  ifExcelFile:boolean = false;
+  ifGridControlBox:boolean = false;
   height = screen.height - (.20*screen.height);
   width = screen.width - (.20*screen.height);
 
@@ -63,7 +65,24 @@ export class AdminpageComponent implements OnInit {
   document.getElementById("gridcontainer").setAttribute("style",this.getGridStyle());
  }
  getGridStyle():string{
-   let HTMLSTRING = ("width:"+this.width+"px;"+"height:"+this.height+"px;")
+   let HTMLSTRING = ("width:"+this.width+"px;"+"height:"+this.height+"px;margin:auto;")
    return HTMLSTRING;
  }
+  controlClick($event){
+    var list = $event.srcElement.parentNode.parentNode;
+    var money = $event;
+    console.log($event);
+    if (list.style.overflow === "auto") {
+      list.setAttribute("style","height:30px;width:15%;overflow:hidden;margin:9px auto");
+    }
+    else {
+      list.setAttribute("style","height:fit-content;width:25%;overflow:auto;margin:9px auto");
+    }
+  }
+
+  boxClick($event){
+    this.ifGridControlBox = !this.ifGridControlBox;
+    $event.srcElement.classList.toggle("active");
+    
+  }
 }
