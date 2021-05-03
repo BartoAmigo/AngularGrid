@@ -41,11 +41,15 @@ export class ExcelsheetComponent implements OnInit {
 
     }; 
     reader.readAsBinaryString(target.files[0]);
-
+    setTimeout(() => {
+      this.dataEvent.emit(this.wb);
+      this.dataEvent2.emit(this.data);
+    },2000);
+    
   }
-  sendData(){
+  /*sendData(){
     this.dataEvent.emit(this.wb);
     this.dataEvent2.emit(this.data);
-  }
+  }*/
 
 }

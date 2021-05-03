@@ -34,8 +34,8 @@ Ul.spend {
 	padding: 0.1%;
 }
 li.money {
-	width: 15%;
-    min-width: 175px;
+	width: 10%;
+    min-width: 225px;
 	height: 30px;
     display: inline-block;
 	background: #84be18;
@@ -106,3 +106,10 @@ h1.title2
     background-color: #555;
     color:white;
   }
+
+.contentContainer {
+    display: flex;
+}
+.contentFormat{
+    margin: 5% auto;
+}
