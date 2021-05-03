@@ -35,7 +35,7 @@
                         </form>
                     </div>
                 </li>
-                <li id="CntrlBox2" class="money" *ngIf="ifGridControlBox">    
+                <li id="CntrlBox2" class="money" *ngIf="!ifExcelFile && ifGridControlBox">    
                     <div class="li_content">
                         <h1 #title2 class="title" 
                             (mouseenter)="title2.style = 'background-color:black;'"
