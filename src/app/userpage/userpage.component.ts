@@ -13,6 +13,7 @@ export class UserpageComponent implements  OnInit {
   @ViewChildren(UsergridComponent) child:QueryList<UsergridComponent>;
   currGrid:number = 0;
   isDataSet:boolean = false;
+  ifGridControlBox:boolean = false;
   gotDataFromAdmin:boolean = false; 
 
   constructor(public db:DatabaseService) {
@@ -36,5 +37,20 @@ export class UserpageComponent implements  OnInit {
     this.currGrid = $event;
   }
   
+  controlClick($event){
+    var list = $event.srcElement.parentNode.parentNode;
+    var money = $event;
+    if (list.style.overflow === "auto") {
+      list.setAttribute("style","height:30px;width:10%;overflow:hidden;margin:auto");
+    }
+    else {
+      list.setAttribute("style","height:fit-content;width:20%;overflow:auto;margin:auto");
+    }
+  }
 
+  boxClick($event){
+    this.ifGridControlBox = !this.ifGridControlBox;
+    $event.srcElement.classList.toggle("active");
+    
+  }
 }

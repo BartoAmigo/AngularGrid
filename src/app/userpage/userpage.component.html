@@ -3,9 +3,50 @@
 <p>This will show a grid designed by the Admin</p>
 
 <p style="font-size:50px; "*ngIf="isDataSet==false">Create DB in Admin</p>
-
-<label for="addRowButton"></label>
-<button (click) = "addARow()" name="addRowButton">Add a row</button>
+<div class="Rich_Tiles"  *ngIf="isDataSet">
+    <div class="group"> 
+        <ul class="spend">
+            <li id="CntrolBox0">
+                <div class="gridControlBox">
+                    <h1 class="title2"  (click)="boxClick($event)">Grid Control Box</h1>
+                </div>
+            </li>
+            <li id="CntrlBox1" class="money" *ngIf="ifGridControlBox" >
+                <div class="li_content">
+                    <h1 #title class="title"
+                        (mouseenter)="title.style = 'background-color:black;'"
+                        (mouseleave)="title.style = 'background-color:transparent;'"
+                        (click)="controlClick($event)"
+                    >Grid Controls</h1>
+                    <form id="controls" class="contentContainer" (submit)="controlChange();">
+                        <select class="contentFormat" name="choice">
+                            <optgroup label="Grid Commands">
+                            </optgroup>
+                            <optgroup label="Edit Rows">
+                                <option value="addrow">Add a Row</option>
+                            </optgroup>
+                        </select>
+                        <button class="contentFormat" type="submit">Execute</button>
+                    </form>
+                </div>
+            </li>
+            <li id="CntrlBox2" class="money" *ngIf="ifGridControlBox">    
+                <div class="li_content">
+                    <h1 #title3 class="title" 
+                        (mouseenter)="title3.style = 'background-color:black;'"
+                        (mouseleave)="title3.style = 'background-color:transparent;'"
+                        (click)="controlClick($event)"
+                    >Grid Formatting Tools</h1>
+                    <div style="display: flex;margin: auto;width: 60%;">
+                        <button class="contentFormat" name="sizeUpButton" (click)="gridSizeUp()">+</button>
+                        <label class="contentFormat" for="sizeDownButton">Resize Grid</label>
+                        <button class="contentFormat" name="sizeDownButton" (click)="gridSizeDown()">-</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div> 
+</div>
 
 <div>
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
