@@ -15,6 +15,8 @@ export class UserpageComponent implements  OnInit {
   isDataSet:boolean = false;
   ifGridControlBox:boolean = false;
   gotDataFromAdmin:boolean = false; 
+  height = screen.height - (.20*screen.height);
+  width = screen.width - (.20*screen.height);
 
   constructor(public db:DatabaseService) {
     db.databaseSet.subscribe(value =>{
@@ -31,6 +33,21 @@ export class UserpageComponent implements  OnInit {
   addARow(){
     this.child.get(this.currGrid).addNewRowItem();
     this.db.databaseChanges.next(true);
+  }
+
+  gridSizeUp(){
+    this.height += .10 *screen.height;
+    this.width  += .10 *screen.width;
+    document.getElementById("gridcontainer").setAttribute("style",this.getGridStyle());
+  }
+  gridSizeDown(){
+   this.height -= .10 *screen.height;
+   this.width  -= .10 *screen.width;
+   document.getElementById("gridcontainer").setAttribute("style",this.getGridStyle());
+  }
+  getGridStyle():string{
+    let HTMLSTRING = ("width:"+this.width+"px;"+"height:"+this.height+"px;margin:auto;")
+    return HTMLSTRING;
   }
 
   tabChanged($event){
@@ -52,5 +69,23 @@ export class UserpageComponent implements  OnInit {
     this.ifGridControlBox = !this.ifGridControlBox;
     $event.srcElement.classList.toggle("active");
     
+  }
+  controlChange(){
+    const form = <HTMLFormElement>(document.querySelector("#controls"));
+
+      const data = new FormData(form);
+      const choice = data.get('choice') as string;
+      console.log(choice);
+      switch(choice)
+      {
+        
+        case ("addrow"):{
+          this.addARow();
+          break;
+        }
+        
+      }
+    
+    return false;
   }
 }

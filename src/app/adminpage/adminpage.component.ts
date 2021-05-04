@@ -112,7 +112,6 @@ export class AdminpageComponent implements OnInit {
           break;
         }
       }
-    
     return false;
   }
 }

@@ -106,3 +106,11 @@ h1.title2
     background-color: #555;
     color:white;
   }
+
+ .contentContainer {
+    display: flex;
+}
+
+.contentFormat{
+    margin: 5% auto;
+}

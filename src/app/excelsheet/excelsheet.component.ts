@@ -47,7 +47,7 @@ export class ExcelsheetComponent implements OnInit {
     },2000);
     
   }
-  /*sendData(){
+ /* sendData(){
     this.dataEvent.emit(this.wb);
     this.dataEvent2.emit(this.data);
   }*/
