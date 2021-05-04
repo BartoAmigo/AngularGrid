@@ -29,6 +29,12 @@ export class AdminpageComponent implements OnInit {
     db.databaseChanges.subscribe(value=>{
       this.somebool=value;
     })
+    db.databaseSet.subscribe(value=>{
+      if(value==true){
+        this.ifExcelFile=true; 
+        this.ifGridControlBox=true; 
+      }
+    })
   }
 
   receiveData($event){
