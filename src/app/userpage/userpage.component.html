@@ -42,6 +42,27 @@
                             <label class="contentFormat" for="sizeDownButton">Resize Grid</label>
                             <button class="contentFormat" name="sizeDownButton" (click)="gridSizeDown()">-</button>
                         </div>
+                        <form class="contentContainer" (submit)="controlChange();">      
+                                <select class="contentFormat" name="choice">
+                                    <option value=''>Change Row Color</option>
+                                    <option value='#f25d5a'>#f25d5a</option>
+                                    <option value='#363537'>#363537</option>
+                                    <option value='#84be18'>#84be18</option>
+                                    <option value='#a68e5a'>#a68e5a</option>
+                                    <option value='#dddcce'>#dddcce</option>
+                                    <option value='#84a834'>#84a834</option>
+                                    <option value='#1698d4'>#1698d4</option>
+                                    <option value='#4e6585'>#4e6585</option>
+                                    <option value='#3d3c3e'>#3d3c3e</option>
+                                    <option value='#e74701'>#e74701</option>
+                                    <option value='#bfef75'>#bfef75</option>
+                                    <option value='#0fc8f8'>#0fc8f8</option>
+                                    <option value='#807e80'>#807e80</option>
+                                    <option value='#f25b48'>#f25b48</option>
+                                    <option value='#ee1c25'>#ee1c25</option>
+                                </select>
+                                <button class="contentFormat" type="submit">Execute</button>
+                        </form>
                     </div>
                 </li>
             </ul>

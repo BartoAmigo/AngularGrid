@@ -71,7 +71,7 @@ export class UserpageComponent implements  OnInit {
     
   }
   controlChange(){
-    const form = <HTMLFormElement>(document.querySelector("#controls"));
+    const form = <HTMLFormElement>(document.querySelector(".contentContainer"));
 
       const data = new FormData(form);
       const choice = data.get('choice') as string;
