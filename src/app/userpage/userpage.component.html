@@ -23,7 +23,7 @@
                                 <optgroup label="Grid Commands">
                                 </optgroup>
                                 <optgroup label="Edit Rows">
-                                    <option value="addrow">Add a Row</option>
+                                    <option value="1">Add a Row</option>
                                 </optgroup>
                             </select>
                             <button class="contentFormat" type="submit">Execute</button>
@@ -42,7 +42,7 @@
                             <label class="contentFormat" for="sizeDownButton">Resize Grid</label>
                             <button class="contentFormat" name="sizeDownButton" (click)="gridSizeDown()">-</button>
                         </div>
-                        <form class="contentContainer" (submit)="controlChange();">      
+                        <form id="format" class="contentContainer" (submit)="controlChange2();">      
                                 <select class="contentFormat" name="choice">
                                     <option value=''>Change Row Color</option>
                                     <option value='#f25d5a'>#f25d5a</option>
@@ -56,7 +56,7 @@
                                     <option value='#3d3c3e'>#3d3c3e</option>
                                     <option value='#e74701'>#e74701</option>
                                     <option value='#bfef75'>#bfef75</option>
-                                    <option value='#0fc8f8'>#0fc8f8</option>
+                                    <option value='#0fc8f'>#0fc8f8</option>
                                     <option value='#807e80'>#807e80</option>
                                     <option value='#f25b48'>#f25b48</option>
                                     <option value='#ee1c25'>#ee1c25</option>

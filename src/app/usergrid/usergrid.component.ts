@@ -1,4 +1,6 @@
+import { parseI18nMeta } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, Input, OnInit } from '@angular/core';
+import { RowNode } from 'ag-grid-community';
 import {DatabaseService} from 'services/database.service'
 
 @Component({
@@ -11,6 +13,8 @@ export class UsergridComponent implements OnInit {
   private gridApi; //placeholder for grid api 
   private columnApi; //place holder to get grid's column api
   private sideBar = "columns"; //this is for the side bar
+  public selectedNodes=[];
+ // public getRowStyle;
   @Input() sheetName;
   @Input() myRowData; //array of row definitions 
   @Input() myColData; //array of columndefinitions 
@@ -19,7 +23,15 @@ export class UsergridComponent implements OnInit {
   Sets properties for grid 
   */ 
   constructor(public db:DatabaseService){ 
-    
+    /*this.getRowStyle = function (params) {
+      setTimeout(() => {
+        console.log(params.node.rowIndex === this.selectedNodes[0].rowIndex)
+        if (params.node.rowIndex === this.selectedNodes.rowIndex) {
+          return { background: 'blue' };
+      }
+      },0);
+        
+    };*/
   }
  private defColDefs = {
   flex: 1,
@@ -32,13 +44,34 @@ export class UsergridComponent implements OnInit {
   editable:true
 }
 
-
   gridOptions = {
     //properties 
     pagination:true,
     defaultColDef:this.defColDefs,
     sideBar:this.sideBar,
-    rowMultiSelectWithClick:"true"
+    //rowMultiSelectWithClick:"true",
+    rowSelection:"multiple",
+    getRowStyle: params => { 
+      console.log(params);
+      var currColor = params.node.context.permColor;
+      if (params.node.isSelected()) {
+        params.node.context.permColor = params.context.colorChoice;
+        console.log(params.context.permColor + " inside");
+        return { background: params.node.context.permColor };
+      }
+        else if(params.node.context.permColor != undefined){
+          params.node.context = {permColor:null};
+          params.node.context.permColor = currColor;
+        }
+        else{
+          console.log(params.node.context.permColor + " return");
+          return { background: params.node.context.permColor };
+        }
+     },
+    context: {
+      colorChoice: '#f25d5a',
+    }
+    
     //events
     //event handlers
     /*Insert Event handlers here  */
@@ -52,6 +85,14 @@ export class UsergridComponent implements OnInit {
   onGridReady = (params) => {
     this.gridApi = params.api; //gets gridApi here
     this.columnApi = params.columnApi; //gets columnApi here 
+  }
+
+  colorGrid(choice){
+    this.gridOptions.context = {
+      colorChoice:choice
+    };
+    console.log (this.gridApi.context);
+    this.gridApi.redrawRows();  
   }
 
   addNewRowItem(){

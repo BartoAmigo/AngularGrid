@@ -71,21 +71,29 @@ export class UserpageComponent implements  OnInit {
     
   }
   controlChange(){
-    const form = <HTMLFormElement>(document.querySelector(".contentContainer"));
+    const form = <HTMLFormElement>(document.querySelector("#controls"));
 
       const data = new FormData(form);
       const choice = data.get('choice') as string;
       console.log(choice);
       switch(choice)
       {
-        
-        case ("addrow"):{
+        case ("1"):{
           this.addARow();
           break;
         }
         
       }
     
+    return false;
+  }
+  controlChange2(){
+    const form = <HTMLFormElement>(document.querySelector("#format"));
+
+    const data = new FormData(form);
+    const choice = data.get('choice') as string;
+    console.log(choice);
+    this.child.get(this.currGrid).colorGrid(choice);
     return false;
   }
 }
