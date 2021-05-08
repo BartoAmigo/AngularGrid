@@ -52,21 +52,19 @@ export class UsergridComponent implements OnInit {
     //rowMultiSelectWithClick:"true",
     rowSelection:"multiple",
     getRowStyle: params => { 
-      console.log(params);
-      var currColor = params.node.context.permColor;
       if (params.node.isSelected()) {
-        params.node.context.permColor = params.context.colorChoice;
-        console.log(params.context.permColor + " inside");
-        return { background: params.node.context.permColor };
+        if (params.context.colorChoice === "clearRow") {
+          params.node.permColor = undefined;
+        }
+        else {
+          params.node.permColor = params.context.colorChoice;
+        }
+        return { background: params.node.permColor };
       }
-        else if(params.node.context.permColor != undefined){
-          params.node.context = {permColor:null};
-          params.node.context.permColor = currColor;
-        }
-        else{
-          console.log(params.node.context.permColor + " return");
-          return { background: params.node.context.permColor };
-        }
+      else if (params.context.colorChoice === "clearAll") {
+        params.node.permColor = undefined;
+      }
+      return { background: params.node.permColor };
      },
     context: {
       colorChoice: '#f25d5a',
@@ -83,6 +81,7 @@ export class UsergridComponent implements OnInit {
   }
 /* Grid Ready function */
   onGridReady = (params) => {
+    console.log(params);
     this.gridApi = params.api; //gets gridApi here
     this.columnApi = params.columnApi; //gets columnApi here 
   }
