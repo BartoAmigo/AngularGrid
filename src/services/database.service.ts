@@ -6,7 +6,10 @@ import {BehaviorSubject} from 'rxjs'
   providedIn: 'root'
 })
 export class DatabaseService{
+  
   database:gridData[]= [];
+
+
 
   databaseSet = new BehaviorSubject<boolean>(false);
   databaseChanges = new BehaviorSubject<boolean>(false);
@@ -14,12 +17,23 @@ export class DatabaseService{
   getDatabaseLength():number{
     return this.database.length;
   }
+
   getGridDataElement(a:number):gridData{
     return this.database[a];
   }
+  
+  getGridDataElementByName(a:string):gridData{
+    for(var i = 0; i<this.database.length;i++){
+      if(this.database[i].getSheetName()==a)
+      return this.database[i];
+    }
+  }
+
+
   getDatabase():gridData[]{
     return this.database;
   }
+
   updateElementRows(a:string,b:any[]){
     for(var i = 0; i<this.database.length;i++){
       if(this.database[i].getSheetName()==a){

@@ -31,16 +31,32 @@
                             (mouseleave)="title.style = 'background-color:transparent;'"
                             (click)="controlClick($event)"
                         >Grid Controls</h1>
-                        <form id="controls" (submit)="controlChange();">
-                            <label for="choice">Choose Control</label>
-                            <select name="choice">
-                                <option value="reset">Reset Grid</option>
-                                <option value="export">Export Grid to User</option>
-                                <option value="addrow">Add a Row</option>
-                                <option value="deleterow">Delete a Row</option>
+                        <form id="controls" class="contentContainer" (submit)="controlChange();">
+                            <select class="contentFormat" name="choice">
+                                <optgroup label="Grid Commands">
+                                    <option value="reset">Reset Grid</option>
+                                    <option value="export">Export Grid to User</option>
+                                </optgroup>
+                                <optgroup label="Edit Rows">
+                                    <option value="addrow">Add a Row</option>
+                                    <option value="deleterow">Delete a Row</option>
+                                </optgroup>
                             </select>
-                            <button type="submit">Execute</button>
+                            <button class="contentFormat" type="submit">Execute</button>
                         </form>
+                    </div>
+                </li>
+                <li id="CntrlBox2" class="money" *ngIf="!ifExcelFile && ifGridControlBox">    
+                    <div class="li_content">
+                        <h1 #title2 class="title" 
+                            (mouseenter)="title2.style = 'background-color:black;'"
+                            (mouseleave)="title2.style = 'background-color:transparent;'"
+                            (click)="controlClick($event)"
+                        >Input Data</h1>
+                        <!--ExcelSheet Component-->
+                        <div class="contentContainer">
+                            <app-excelsheet class="contentFormat" (dataEvent)="receiveData($event)"></app-excelsheet>
+                        </div>
                     </div>
                 </li>
                 <li id="CntrlBox3" class="money" *ngIf="ifExcelFile && ifGridControlBox">    
@@ -49,12 +65,11 @@
                             (mouseenter)="title3.style = 'background-color:black;'"
                             (mouseleave)="title3.style = 'background-color:transparent;'"
                             (click)="controlClick($event)"
-                        >Grid size tools</h1>
-                        <div style='text-align:center'>
-                        <label for ="sizeUpButton"></label>
-                        <button style='margin-left:5px;margin-right:5px;'name="sizeUpButton" (click)="gridSizeUp()">+</button>
-                        <label for="sizeDownButton"></label>
-                        <button style='margin-left:5px;margin-right:5px;'name="sizeDownButton" (click)="gridSizeDown()">-</button>
+                        >Grid Formatting Tools</h1>
+                        <div style="display: flex;margin: auto;width: 60%;">
+                            <button class="contentFormat" name="sizeUpButton" (click)="gridSizeUp()">+</button>
+                            <label class="contentFormat" for="sizeDownButton">Resize Grid</label>
+                            <button class="contentFormat" name="sizeDownButton" (click)="gridSizeDown()">-</button>
                         </div>
                     </div>
                 </li>
@@ -63,12 +78,12 @@
     </div>
 </div>
 <div *ngIf="somebool" style="font-size:40px;text-align:center;display:flex;">User has edited the Data</div>
-<div *ngIf="ifExcelFile">
+<div>
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
         <mat-tab *ngFor= "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>
             <div id="gridcontainer" [style]="getGridStyle()">
                 <app-admingrid
-                    [columnInfo]="db.database[i].columns.columns"
+                    [columnInfo]="db.database[i].columns"
                     [myRowData]="db.database[i].rows"
                     [sheetName]="db.database[i].workSheetName"
                 >

@@ -49,7 +49,6 @@ export class AdminpageComponent implements OnInit {
   }
 
   resetGrid(){
-    console.log(this.child);
     this.child.get(this.currentGrid).resetState();
   }
   exportState(){
@@ -80,10 +79,10 @@ export class AdminpageComponent implements OnInit {
     var list = $event.srcElement.parentNode.parentNode;
     var money = $event;
     if (list.style.overflow === "auto") {
-      list.setAttribute("style","height:30px;width:15%;overflow:hidden;margin:auto");
+      list.setAttribute("style","height:30px;width:10%;overflow:hidden;margin:auto");
     }
     else {
-      list.setAttribute("style","height:fit-content;width:25%;overflow:auto;margin:auto");
+      list.setAttribute("style","height:fit-content;width:20%;overflow:auto;margin:auto");
     }
   }
 
@@ -118,7 +117,6 @@ export class AdminpageComponent implements OnInit {
           break;
         }
       }
-    
     return false;
   }
 }
