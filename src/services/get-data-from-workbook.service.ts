@@ -20,7 +20,7 @@ export class GetDataFromWorkbookService {
     for(var i = 0;i<workbook.SheetNames.length;i++){
       columns = this.colService.getColumnsFromExcelFile(workbook.Sheets[workbook.SheetNames[i]]);
       rows = this.rowService.populateRows(workbook.Sheets[workbook.SheetNames[i]],columns.columnsForRows);  
-      this.database.database.push(new gridData(workbook.SheetNames[i],columns,rows));
+      this.database.database.push(new gridData(workbook.SheetNames[i],columns.columns,rows));
       this.database.databaseSet.next(true);
     }
   }

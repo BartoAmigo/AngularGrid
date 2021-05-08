@@ -72,7 +72,7 @@
         <mat-tab *ngFor= "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>
             <div id="gridcontainer" [style]="getGridStyle()">
                 <app-admingrid
-                    [columnInfo]="db.database[i].columns.columns"
+                    [columnInfo]="db.database[i].columns"
                     [myRowData]="db.database[i].rows"
                     [sheetName]="db.database[i].workSheetName"
                 >

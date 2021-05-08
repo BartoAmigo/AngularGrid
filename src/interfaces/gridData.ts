@@ -1,13 +1,18 @@
+import {rowColors} from './rowColor'
+
 interface IgridData{
     workSheetName:string;
     columns:any[];
     rows:any[];
-    userEdited:boolean;
+    userEdited?:boolean;
+    rowColors?:rowColors[];
 }
 
 export class gridData implements IgridData{
-    constructor(public workSheetName, public columns, public rows,public userEdited=false){
-
+    constructor(public workSheetName, public columns, public rows,public userEdited?,public rowColors?){
+        this.userEdited = false;
+        this.rowColors=[];
+        
     }
     getSheetName():string{
         return this.workSheetName;
@@ -26,5 +31,9 @@ export class gridData implements IgridData{
     }
     setNewRows(a:any[]){
         this.rows = a; 
+    }
+    setARowColor(a:number,b:string){
+        console.log(a);
+        console.log(b);
     }
 }

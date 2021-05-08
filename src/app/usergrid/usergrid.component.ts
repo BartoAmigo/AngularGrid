@@ -44,6 +44,8 @@ export class UsergridComponent implements OnInit {
   editable:true
 }
 
+
+
   gridOptions = {
     //properties 
     pagination:true,
@@ -58,7 +60,10 @@ export class UsergridComponent implements OnInit {
         }
         else {
           params.node.permColor = params.context.colorChoice;
+
         }
+        this.db.getGridDataElementByName(this.sheetName).setARowColor(params.node.rowIndex,params.node.permColor);
+        console.log(this.db.database[0].rowColors[0]);
         return { background: params.node.permColor };
       }
       else if (params.context.colorChoice === "clearAll") {
@@ -90,7 +95,7 @@ export class UsergridComponent implements OnInit {
     this.gridOptions.context = {
       colorChoice:choice
     };
-    console.log (this.gridApi.context);
+
     this.gridApi.redrawRows();  
   }
 
