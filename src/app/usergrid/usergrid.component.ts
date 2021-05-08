@@ -81,7 +81,6 @@ export class UsergridComponent implements OnInit {
   }
 /* Grid Ready function */
   onGridReady = (params) => {
-    console.log(params);
     this.gridApi = params.api; //gets gridApi here
     this.columnApi = params.columnApi; //gets columnApi here 
   }
@@ -90,8 +89,8 @@ export class UsergridComponent implements OnInit {
     this.gridOptions.context = {
       colorChoice:choice
     };
-    console.log (this.gridApi.context);
-    this.gridApi.redrawRows();  
+    console.log (this.gridApi.getRowNode(1));
+    this.gridApi.redrawRows(); 
   }
 
   addNewRowItem(){
@@ -111,7 +110,7 @@ export class UsergridComponent implements OnInit {
     });
     this.myRowData = exrowdata;
     this.db.updateElementRows(this.sheetName,exrowdata); 
-  }
+    }
 
   ngOnInit(): void {
   }
