@@ -13,8 +13,19 @@
                         <h1 class="title2"  (click)="boxClick($event)">Grid Control Box</h1>
                     </div>
                 </li>
+                <li id="CntrlBox2" class="money" *ngIf="ifGridControlBox && ifExcelFile==false">    
+                    <div class="li_content" style="text-align:center">
+                        <h1 #title2 class="title" 
+                            (mouseenter)="title2.style = 'background-color:black;'"
+                            (mouseleave)="title2.style = 'background-color:transparent;'"
+                            (click)="controlClick($event)"
+                        >Input Data</h1>
+                        <!--ExcelSheet Component-->
+                        <app-excelsheet (dataEvent)="receiveData($event)"></app-excelsheet>
+                    </div>
+                </li>
                 <li id="CntrlBox1" class="money" *ngIf="ifExcelFile && ifGridControlBox" >
-                    <div class="li_content">
+                    <div class="li_content" style='text-align:center'>
                         <h1 #title class="title"
                             (mouseenter)="title.style = 'background-color:black;'"
                             (mouseleave)="title.style = 'background-color:transparent;'"
@@ -72,7 +83,7 @@
         <mat-tab *ngFor= "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>
             <div id="gridcontainer" [style]="getGridStyle()">
                 <app-admingrid
-                    [columnInfo]="db.database[i].columns.columns"
+                    [columnInfo]="db.database[i].columns"
                     [myRowData]="db.database[i].rows"
                     [sheetName]="db.database[i].workSheetName"
                 >

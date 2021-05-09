@@ -2,7 +2,6 @@
 import { Component, OnInit,ViewChildren,QueryList} from '@angular/core';
 import {UsergridComponent} from '../usergrid/usergrid.component'
 import {DatabaseService} from 'services/database.service';
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-userpage',
@@ -27,9 +26,9 @@ export class UserpageComponent implements  OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
+  
   addARow(){
     this.child.get(this.currGrid).addNewRowItem();
     this.db.databaseChanges.next(true);
@@ -40,11 +39,13 @@ export class UserpageComponent implements  OnInit {
     this.width  += .10 *screen.width;
     document.getElementById("gridcontainer").setAttribute("style",this.getGridStyle());
   }
+
   gridSizeDown(){
    this.height -= .10 *screen.height;
    this.width  -= .10 *screen.width;
    document.getElementById("gridcontainer").setAttribute("style",this.getGridStyle());
   }
+
   getGridStyle():string{
     let HTMLSTRING = ("width:"+this.width+"px;"+"height:"+this.height+"px;margin:auto;")
     return HTMLSTRING;
@@ -70,6 +71,7 @@ export class UserpageComponent implements  OnInit {
     $event.srcElement.classList.toggle("active");
     
   }
+
   controlChange(){
     const form = <HTMLFormElement>(document.querySelector("#controls"));
 
@@ -87,6 +89,8 @@ export class UserpageComponent implements  OnInit {
     
     return false;
   }
+
+
   controlChange2(){
     const form = <HTMLFormElement>(document.querySelector("#format"));
 
