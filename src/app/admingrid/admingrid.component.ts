@@ -1,6 +1,6 @@
 import { CustomTooltipComponent } from '../custom-tooltip/custom-tooltip.component';
 import {DatabaseService} from 'services/database.service'
-import { Component, OnInit,Input} from '@angular/core';
+import { Component, OnInit,Input, ɵNG_INJ_DEF} from '@angular/core';
 import {CreateUserGridService} from 'services/create-user-grid.service'
 import {ColsFromExcelService} from 'services/cols-from-excel.service'
 import {RowsFromExcelService} from 'services/rows-from-excel.service'
@@ -19,7 +19,7 @@ export class AdmingridComponent implements OnInit {
   private sideBar = "columns"; //columns for side
   @Input() columnInfo; // columnInfo is going to collect column   
   @Input() myRowData; // Defines row definitions
-  @Input() sheetName:string;
+  @Input() sheetName:string; //sheetName
   public tooltipShowDelay;
   public frameworkComponents;
 
@@ -61,65 +61,29 @@ private rowIndex;
        //grid gets column definitons here
       pagination:true, //pagination
       sideBar:this.sideBar, //sidebar
-      rowMultiSelectWithClick:"true", //rowMultiSelectWithClick
-      rowSelection:"single",
+      //rowMultiSelectWithClick:"true", //rowMultiSelectWithClick
+      rowSelection:"multiple",
       detailCellRendererFramework: CustomTooltipComponent,
       detailCellRendererParams: (params: ICellRendererParams) => this.formatToolTip(params.data),
-      getRowStyle: params => {
+      getRowStyle: params => { 
+        if (params.node.isSelected()) {
+          if (params.context.colorChoice === "clearRow") {
+            params.node.permColor = undefined;
+          }
+          else {
+            params.node.permColor = params.context.colorChoice;
+          }
+          return { background: params.node.permColor };
+        }
+        else if (params.context.colorChoice === "clearAll") {
+          params.node.permColor = undefined;
+        }
+        return { background: params.node.permColor };
+       },
+      context: {
+        colorChoice: '#f25d5a',
+      }
 
-        if( params.node.rowIndex % 14 === 0){
-          return {background: '#f25d5a'};
-        }
-        else if(params.node.rowIndex % 14 === 1){
-          return {background: '#363537',color:'white'};
-        }
-        else if(params.node.rowIndex % 14 === 2){
-            return {background: '#84be18'};
-        }
-        else if(params.node.rowIndex % 14 === 3){
-          return {background: 'a68e5a'};
-
-        }
-        else if(params.node.rowIndex % 14 === 4){
-          return {background: '#dddcce'};
-        }
-        else if(params.node.rowIndex % 14 === 5){
-          return {background: '#84a834'};
-        }
-        else if(params.node.rowIndex % 14 === 6){
-          return {background: '#1698d4'};
-        }
-        else if(params.node.rowIndex % 14 === 7){
-          return {background: '#4e6585'};
-        }
-        else if(params.node.rowIndex % 14 === 8){
-          return {background: '#3d3c3e'};
-        }
-        else if(params.node.rowIndex % 14 === 9){
-          return {background: '#e74701'};
-        }
-        else if(params.node.rowIndex % 14 === 10){
-          return {background: '#bfef75'};
-        }
-        else if(params.node.rowIndex % 14 === 11){
-          return {background: '#0fc8f8'};
-        }
-        else if(params.node.rowIndex % 14 === 12){
-          return {background: '#807e80'};
-        }
-        else if(params.node.rowIndex % 14 === 13){
-          return {background: '#f25b48'};
-        }
-        else if(params.node.rowIndex % 14 === 14){
-          return {background: '#ee1c25'};
-
-
-
-        }
-
-
-
-      },
       //Events 
       //add event handlers
       /* */ 
@@ -153,19 +117,23 @@ private rowIndex;
     Object.keys(columns).forEach(function(column){
       row[columns[column].field]="";
     });
-  
-
-
     this.gridApi.applyTransaction({ add: [row], addIndex: this.rowIndex+1 })
     this.updateRowItems();
-
-
   }
+
   onRowClick(event: any): void {
     this.deleteIndex = event.getRow;
     this.rowIndex = event.rowIndex
-
   }
+
+  colorGrid(choice){
+    this.gridOptions.context = {
+      colorChoice:choice
+    };
+    console.log (this.gridApi.getRowNode(1));
+    this.gridApi.redrawRows(); 
+  }
+
   deleteRowItem(){
     var selectedData = this.gridApi.getSelectedRows();
     var res = this.gridApi.applyTransaction({ remove: selectedData });
@@ -181,6 +149,8 @@ private rowIndex;
     this.myRowData = exrowdata;
     this.db.updateElementRows(this.sheetName,exrowdata); 
   }
+
+
 
   formatToolTip(params: any) {
     // USE THIS FOR TOOLTIP LINE BREAKs

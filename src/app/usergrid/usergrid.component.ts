@@ -14,6 +14,8 @@ export class UsergridComponent implements OnInit {
   private columnApi; //place holder to get grid's column api
   private sideBar = "columns"; //this is for the side bar
   public selectedNodes=[];
+  private deleteIndex;
+  private rowIndex;
  // public getRowStyle;
   @Input() sheetName;
   @Input() myRowData; //array of row definitions 
@@ -99,7 +101,7 @@ export class UsergridComponent implements OnInit {
     Object.keys(columns).forEach(function(column){
       row[columns[column].field]="";
     });
-    this.gridApi.applyTransaction({add:[row]});
+    this.gridApi.applyTransaction({add:[row], addIndex: this.rowIndex+1 });
     this.updateRowItems();
   }
 

@@ -1,6 +1,5 @@
 
-import { state } from '@angular/animations';
-import { Component,OnInit,ViewChildren,QueryList, Input} from '@angular/core';
+import { Component,OnInit,ViewChildren,QueryList} from '@angular/core';
 import * as XLSX from "xlsx";
 import { AdmingridComponent } from '../admingrid/admingrid.component';
 import {GetDataFromWorkbookService} from 'services/get-data-from-workbook.service'
@@ -13,7 +12,7 @@ import {DatabaseService} from 'services/database.service'
 })
 export class AdminpageComponent implements OnInit {
   @ViewChildren(AdmingridComponent) child:QueryList<AdmingridComponent>;
-  currentGrid:number;
+  currentGrid:number = 0;
   somebool:boolean;
   indexArr: Number[] = [];
   ifExcelFile:boolean = false;
@@ -41,7 +40,6 @@ export class AdminpageComponent implements OnInit {
     this.ifExcelFile = true;
     let excelsheet:XLSX.WorkBook = $event;
     this.workbookservice.setData(excelsheet);
-  
   }
   
   tabChanged($event){
@@ -118,6 +116,14 @@ export class AdminpageComponent implements OnInit {
           break;
         }
       }
+    return false;
+  }
+  controlChange2(){
+    const form = <HTMLFormElement>(document.querySelector("#format"));
+
+    const data = new FormData(form);
+    const choice = data.get('choice') as string;
+    this.child.get(this.currentGrid).colorGrid(choice);
     return false;
   }
 }
