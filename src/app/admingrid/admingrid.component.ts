@@ -6,6 +6,7 @@ import {ColsFromExcelService} from 'services/cols-from-excel.service'
 import {RowsFromExcelService} from 'services/rows-from-excel.service'
 import 'ag-grid-enterprise'
 import {ICellRendererParams} from 'ag-grid-community'
+import { element } from 'protractor';
 
 
 @Component({
@@ -126,12 +127,19 @@ private rowIndex;
     this.rowIndex = event.rowIndex
   }
 
-  colorGrid(choice){
+  colorGrid(choice,currentGrid){
     this.gridOptions.context = {
       colorChoice:choice
     };
-    console.log (this.gridApi.getRowNode(1));
-    this.gridApi.redrawRows(); 
+    this.gridApi.redrawRows();
+      this.gridApi.forEachNode(element => {
+        if(element.permColor){
+          var colorObj = {rowIndex: element.rowIndex, rowColors:element.permColor}
+          this.db.database[currentGrid].rowColors.push(colorObj);
+        }
+        console.log(this.db.database[currentGrid].rowColors);
+    }); 
+    
   }
 
   deleteRowItem(){

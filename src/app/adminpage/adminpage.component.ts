@@ -123,7 +123,7 @@ export class AdminpageComponent implements OnInit {
 
     const data = new FormData(form);
     const choice = data.get('choice') as string;
-    this.child.get(this.currentGrid).colorGrid(choice);
+    this.child.get(this.currentGrid).colorGrid(choice, this.currentGrid);
     return false;
   }
 }
