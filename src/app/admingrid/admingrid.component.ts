@@ -7,6 +7,7 @@ import {RowsFromExcelService} from 'services/rows-from-excel.service'
 import 'ag-grid-enterprise'
 import {ICellRendererParams} from 'ag-grid-community'
 import { element } from 'protractor';
+import { of } from 'rxjs';
 
 
 @Component({
@@ -128,6 +129,7 @@ private rowIndex;
   }
 
   colorGrid(choice,currentGrid){
+    var wasFound:boolean = false; 
     this.gridOptions.context = {
       colorChoice:choice
     };
@@ -135,9 +137,17 @@ private rowIndex;
       this.gridApi.forEachNode(element => {
         if(element.permColor){
           var colorObj = {rowIndex: element.rowIndex, rowColors:element.permColor}
-          this.db.database[currentGrid].rowColors.push(colorObj);
+          for(var i = 0;i<this.db.database[currentGrid].rowColors.length;i++){
+            if(this.db.database[currentGrid].rowColors[i].rowIndex == colorObj.rowIndex)
+            {
+              this.db.database[currentGrid].rowColors[i].rowColors=colorObj.rowColors;
+              wasFound=true;
+            }
+          }
+          if(wasFound==false){
+            this.db.database[currentGrid].rowColors.push(colorObj);
+          }
         }
-        console.log(this.db.database[currentGrid].rowColors);
     }); 
     
   }

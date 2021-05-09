@@ -96,7 +96,6 @@ export class UserpageComponent implements  OnInit {
 
     const data = new FormData(form);
     const choice = data.get('choice') as string;
-    this.child.get(this.currGrid).colorGrid(choice);
     return false;
   }
 }
