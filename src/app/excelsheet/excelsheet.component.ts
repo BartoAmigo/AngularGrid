@@ -1,4 +1,5 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+
+import { Component, OnInit,Output,EventEmitter, Input } from '@angular/core';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -8,12 +9,20 @@ import * as XLSX from 'xlsx';
 })
 export class ExcelsheetComponent implements OnInit {
 
+  @Input() role:boolean = false; 
   data: [][];
+   wb: XLSX.WorkBook;
   @Output() dataEvent = new EventEmitter<any>();
+  @Output() dataEvent2 = new EventEmitter<any>();
+  ws: XLSX.WorkSheet;
+ 
+
   constructor() { }
+  @Input() columns:[];
 
   ngOnInit(): void {
   }
+
   onFileChange(evt: any) {
     const target : DataTransfer =   <DataTransfer>(evt.target);
     
@@ -23,23 +32,24 @@ export class ExcelsheetComponent implements OnInit {
 
     reader.onload = (e: any) => {
       const bstr: string = e.target.result;
+     this.wb = XLSX.read(bstr, { type: 'binary' });
 
-      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+      const wsname : string = this.wb.SheetNames[0];
 
-      const wsname : string = wb.SheetNames[0];
+      this.ws = this.wb.Sheets[wsname];
+      this.data = (XLSX.utils.sheet_to_json(this.ws, { header: 1 }));
 
-      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-
-      this.data = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
-
-      
-    };
-
+    }; 
     reader.readAsBinaryString(target.files[0]);
-    
+    setTimeout(() => {
+      this.dataEvent.emit(this.wb);
+      this.dataEvent2.emit(this.data);
+    },2000);
     
   }
-  sendData(){
-    this.dataEvent.emit(this.data);
-  }
+ /* sendData(){
+    this.dataEvent.emit(this.wb);
+    this.dataEvent2.emit(this.data);
+  }*/
+
 }

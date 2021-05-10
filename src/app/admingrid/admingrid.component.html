@@ -1,16 +1,12 @@
-<h2>Admin-Grid Page</h2>
-<p>This is our Admin-Grid, It will be able to create a grid for user to use.</p>
-<p>The admin grid shows all the data. It allows you to choose what data the user should see.</p>
-<!--ExcelSheet Component-->
-<app-excelsheet (dataEvent)="receiveData($event)"></app-excelsheet>
-<!--********************-->
-
-<!--Grid Component-->
 <ag-grid-angular
-#admingrid
-style="width:500px;height:500px;"
+style="width:100%;height:100%"
 class="ag-theme-alpine"
+[rowData]="myRowData"
+[columnDefs]="columnInfo"
 [gridOptions]="gridOptions"
+[tooltipShowDelay]="tooltipShowDelay"
+[frameworkComponents]="frameworkComponents"
 (gridReady) = "onGridReady($event)"
+(rowClicked)="onRowClick($event)"
 ></ag-grid-angular>
-<!--****************-->
+

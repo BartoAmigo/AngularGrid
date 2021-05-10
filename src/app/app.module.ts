@@ -8,6 +8,14 @@ import { HomeComponent } from './home/home.component';
 import { AdmingridComponent } from './admingrid/admingrid.component';
 import { UsergridComponent } from './usergrid/usergrid.component';
 import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
+import { AdminpageComponent } from './adminpage/adminpage.component';
+import { UserpageComponent } from './userpage/userpage.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTabsModule} from '@angular/material/tabs';
+import { CustomTooltipComponent } from './custom-tooltip/custom-tooltip.component';
+
+//import { GridcontrolboxComponent } from './gridcontrolbox/gridcontrolbox.component';
+
 
 @NgModule({
   declarations: [
@@ -16,12 +24,17 @@ import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
     HomeComponent,
     AdmingridComponent,
     UsergridComponent,
-    ExcelsheetComponent
+    ExcelsheetComponent,
+    AdminpageComponent,
+    UserpageComponent,
+    CustomTooltipComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([CustomTooltipComponent]),
+    BrowserAnimationsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

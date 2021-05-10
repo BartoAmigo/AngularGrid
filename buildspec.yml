@@ -9,8 +9,9 @@ phases:
       nodejs: 12
     commands:
       # Install dependencies needed for running tests
-      - npm install
+      - npm install --save ag-grid-angular ag-grid-enterprise
       - npm install -g @angular/cli 
+      - npm install
 
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
@@ -23,8 +24,10 @@ phases:
       # Use AWS SAM to package the application by using AWS CloudFormation
       - ng build --prod
       - rm -dfr node_modules
-      - aws s3 cp --recursive $BUILD_FOLDER s3://$WEBSITE_S3_BUCKET/public/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
-      #- sed -i -e "s|assets/|$WEBSITE_S3_PREFIX/public/assets/|g" public/src/app/index.html
+      - aws s3 cp --recursive $BUILD_FOLDER s3://$WEBSITE_S3_BUCKET/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
+      - sed -i -e "8 s|href=\"|&$WEBSITE_S3_PREFIX/|g" $BUILD_FOLDER/index.html
+      - sed -i -e "11 s|href=\"|&$WEBSITE_S3_PREFIX/|g" $BUILD_FOLDER/index.html 
+      - sed -i -e "18 s|src=\"|&$WEBSITE_S3_PREFIX/|g" $BUILD_FOLDER/index.html 
       - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template template-export.yml
   post_build:
     commands:
