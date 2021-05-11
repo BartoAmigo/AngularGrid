@@ -35,7 +35,8 @@ export class AdminpageComponent implements OnInit {
       }
     })
   }
-
+//receives data from excelsheet component and imports the worksheet into a variable. The variable is then used to call
+//the workbook service which sets the rows and columns for the grid as well as inputs it into the "database"
   receiveData($event){
     this.ifExcelFile = true;
     let excelsheet:XLSX.WorkBook = $event;
@@ -53,18 +54,21 @@ export class AdminpageComponent implements OnInit {
   exportState(){
     this.child.get(this.currentGrid);
   }
-
+//calls addrowitem function to add a row to the grid
  addARow(){
    this.child.get(this.currentGrid).addNewRowItem();
  }
+ //calls deleterowitem to remove the row from the current grid
  deleteRow(){
    this.child.get(this.currentGrid).deleteRowItem();
  }
+ //inceases the size of the grid view based on the screen dimensions
  gridSizeUp(){
    this.height += .10 *screen.height;
    this.width  += .10 *screen.width;
    document.getElementById("gridcontainer").setAttribute("style",this.getGridStyle());
  }
+ //decreases the size of the grid view based on the screen dimensions
  gridSizeDown(){
   this.height -= .10 *screen.height;
   this.width  -= .10 *screen.width;

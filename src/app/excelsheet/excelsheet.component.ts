@@ -22,7 +22,10 @@ export class ExcelsheetComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+/**the excel input code that allows the admin to acess their documents, select an excel file, and import it into the grid.
+ * the code will read the inputed file using the XLSX reader library. It grabs the worksheets and emits the data to the admingrid
+ * component to be inputted into the admin grid
+*/
   onFileChange(evt: any) {
     const target : DataTransfer =   <DataTransfer>(evt.target);
     
@@ -47,9 +50,4 @@ export class ExcelsheetComponent implements OnInit {
     },2000);
     
   }
- /* sendData(){
-    this.dataEvent.emit(this.wb);
-    this.dataEvent2.emit(this.data);
-  }*/
-
 }

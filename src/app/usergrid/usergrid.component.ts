@@ -71,7 +71,8 @@ export class UsergridComponent implements OnInit {
     this.columnApi = params.columnApi; //gets columnApi here 
   }
 
-
+//allows user to add a row item at below seleted row position. for each column in the grid, it will add a new empty field
+//add that row to the rowdata
   addNewRowItem(){
     let columns = this.myColData;
     let row = {};
@@ -81,7 +82,7 @@ export class UsergridComponent implements OnInit {
     this.gridApi.applyTransaction({add:[row], addIndex: this.rowIndex+1 });
     this.updateRowItems();
   }
-
+//updates row nodes and inputs the updated nodes into the "database" for the currently viewed worksheet
   updateRowItems(){
     let exrowdata = [];
     this.gridApi.forEachNode(function(node){

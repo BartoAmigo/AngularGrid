@@ -36,7 +36,7 @@ export class AdmingridComponent implements OnInit {
 
 private deleteIndex;
 private rowIndex;
- newbranch
+ 
   //This is for the column information, sets rules to every column. 
   private defColDefs = {
     flex: 1,
@@ -65,6 +65,10 @@ private rowIndex;
       sideBar:this.sideBar, //sidebar
       //rowMultiSelectWithClick:"true", //rowMultiSelectWithClick
       rowSelection:"multiple",
+      /* detailCellRendererFramenwork
+       meant for the row data display on mouse hover. Allows mouse hover to grab the data from the current row using toolTip 
+       component
+      */
       detailCellRendererFramework: CustomTooltipComponent,
       detailCellRendererParams: (params: ICellRendererParams) => this.formatToolTip(params.data),
       getRowStyle: params => { 
@@ -111,7 +115,9 @@ private rowIndex;
     this.columnApi.resetColumnState(); //resets columns to origin state 
   }
 
-
+/*adds a new row into the current grid below the current clicked row. If no rows are clicked, it will add the row to the end
+  of the grid
+*/ 
   addNewRowItem(){
     let columns = this.columnInfo;
     let row = {};
@@ -151,14 +157,16 @@ private rowIndex;
     }); 
     
   }
-
+//deleteRowItem: grabs the selected row on the grid and removes it, then updates the rows
   deleteRowItem(){
     var selectedData = this.gridApi.getSelectedRows();
     var res = this.gridApi.applyTransaction({ remove: selectedData });
     this.updateRowItems();
   }
 
-
+/*uodateRowItems: grabs each row in the grid and places it into an array. myRowData is then updated with the current row elements
+ and the rows are updated inside the database.
+ */
   updateRowItems(){
     let exrowdata = [];
     this.gridApi.forEachNode(function(node){
@@ -169,20 +177,16 @@ private rowIndex;
   }
 
 
-
+/* 
+format tooltip: grabs the parameters from the gridoptions and returns columninfo
+*/
   formatToolTip(params: any) {
-    // USE THIS FOR TOOLTIP LINE BREAKs
-
     const toolTipArray = this.gridApi.setColumnDefs(this.columnInfo);
     const toolTipArray1 = this.gridApi.setColumnDefs(this.columnInfo);
 
     return {toolTipArray,toolTipArray1}
 
-    // USE THIS FOR SINGLE LINE TOOLTIP
-
-    // const lineBreak = false;
-    // const toolTipString = 'Hello World'
-    // return { toolTipString, lineBreak }
+    
   }
 
     
