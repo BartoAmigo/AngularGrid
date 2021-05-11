@@ -51,7 +51,7 @@ export class UserpageComponent implements  OnInit {
     let HTMLSTRING = ("width:"+this.width+"px;"+"height:"+this.height+"px;margin:auto;")
     return HTMLSTRING;
   }
-
+//changes the grid when you click on a different tag.
   tabChanged($event){
     this.currGrid = $event;
   }

@@ -86,7 +86,7 @@ export class UsergridComponent implements OnInit{
     this.gridApi.applyTransaction({add:[row], addIndex: this.rowIndex+1 });
     this.updateRowItems();
   }
-
+//updates row nodes and inputs the updated nodes into the "database" for the currently viewed worksheet
   updateRowItems(){
     let exrowdata = [];
     this.gridApi.forEachNode(function(node){
