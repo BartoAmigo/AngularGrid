@@ -1,11 +1,11 @@
-import {rowColors} from './rowColor'
+
 
 interface IgridData{
     workSheetName:string;
     columns:any[];
     rows:any[];
     userEdited?:boolean;
-    rowColors?:rowColors[];
+    rowColors?:any[]
 }
 
 export class gridData implements IgridData{
@@ -33,7 +33,8 @@ export class gridData implements IgridData{
         this.rows = a; 
     }
     setARowColor(a:number,b:string){
-        console.log(a);
-        console.log(b);
+      let obj = {};
+      obj = {rowIndex:a,rowColor:b};
+      this.rowColors.push(obj);
     }
 }

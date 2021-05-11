@@ -27,8 +27,9 @@ export class UserpageComponent implements  OnInit {
 
   ngOnInit(): void {
   }
-
-  
+  progressColor(){
+    this.child.get(this.currGrid).progressColor();
+  }
   addARow(){
     this.child.get(this.currGrid).addNewRowItem();
     this.db.databaseChanges.next(true);
