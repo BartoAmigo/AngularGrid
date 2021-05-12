@@ -12,6 +12,9 @@ import { AdminpageComponent } from './adminpage/adminpage.component';
 import { UserpageComponent } from './userpage/userpage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
+import { CustomTooltipComponent } from './custom-tooltip/custom-tooltip.component';
+
+//import { GridcontrolboxComponent } from './gridcontrolbox/gridcontrolbox.component';
 
 
 @NgModule({
@@ -24,11 +27,12 @@ import {MatTabsModule} from '@angular/material/tabs';
     ExcelsheetComponent,
     AdminpageComponent,
     UserpageComponent,
+    CustomTooltipComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([CustomTooltipComponent]),
     BrowserAnimationsModule,
     MatTabsModule
   ],

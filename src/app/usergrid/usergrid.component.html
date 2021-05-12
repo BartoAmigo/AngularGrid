@@ -4,10 +4,12 @@
 <!--Grid Component -->
 <ag-grid-angular
 #usergrid
-style="width:1000px;height:750px;"
+[rowData]="myRowData"
+[columnDefs]="myColData"
+style="width:100%;height:100%;"
 class="ag-theme-alpine"
 [gridOptions]="gridOptions"
 (gridReady)="onGridReady($event)"
-
+*ngIf ="db.database[this.currGrid].getSheetName()==this.sheetName"
 ></ag-grid-angular>
 <!---->

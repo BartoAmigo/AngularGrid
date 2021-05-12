@@ -1,0 +1,32 @@
+:host {
+    position: absolute;
+    width:fit-content;
+    height: 70px;
+    pointer-events: none;
+    transition: opacity 1s;
+  }
+
+  :host.ag-tooltip-hiding {
+    opacity: 0;
+  }
+
+  .custom-tooltip p {
+    margin: 5px;
+    white-space: nowrap;
+  }
+
+  .custom-tooltip p:first-of-type {
+    font-weight: bold;
+  }
+  .custom-tooltip {
+    position: absolute;
+    max-width:300px;
+    min-width:150px;
+    height: fit-content;
+    border: 3px solid rgb(255, 255, 255);
+    background-color:#f25d5a ;
+    overflow:visible;
+    pointer-events: none;
+    
+    transition: opacity 1s;
+  }
