@@ -149,7 +149,7 @@ private rowIndex;
           }
         }
     }); 
-    
+    console.log(this.db.database);
   }
 
   deleteRowItem(){

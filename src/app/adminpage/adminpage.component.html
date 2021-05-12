@@ -13,17 +13,6 @@
                         <h1 class="title2"  (click)="boxClick($event)">Grid Control Box</h1>
                     </div>
                 </li>
-                <li id="CntrlBox2" class="money" *ngIf="ifGridControlBox && ifExcelFile==false">    
-                    <div class="li_content" style="text-align:center">
-                        <h1 #title2 class="title" 
-                            (mouseenter)="title2.style = 'background-color:black;'"
-                            (mouseleave)="title2.style = 'background-color:transparent;'"
-                            (click)="controlClick($event)"
-                        >Input Data</h1>
-                        <!--ExcelSheet Component-->
-                        <app-excelsheet (dataEvent)="receiveData($event)"></app-excelsheet>
-                    </div>
-                </li>
                 <li id="CntrlBox1" class="money" *ngIf="ifExcelFile && ifGridControlBox" >
                     <div class="li_content" style='text-align:center'>
                         <h1 #title class="title"
