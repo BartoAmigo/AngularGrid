@@ -15,17 +15,24 @@ export class UsergridComponent implements OnInit{
   private rowIndex;
   tempColor;
  // public getRowStyle;
-  @Input() sheetName;
+  sheetName; //is the workbook sheetname
   @Input() myRowData; //array of row definitions 
   @Input() myColData; //array of columndefinitions 
-  @Input() currGrid;
+  @Input() currGrid; //current grid that is displayed
   
   /* Grid option function 
   Sets properties for grid 
   */ 
   constructor(public db:DatabaseService){
+    db.currWorkSheet.subscribe(x=> 
+      this.sheetName = x);
   }
 
+
+/* NECESSARY TO RUN AG-GRID */
+/*
+  Sets default options of Columns
+*/
  private defColDefs = {
   flex: 1,
   minWidth: 100,
@@ -61,11 +68,14 @@ export class UsergridComponent implements OnInit{
   }
 /* Grid Ready function */
   onGridReady = (params) => {
-  
     this.gridApi = params.api; //gets gridApi here
     this.columnApi = params.columnApi; //gets columnApi here
-
+    this.progressColor();
   }
+
+/* END OF NECESSARY CODE TO RUN AG GRID */ 
+
+/* progressColor function: gets colors from database and displays rows in color from database.*/
   progressColor(){
     let rowColors = this.db.database[this.currGrid].rowColors;
     var rows=[];
@@ -86,6 +96,7 @@ export class UsergridComponent implements OnInit{
     this.gridApi.applyTransaction({add:[row], addIndex: this.rowIndex+1 });
     this.updateRowItems();
   }
+  
 //updates row nodes and inputs the updated nodes into the "database" for the currently viewed worksheet
   updateRowItems(){
     let exrowdata = [];

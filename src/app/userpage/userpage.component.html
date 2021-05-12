@@ -55,13 +55,14 @@
 <p style="font-size:50px; "*ngIf="isDataSet==false">Create DB in Admin</p>
 <div>
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
-        <mat-tab *ngFor = "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>
+        <mat-tab (click)="this.progressColor()" *ngFor = "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>
             <div id="gridcontainer" [style]="getGridStyle()">
+           
                 <app-usergrid
-                    [currGrid] ="currGrid"
+                    [currGrid] ="i"
                     [myColData]="db.database[i].columns"
                     [myRowData]="db.database[i].rows"
-                    [sheetName]="db.database[i].workSheetName"
+                    [sheetName]=db.currWorkSheet.value
                 >
                 </app-usergrid>
             </div>

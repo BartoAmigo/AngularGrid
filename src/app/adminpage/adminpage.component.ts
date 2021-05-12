@@ -28,14 +28,16 @@ export class AdminpageComponent implements OnInit {
     db.databaseChanges.subscribe(value=>{
       this.somebool=value; //race condition that is triggered SUBSCRIBES to databaseChanges FALSE -> No Changes, TRUE -> Changes
     });
+    
     /* see database.service.ts 
     This subscribe just tells us we already uploaded an excel file.*/
     db.databaseSet.subscribe(value=>{
       if(value==true){
         this.ifExcelFile=true; 
         this.ifGridControlBox=true; 
+        db.currWorkSheet.next(db.database[0].getSheetName());
       }
-    })
+    });
   }
 /*
 receieveData function: is the receiver of an output() emitted by the excelsheet component
@@ -52,8 +54,8 @@ we are getting the workbook here from $event
   $event here just gives you the index of the current admingrid you are viewing*/
   tabChanged($event){
     this.currentGrid = $event;
-    
-    document.getElementById("gridcontainer").setAttribute("style",this.getGridStyle()); //set default grid sizing. 
+    this.db.currWorkSheet.next(this.db.database[$event].getSheetName());
+    //document.getElementById("gridcontainer").setAttribute("style",this.getGridStyle()); //set default grid sizing. 
   }
 
   /*resetGrid function: this calls on a admingrid component's method resetState()*/ 
@@ -110,7 +112,6 @@ we are getting the workbook here from $event
 
       const data = new FormData(form);
       const choice = data.get('choice') as string;
-      console.log(choice);
       switch(choice)
       {
         case ("reset"):{

@@ -15,18 +15,19 @@ export class AdmingridComponent implements OnInit{
   private columnApi;  //defines placeholder for our columnApi 
   private sideBar = "columns"; //columns for side
   @Input() columnInfo; // columnInfo is going to collect column   
-  @Input() myRowData; // Defines row definitions
-  @Input() sheetName:string; //sheetName
+  @Input() myRowData; // Defines row definition
+  sheetName:string; //sheetName
   @Input() currGrid; //current grid index.
-  public tooltipShowDelay; //DAVE & JESSE
-  public frameworkComponents; //DAVE & JESSE 
+  public tooltipShowDelay; //Mouse hover does not load up immediately. DELAY. 
+  public frameworkComponents; //Object of components
 
 
   ngOnInit(){
-    console.log("grid is not ready");
   }
-  constructor(private db:DatabaseService)  {
-     
+  constructor(public db:DatabaseService)  {
+    db.currWorkSheet.subscribe(value=>
+      this.sheetName=value);
+      
     this.frameworkComponents = { customTooltip: CustomTooltipComponent }; //DAVE & JESSE 
    }
 
@@ -78,7 +79,6 @@ private rowIndex; //place holder for a row index you are about to add.
           else {
             params.node.permColor = params.context.colorChoice;
           }
-          console.log(params);
           return { background: params.node.permColor };
         }
         else if (params.context.colorChoice === "clearAll") {
@@ -104,7 +104,6 @@ private rowIndex; //place holder for a row index you are about to add.
   onGridReady = (params) => {
     this.gridApi = params.api; 
     this.columnApi = params.columnApi;
-    console.log("grid is ready");
     }
 
 

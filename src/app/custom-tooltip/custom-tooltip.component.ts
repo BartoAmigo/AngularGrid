@@ -1,10 +1,8 @@
-import { element } from 'protractor';
-import { AdmingridComponent } from './../admingrid/admingrid.component';
-import { TooltipComponent } from 'ag-grid-community/dist/lib/components/framework/componentTypes';
+
 import { Component, OnInit, } from '@angular/core';
 import { ITooltipAngularComp } from 'ag-grid-angular';
-import { ITooltipParams, IAfterGuiAttachedParams } from 'ag-grid-community';
-import { ICellRendererParams } from 'ag-grid-community';
+import { ITooltipParams} from 'ag-grid-community';
+
 @Component({
   selector: 'app-custom-tooltip',
   templateUrl: './custom-tooltip.component.html',
