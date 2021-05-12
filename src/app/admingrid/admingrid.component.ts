@@ -104,11 +104,21 @@ private rowIndex; //place holder for a row index you are about to add.
   onGridReady = (params) => {
     this.gridApi = params.api; 
     this.columnApi = params.columnApi;
+    this.progressColor();
     }
 
 
 /*END OF REQUIRED CODE TO RUN GRID COMPONENT */ 
-
+  progressColor(){
+    let rowColors = this.db.database[this.currGrid].rowColors;
+    var rows=[];
+    for(var i =0;i<rowColors.length;i++){
+      var row=this.gridApi.getRowNode(rowColors[i].rowIndex);
+      row.permColor=rowColors[i].rowColors;
+      rows.push(row);
+    }
+    this.gridApi.redrawRows({rowNodes:rows});
+  }
 
 
 
@@ -138,7 +148,7 @@ private rowIndex; //place holder for a row index you are about to add.
 
   /* WAIT */
   colorGrid(choice,currentGrid){
-    var wasFound:boolean = false; 
+    var wasFound:boolean; 
     this.gridOptions.context = {
       colorChoice:choice
     };
@@ -146,6 +156,7 @@ private rowIndex; //place holder for a row index you are about to add.
       this.gridApi.forEachNode(element => {
         if(element.permColor){
           var colorObj = {rowIndex: element.rowIndex, rowColors:element.permColor}
+          wasFound = false;
           for(var i = 0;i<this.db.database[currentGrid].rowColors.length;i++){
             if(this.db.database[currentGrid].rowColors[i].rowIndex == colorObj.rowIndex)
             {
@@ -158,7 +169,6 @@ private rowIndex; //place holder for a row index you are about to add.
           }
         }
     }); 
-    
   }
 //deleteRowItem: grabs the selected row on the grid and removes it, then updates the rows
   deleteRowItem(){
