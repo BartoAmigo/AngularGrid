@@ -169,7 +169,6 @@ private rowIndex; //place holder for a row index you are about to add.
           }
         }
     }); 
-    console.log(this.db.database);
   }
 //deleteRowItem: grabs the selected row on the grid and removes it, then updates the rows
   deleteRowItem(){
