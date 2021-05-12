@@ -1,17 +1,17 @@
-import {rowColors} from './rowColor'
-
+/*Interface IgridData*/
+/*Will set the template up for our gridData element.*/
 interface IgridData{
-    workSheetName:string;
-    columns:any[];
-    rows:any[];
-    userEdited?:boolean;
-    rowColors?:rowColors[];
+    workSheetName:string; //workSheetName 
+    columns:any[]; //column object 
+    rows:any[]; //row object 
+    //userEdited?:boolean; 
+    rowColors?:any[] //objects to hold rowindex, rowcolor to keep track of rows that are colored.
 }
-
+/*gridData class: for Database see Database.service.ts */
 export class gridData implements IgridData{
-    constructor(public workSheetName, public columns, public rows,public userEdited?,public rowColors?){
-        this.userEdited = false;
-        this.rowColors=[];
+    constructor(public workSheetName, public columns, public rows,public rowColors?){
+        //this.userEdited = false;
+        this.rowColors=[]; //by default set rowColors to nothing.
         
     }
     getSheetName():string{
@@ -23,9 +23,10 @@ export class gridData implements IgridData{
     getColumns():any[]{
         return this.columns;
     }
-    getEditFlag():boolean{
+    /*getEditFlag():boolean{
         return this.userEdited;
     }
+    */
     setNewColumns(a:any[]){
         this.columns = a;
     }
@@ -33,7 +34,8 @@ export class gridData implements IgridData{
         this.rows = a; 
     }
     setARowColor(a:number,b:string){
-        console.log(a);
-        console.log(b);
+      let obj = {};
+      obj = {rowIndex:a,rowColor:b};
+      this.rowColors.push(obj);
     }
 }
