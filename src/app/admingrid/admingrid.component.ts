@@ -154,7 +154,7 @@ private rowIndex; //place holder for a row index you are about to add.
     };
     this.gridApi.redrawRows();
       this.gridApi.forEachNode(element => {
-        if(element.permColor){
+   //     if(element.permColor){
           var colorObj = {rowIndex: element.rowIndex, rowColors:element.permColor}
           wasFound = false;
           for(var i = 0;i<this.db.database[currentGrid].rowColors.length;i++){
@@ -167,7 +167,7 @@ private rowIndex; //place holder for a row index you are about to add.
           if(wasFound==false){
             this.db.database[currentGrid].rowColors.push(colorObj);
           }
-        }
+ //       }
     }); 
   }
 //deleteRowItem: grabs the selected row on the grid and removes it, then updates the rows
