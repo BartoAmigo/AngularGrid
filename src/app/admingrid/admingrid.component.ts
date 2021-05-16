@@ -153,21 +153,19 @@ private rowIndex; //place holder for a row index you are about to add.
       colorChoice:choice
     };
     this.gridApi.redrawRows();
-      this.gridApi.forEachNode(element => {
-   //     if(element.permColor){
-          var colorObj = {rowIndex: element.rowIndex, rowColors:element.permColor}
-          wasFound = false;
-          for(var i = 0;i<this.db.database[currentGrid].rowColors.length;i++){
-            if(this.db.database[currentGrid].rowColors[i].rowIndex == colorObj.rowIndex)
-            {
-              this.db.database[currentGrid].rowColors[i].rowColors=colorObj.rowColors;
-              wasFound=true;
-            }
-          }
-          if(wasFound==false){
-            this.db.database[currentGrid].rowColors.push(colorObj);
-          }
- //       }
+    this.gridApi.forEachNode(element => {
+      var colorObj = {rowIndex: element.rowIndex, rowColors:element.permColor}
+      wasFound = false;
+      for(var i = 0;i<this.db.database[currentGrid].rowColors.length;i++){
+        if(this.db.database[currentGrid].rowColors[i].rowIndex == colorObj.rowIndex)
+        {
+          this.db.database[currentGrid].rowColors[i].rowColors=colorObj.rowColors;
+          wasFound=true;
+        }
+      }
+      if(wasFound==false){
+        this.db.database[currentGrid].rowColors.push(colorObj);
+      }
     }); 
   }
 //deleteRowItem: grabs the selected row on the grid and removes it, then updates the rows
