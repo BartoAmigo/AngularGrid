@@ -8,10 +8,6 @@ phases:
     runtime-versions:
       nodejs: 12
     commands:
-       # Get Chrome Information
-      - curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-      - echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
-      - apt-get -y update
       # Install chrome
       - apt-get -y install google-chrome-stable
       # Install dependencies needed for running tests
