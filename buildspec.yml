@@ -13,8 +13,7 @@ phases:
       - yum -y update
       # Headless Chrome
       - yum install -y fonts-liberation libasound2 libnspr4 libnss3 libx11-xcb1 xdg-utils libxss1 libappindicator1 libindicator7
-      - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      - dpkg -i google-chrome*.deb
+      - curl https://intoli.com/install-google-chrome.sh | bash
       # Install dependencies needed for running tests
       - npm install --save ag-grid-angular ag-grid-community xlsx ag-grid-enterprise
       - npm install -g @angular/cli 
