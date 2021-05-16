@@ -8,8 +8,6 @@ phases:
     runtime-versions:
       nodejs: 12
     commands:
-      # Install chrome
-      - apt-get -y install google-chrome-stable
       # Install dependencies needed for running tests
       - npm install --save ag-grid-angular ag-grid-community xlsx ag-grid-enterprise
       - npm install -g @angular/cli 
