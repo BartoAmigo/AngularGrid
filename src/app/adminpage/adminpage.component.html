@@ -24,7 +24,6 @@
                             <select class="contentFormat" name="choice">
                                 <optgroup label="Grid Commands">
                                     <option value="reset">Reset Grid</option>
-                                    <option value="export">Export Grid to User</option>
                                 </optgroup>
                                 <optgroup label="Edit Rows">
                                     <option value="addrow">Add a Row</option>
@@ -65,31 +64,33 @@
                                 <option value=''>Change Row Color</option>
                                 <option value="clearRow">Clear Row</option>
                                 <option value="clearAll">Clear All Rows</option>
-                                <option value='#f25d5a'>#f25d5a</option>
-                                <option value='#363537'>#363537</option>
-                                <option value='#84be18'>#84be18</option>
-                                <option value='#a68e5a'>#a68e5a</option>
-                                <option value='#dddcce'>#dddcce</option>
-                                <option value='#84a834'>#84a834</option>
-                                <option value='#1698d4'>#1698d4</option>
-                                <option value='#4e6585'>#4e6585</option>
-                                <option value='#3d3c3e'>#3d3c3e</option>
-                                <option value='#e74701'>#e74701</option>
-                                <option value='#bfef75'>#bfef75</option>
-                                <option value='#0fc8f'>#0fc8f8</option>
-                                <option value='#807e80'>#807e80</option>
-                                <option value='#f25b48'>#f25b48</option>
-                                <option value='#ee1c25'>#ee1c25</option>
+                                <option value='Blue'>Blue</option>
+                                <option value='Red'>Red</option>
+                                <option value='Green'>Green</option>
+                                <option value='Yellow'>Yellow</option>
                             </select>
                             <button class="contentFormat" type="submit">Execute</button>
                     </form>
+                    </div>
+                </li>
+                <li id="CntrlBox4" class="money" *ngIf="ifExcelFile && ifGridControlBox">
+                    <div class="li_content" style="text-align:center">
+                        <h1 #title4 class="title" 
+                        (mouseenter)="title4.style = 'background-color:black;'"
+                        (mouseleave)="title4.style = 'background-color:transparent;'"
+                        (click) = "controlClick($event)"
+                        >History</h1>
+                        <div id="historyBox" class ="contentFormat" style="color:black;height:120px;width:100%;border:1px solid #ccc; font:16px/26px Georgia, Garamond, Serif;overflow:auto; background-color:white;"
+                        >
+                        <p *ngFor="let message of messages" style="margin:0; font:14px Georgia;text-align:start">{{message}}</p>
+                    </div>
+                    <button (click)="clearHistory()">Clear</button>
                     </div>
                 </li>
             </ul>
         </div> 
     </div>
 </div>
-<div *ngIf="somebool" style="font-size:40px;text-align:center;display:flex;">User has edited the Data</div>
 <div>
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
         <mat-tab *ngFor= "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>

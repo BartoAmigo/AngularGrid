@@ -85,7 +85,6 @@ export class UserpageComponent implements  OnInit {
 
       const data = new FormData(form);
       const choice = data.get('choice') as string;
-      console.log(choice);
       switch(choice)
       {
         case ("1"):{

@@ -1,6 +1,7 @@
 
 import { Component, Input, OnInit} from '@angular/core';
 import {DatabaseService} from 'services/database.service'
+import { HistoryService } from 'services/history.service';
 
 @Component({
   selector: 'app-usergrid',
@@ -23,7 +24,7 @@ export class UsergridComponent implements OnInit{
   /* Grid option function 
   Sets properties for grid 
   */ 
-  constructor(public db:DatabaseService){
+  constructor(public db:DatabaseService, public history:HistoryService){
     db.currWorkSheet.subscribe(x=> 
       this.sheetName = x);
   }
@@ -94,6 +95,7 @@ export class UsergridComponent implements OnInit{
       row[columns[column].field]="";
     });
     this.gridApi.applyTransaction({add:[row], addIndex: this.rowIndex+1 });
+    this.history.addMessage(1,"user",this.sheetName,this.rowIndex);
     this.updateRowItems();
   }
   
@@ -106,7 +108,10 @@ export class UsergridComponent implements OnInit{
     this.myRowData = exrowdata;
     this.db.updateElementRows(this.sheetName,exrowdata); 
     }
-
+  onRowClick($event)
+  {
+    this.rowIndex = $event.rowIndex;
+  }
   ngOnInit(): void {
   }
 }

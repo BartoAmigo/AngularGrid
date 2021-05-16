@@ -51,8 +51,8 @@
             </ul>
         </div>
     </div>
+    <div style="font-size:50px;margin-top:20px;padding:10px;; "*ngIf="isDataSet==false">Please Import a Excel File</div>
 </div>
-<p style="font-size:50px; "*ngIf="isDataSet==false">Create DB in Admin</p>
 <div>
     <mat-tab-group (selectedIndexChange)="tabChanged($event)">
         <mat-tab (click)="this.progressColor()" *ngFor = "let ind of db.getDatabase(); let i = index;" label={{db.database[i].workSheetName}}>

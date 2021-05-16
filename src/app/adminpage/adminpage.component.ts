@@ -4,6 +4,7 @@ import * as XLSX from "xlsx";
 import { AdmingridComponent } from '../admingrid/admingrid.component';
 import {GetDataFromWorkbookService} from 'services/get-data-from-workbook.service'
 import {DatabaseService} from 'services/database.service'
+import { HistoryService } from 'services/history.service';
 
 @Component({
   selector: 'app-adminpage',
@@ -19,11 +20,12 @@ export class AdminpageComponent implements OnInit {
   ifGridControlBox:boolean = false; //this enables our grid controls on our admin page. FALSE -> gridbox not displayed. TRUE -> gridbox is displayed
   height = screen.height - (.20*screen.height); 
   width = screen.width - (.20*screen.height);
+  messages:string[]; 
 
   ngOnInit(): void { 
   }
   
-  constructor(private workbookservice:GetDataFromWorkbookService,public db:DatabaseService) {
+  constructor(private workbookservice:GetDataFromWorkbookService,public db:DatabaseService, public history:HistoryService) {
     /* see database.service.ts */ 
     db.databaseChanges.subscribe(value=>{
       this.somebool=value; //race condition that is triggered SUBSCRIBES to databaseChanges FALSE -> No Changes, TRUE -> Changes
@@ -38,6 +40,7 @@ export class AdminpageComponent implements OnInit {
         db.currWorkSheet.next(db.database[0].getSheetName());
       }
     });
+    this.messages = history.messages;
   }
 /*
 receieveData function: is the receiver of an output() emitted by the excelsheet component
@@ -137,5 +140,9 @@ we are getting the workbook here from $event
     const choice = data.get('choice') as string;
     this.child.get(this.currentGrid).colorGrid(choice, this.currentGrid);
     return false;
+  }
+  clearHistory(){
+    this.history.clearMessages();
+    this.messages=this.history.messages;
   }
 }

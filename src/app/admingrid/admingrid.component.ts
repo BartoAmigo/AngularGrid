@@ -3,6 +3,7 @@ import {DatabaseService} from 'services/database.service'
 import { Component, OnInit,Input} from '@angular/core';
 import 'ag-grid-enterprise'
 import {ICellRendererParams} from 'ag-grid-community';
+import { HistoryService } from 'services/history.service';
 
 
 @Component({
@@ -24,14 +25,13 @@ export class AdmingridComponent implements OnInit{
 
   ngOnInit(){
   }
-  constructor(public db:DatabaseService)  {
+  constructor(public db:DatabaseService, public history:HistoryService)  {
     db.currWorkSheet.subscribe(value=>
       this.sheetName=value);
       
     this.frameworkComponents = { customTooltip: CustomTooltipComponent }; //DAVE & JESSE 
    }
 
-private deleteIndex; //place holder for a row you are about to delete 
 private rowIndex; //place holder for a row index you are about to add. 
   
 /*THIS CODE IS REQUIRED TO RUN AN AG-GRID COMPONENT */ 
@@ -138,11 +138,11 @@ private rowIndex; //place holder for a row index you are about to add.
       row[columns[column].field]="";
     });
     this.gridApi.applyTransaction({ add: [row], addIndex: this.rowIndex+1 })
+    this.history.addMessage(1,"admin",this.sheetName,this.rowIndex);
     this.updateRowItems();
   }
 /*onRowClick function: reciever for an output() when a row has been clicked. Sets row position for delete/add */
   onRowClick(event: any): void {
-    this.deleteIndex = event.getRow;
     this.rowIndex = event.rowIndex
   }
 
@@ -167,13 +167,13 @@ private rowIndex; //place holder for a row index you are about to add.
           if(wasFound==false){
             this.db.database[currentGrid].rowColors.push(colorObj);
           }
- //       }
     }); 
   }
 //deleteRowItem: grabs the selected row on the grid and removes it, then updates the rows
   deleteRowItem(){
     var selectedData = this.gridApi.getSelectedRows();
     var res = this.gridApi.applyTransaction({ remove: selectedData });
+    this.history.addMessage(2,"admin",this.sheetName,this.rowIndex);
     this.updateRowItems();
   }
 
