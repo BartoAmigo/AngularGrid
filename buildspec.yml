@@ -9,7 +9,7 @@ phases:
       nodejs: 12
     commands:
       # Install dependencies needed for running tests
-      - npm install --save ag-grid-angular ag-grid-enterprise
+      - npm install --save ag-grid-angular ag-grid-community xlsx ag-grid-enterprise
       - npm install -g @angular/cli 
       - npm install
 
